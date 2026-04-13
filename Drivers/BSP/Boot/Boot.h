@@ -13,5 +13,6 @@ typedef void (*load_a)(void); // 定义函数指针
 void BootLoader_Brance(void);
 void BootLoader_Event(uint8_t* pdata);
 void BootLoader_State(void);
+bool Boot_VerifySignature(void);
 
 #endif /* __BOOT_H__ */

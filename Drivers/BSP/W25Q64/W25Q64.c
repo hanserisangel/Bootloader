@@ -125,3 +125,85 @@ void W25Q64_EraseBlock(uint8_t BlockNum)
     HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_SET); // 禁用芯片
     W25Q64_WaitForWriteEnd(); // 等待擦除完成
 }
+
+/**
+ * @brief  读取指定地址的数据。
+ * @param  Address: 字节地址。
+ * @param  pData: 指向存储读取数据的指针。
+ * @param  Size: 要读取的数据长度（以字节为单位）。
+ * @retval None
+ */
+void W25Q64_ReadBytes(uint32_t Address, uint8_t* pData, uint32_t Size)
+{
+    uint8_t cmd[4];
+
+    cmd[0] = 0x03; // read data
+    cmd[1] = (Address >> 16) & 0xFF;
+    cmd[2] = (Address >> 8) & 0xFF;
+    cmd[3] = Address & 0xFF;
+
+    HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_RESET);
+    HAL_SPI_Transmit(&hspi3, cmd, 4, HAL_MAX_DELAY);
+    HAL_SPI_Receive(&hspi3, pData, Size, HAL_MAX_DELAY);
+    HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_SET);
+}
+
+/**
+ * @brief  写入指定地址的数据（自动处理跨页）。
+ * @param  Address: 字节地址。
+ * @param  pData: 指向要写入数据的指针。
+ * @param  Size: 要写入的数据长度（以字节为单位）。
+ * @retval None
+ */
+void W25Q64_WriteBytes(uint32_t Address, const uint8_t* pData, uint32_t Size)
+{
+    while (Size > 0)
+    {
+        uint32_t page_offset = Address % W25Q64_PAGE_SIZE;
+        uint32_t chunk = W25Q64_PAGE_SIZE - page_offset;
+        uint8_t cmd[4];
+
+        if (chunk > Size)
+        {
+            chunk = Size;
+        }
+
+        W25Q64_WriteEnable();
+        cmd[0] = 0x02; // page program
+        cmd[1] = (Address >> 16) & 0xFF;
+        cmd[2] = (Address >> 8) & 0xFF;
+        cmd[3] = Address & 0xFF;
+
+        HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_RESET);
+        HAL_SPI_Transmit(&hspi3, cmd, 4, HAL_MAX_DELAY);
+        HAL_SPI_Transmit(&hspi3, (uint8_t*)pData, chunk, HAL_MAX_DELAY);
+        HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_SET);
+        W25Q64_WaitForWriteEnd();
+
+        Address += chunk;
+        pData += chunk;
+        Size -= chunk;
+    }
+}
+
+/**
+ * @brief  擦除指定扇区。
+ * @param  SectorNum: 扇区号。
+ * @retval None
+ */
+void W25Q64_EraseSector(uint32_t SectorNum)
+{
+    uint8_t cmd[4];
+    uint32_t addr = SectorNum * W25Q64_SECTOR_SIZE;
+
+    W25Q64_WriteEnable();
+    cmd[0] = 0x20; // sector erase 4KB
+    cmd[1] = (addr >> 16) & 0xFF;
+    cmd[2] = (addr >> 8) & 0xFF;
+    cmd[3] = addr & 0xFF;
+
+    HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_RESET);
+    HAL_SPI_Transmit(&hspi3, cmd, 4, HAL_MAX_DELAY);
+    HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_SET);
+    W25Q64_WaitForWriteEnd();
+}

@@ -1,20 +1,40 @@
 #include "main.h"
 #include "Boot.h"
+#include "Ymodem.h"
 #include <stdlib.h>
 #include <string.h>
+#include "mbedtls/sha256.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/platform_util.h"
+#include "mbedtls.h"
 
 load_a Load_A;
-uint8_t data[RX_DATA_CELLING];
-bool Where_to_store;
+static uint8_t data[RX_DATA_CELLING];
+static bool Where_to_store;
+
+// 初级阶段的 Bootloader 设计
 static bool BootLoader_Console(uint16_t timeout);
 static void BootLoader_Menu(void);
 static void BootLoader_Clear(void);
 static void LOAD_A(uint32_t addr);
-static uint16_t Ymodem_CRC16(uint8_t *pdata, uint16_t length);
-static bool Ymodem_CheckPacket(const uint8_t *packet, uint16_t size, uint16_t *data_len, uint8_t *block_num);
-static bool Ymodem_ParseHeader(const uint8_t *data, uint16_t data_len, uint32_t *file_size, bool *is_end);
-static void Ymodem_WriteBlock(uint32_t block_index, const uint8_t *buf, uint32_t size);
-static void Ymodem_Finalize(uint32_t start_time);
+
+// 进阶阶段的 Bootloader 设计
+static void Boot_ResetVerifyState(void);
+static void Boot_ReadW25Q64Bytes(uint32_t addr, uint8_t *out, uint32_t len);
+static bool Boot_ParseOtaHeader(const uint8_t *buf, uint32_t len, OTA_Header_t *out);
+
+static mbedtls_sha256_context g_sha_ctx;        // 全局 SHA-256 上下文
+static bool g_sha_started = false;              // 是否已经开始计算 SHA-256
+
+static uint32_t g_firmware_size = 0;            // 固件数据大小
+static uint32_t g_sig_received = 0;             // 已经接收到的签名字节数
+static uint32_t g_sig_len = 0;                  // 头部解析出来的签名长度
+static uint32_t g_payload_received = 0;         // 已接收的固件+签名字节数(不含头部)
+static uint32_t g_hdr_received = 0;             // 已接收的头部字节数
+static uint8_t g_hdr_buf[OTA_HDR_SIZE];         // OTA 头部缓存
+
+static uint8_t g_sig_buf[OTA_SIG_MAX];          // 接收签名的缓冲区
 
 /**
  * @brief  Bootloader 主函数，负责引导流程控制
@@ -104,7 +124,8 @@ void BootLoader_Event(uint8_t* pdata)
             UpData_A.Ymodem_BytesInBuffer = 0;
             UpData_A.Ymodem_ExpectBlock = 0;
             UpData_A.Ymodem_HeaderReceived = 0;
-            Where_to_store = true;
+            Boot_ResetVerifyState();            // 重置 OTA 验证状态
+            Where_to_store = true;              // 设置存储位置为 MCU 的 Flash
             break;
         case '3': // 设置版本号
             LOG_I("Set version number Starting!");
@@ -117,7 +138,7 @@ void BootLoader_Event(uint8_t* pdata)
             break;
         case '5': // 串口 IAP 下载 A 区程序到 W25Q64
             LOG_I("Download Starting!");
-            W25Q64_EraseBlock(0);
+            W25Q64_EraseBlock(OTA_Firmware_A_ADDR / W25Q64_BLOCK_SIZE); // 擦除 W25Q64 中存储固件的块
             OTA_state = IAP_YMODEM_START;
             UpData_A.Ymodem_Timer = 0;
             UpData_A.Ymodem_CRC = 0;
@@ -126,8 +147,9 @@ void BootLoader_Event(uint8_t* pdata)
             UpData_A.Ymodem_BytesInBuffer = 0;
             UpData_A.Ymodem_ExpectBlock = 0;
             UpData_A.Ymodem_HeaderReceived = 0;
-            Where_to_store = false;
-            OTA_Info.FileSize = 0; // 需要一边下载，一边记录程序的大小
+            Boot_ResetVerifyState();
+            Where_to_store = false;              // 设置存储位置为 W25Q64
+            OTA_Info.FileSize = 0;
             break;
         case '6': // 从 W25Q64 下载程序到 MCU 的 Flash
             LOG_I("Download Starting!");
@@ -153,8 +175,6 @@ void BootLoader_State(void)
 {
     uint16_t size;
     int temp;
-    static uint32_t start_time = 0;
-
     size = RingBuffer_Get(uart_rb, data); // 获取串口数据
 
     // 状态机处理串口数据
@@ -182,10 +202,22 @@ void BootLoader_State(void)
                         break;
                     }
 
-                    OTA_Info.FileSize = file_size;
+                    OTA_Info.FileSize = file_size;      // 记录文件大小，后续接收数据时用来判断是否接收完成
+                    if(OTA_Info.FileSize <= OTA_HDR_SIZE)
+                    {
+                        LOG_E("File size too small for header");
+                        Uart_Printf("\x15"); // NAK
+                        OTA_state = UART_CONSOLE_IDLE;
+                        break;
+                    }
+                    g_sig_received = 0;
+                    g_sig_len = 0;
+                    g_firmware_size = 0;
+                    g_payload_received = 0;
+                    g_hdr_received = 0;
+                    g_sha_started = false;
                     UpData_A.Ymodem_HeaderReceived = 1;
                     UpData_A.Ymodem_ExpectBlock = 1;
-                    start_time = HAL_GetTick();
 
                     Uart_Printf("\x06"); // ACK
                     Uart_Printf("%c", CRC_REQ); // Request data packets
@@ -227,7 +259,9 @@ void BootLoader_State(void)
 
             if(block_num == UpData_A.Ymodem_ExpectBlock)    // 收到期望的数据块
             {
-                uint32_t remaining = data_len;  // 计算剩余需要接收的字节数
+                uint32_t remaining = data_len;  // 计算剩余需要接收的字节数，data_len=1024
+
+                // 如果已经知道了文件总大小，就根据文件总大小和已经接收的字节数来计算当前数据块中实际需要处理的字节数，避免处理多余的数据
                 if(OTA_Info.FileSize > 0)
                 {
                     if(UpData_A.Ymodem_TotalReceived >= OTA_Info.FileSize)
@@ -238,18 +272,109 @@ void BootLoader_State(void)
 
                 if(remaining > 0)
                 {
-                    uint16_t copy_len = (uint16_t)remaining;
-                    memcpy(&UpData_A.UpAppBuffer[UpData_A.Ymodem_BytesInBuffer], data + 3, copy_len);
-                    UpData_A.Ymodem_BytesInBuffer += copy_len;
-                    UpData_A.Ymodem_TotalReceived += copy_len;
+                    uint32_t copy_len = remaining;      // 实际需要处理的数据长度，正常是 1024
+                    uint32_t payload_offset = 0;        // 已经处理的数据偏移量
 
-                    if(UpData_A.Ymodem_BytesInBuffer >= UPDATA_BUFF)
+                    while(payload_offset < copy_len)
                     {
-                        Ymodem_WriteBlock(UpData_A.Ymodem_WriteBlockIndex,
-                            UpData_A.UpAppBuffer, UPDATA_BUFF);
-                        UpData_A.Ymodem_WriteBlockIndex ++;
-                        UpData_A.Ymodem_BytesInBuffer = 0;
+                        uint32_t chunk = copy_len - payload_offset;
+
+                        // 1. 首先处理头部，直到接收完整个头部为止
+                        if(g_hdr_received < OTA_HDR_SIZE)
+                        {
+                            uint32_t hdr_left = OTA_HDR_SIZE - g_hdr_received;
+                            uint32_t hdr_chunk = (chunk < hdr_left) ? chunk : hdr_left;
+                            memcpy(g_hdr_buf + g_hdr_received, data + 3 + payload_offset, hdr_chunk);
+                            g_hdr_received += hdr_chunk;
+                            payload_offset += hdr_chunk;
+
+                            if(g_hdr_received == OTA_HDR_SIZE)
+                            {
+                                OTA_Header_t hdr;
+                                if(!Boot_ParseOtaHeader(g_hdr_buf, OTA_HDR_SIZE, &hdr))
+                                {
+                                    LOG_E("Invalid OTA header");
+                                    OTA_state = UART_CONSOLE_IDLE;
+                                    break;
+                                }
+                                if((hdr.header_size + hdr.fw_size + hdr.sig_len) != OTA_Info.FileSize)
+                                {
+                                    LOG_E("OTA size mismatch");
+                                    OTA_state = UART_CONSOLE_IDLE;
+                                    break;
+                                }
+                                if(hdr.sig_len > OTA_SIG_MAX || hdr.fw_size == 0)
+                                {
+                                    LOG_E("OTA header fields invalid");
+                                    OTA_state = UART_CONSOLE_IDLE;
+                                    break;
+                                }
+
+                                g_firmware_size = hdr.fw_size;
+                                g_sig_len = hdr.sig_len;
+                                mbedtls_sha256_init(&g_sha_ctx);
+                                mbedtls_sha256_starts(&g_sha_ctx, 0);
+                                g_sha_started = true;
+                            }
+                            continue;
+                        }
+
+                        // 2. 头部接收完成后，处理固件数据，直到接收完整个固件为止
+                        uint32_t stream_pos = g_payload_received;
+                        if(stream_pos < g_firmware_size)
+                        {
+                            uint32_t fw_left = g_firmware_size - stream_pos;    // 固件剩余字节数
+                            uint32_t fw_chunk = (chunk < fw_left) ? chunk : fw_left;
+                            uint32_t fw_written = fw_chunk; // 一般1024字节
+
+                            // 如果已经开始但还没有接收完整个固件，就继续更新 SHA-256
+                            if(g_sha_started)
+                                mbedtls_sha256_update(&g_sha_ctx, data + 3 + payload_offset, fw_chunk);
+
+                            // 将数据写入缓存，满 1024 字节就写入 Flash
+                            while(fw_chunk > 0)
+                            {
+                                uint32_t space = UPDATA_BUFF - UpData_A.Ymodem_BytesInBuffer;
+                                uint32_t n = (fw_chunk < space) ? fw_chunk : space;
+                                memcpy(&UpData_A.UpAppBuffer[UpData_A.Ymodem_BytesInBuffer],
+                                    data + 3 + payload_offset, n);
+                                UpData_A.Ymodem_BytesInBuffer += n;
+                                payload_offset += n;
+                                fw_chunk -= n;
+
+                                if(UpData_A.Ymodem_BytesInBuffer >= UPDATA_BUFF)
+                                {
+                                    Ymodem_WriteBlock(UpData_A.Ymodem_WriteBlockIndex,
+                                        UpData_A.UpAppBuffer, UPDATA_BUFF, Where_to_store);
+                                    UpData_A.Ymodem_WriteBlockIndex ++;
+                                    UpData_A.Ymodem_BytesInBuffer = 0;
+                                }
+                            }
+
+                            g_payload_received += fw_written;
+                        }
+                        else    // 3. 固件数据接收完成后，处理签名数据，直到接收完整个签名为止
+                        {
+                            uint32_t sig_offset = stream_pos - g_firmware_size;
+                            if(sig_offset >= g_sig_len)
+                            {
+                                payload_offset += chunk;
+                                g_payload_received += chunk;
+                            }
+                            else    // 接收签名数据，存储到 g_sig_buf 中
+                            {
+                                uint32_t sig_left = g_sig_len - sig_offset;
+                                uint32_t sig_chunk = (chunk < sig_left) ? chunk : sig_left;
+                                memcpy(&g_sig_buf[sig_offset], data + 3 + payload_offset, sig_chunk);
+                                if(g_sig_received < sig_offset + sig_chunk)
+                                    g_sig_received = sig_offset + sig_chunk;
+                                payload_offset += sig_chunk;
+                                g_payload_received += sig_chunk;
+                            }
+                        }
                     }
+
+                    UpData_A.Ymodem_TotalReceived += copy_len;
                 }
 
                 UpData_A.Ymodem_ExpectBlock ++;
@@ -279,7 +404,7 @@ void BootLoader_State(void)
                 if(Ymodem_ParseHeader(data + 3, data_len, &file_size, &is_end) && is_end)
                 {
                     Uart_Printf("\x06"); // ACK
-                    Ymodem_Finalize(start_time);
+                    Ymodem_Finalize(Where_to_store, g_firmware_size);
                     OTA_state = UART_CONSOLE_IDLE;
                     break;
                 }
@@ -287,7 +412,7 @@ void BootLoader_State(void)
 
             if(UpData_A.Ymodem_Timer >= 200)    // 每 2 秒发送一次申请，直到收到最后的空头包
             {
-                Ymodem_Finalize(start_time);
+                Ymodem_Finalize(Where_to_store, g_firmware_size);
                 OTA_state = UART_CONSOLE_IDLE;
             }
             else
@@ -324,7 +449,7 @@ void BootLoader_State(void)
             for(i = 0; i < OTA_Info.FileSize/UPDATA_BUFF; i ++)
             {
                 // 1024 字节为单位从 W25Q64 读取应用程序
-                W25Q64_ReadData((i * UPDATA_BUFF)/W25Q64_PAGE_SIZE, 
+                Boot_ReadW25Q64Bytes(OTA_Firmware_A_ADDR + i * UPDATA_BUFF, 
                 UpData_A.UpAppBuffer, UPDATA_BUFF);
 
                 // 1024 字节为单位向 MCU 的 Flash 写入应用程序
@@ -334,7 +459,7 @@ void BootLoader_State(void)
             if(OTA_Info.FileSize % UPDATA_BUFF != 0)
             {
                 // 读取剩余应用程序
-                W25Q64_ReadData((i * UPDATA_BUFF)/W25Q64_PAGE_SIZE, 
+                Boot_ReadW25Q64Bytes(OTA_Firmware_A_ADDR + i * UPDATA_BUFF, 
                 UpData_A.UpAppBuffer, OTA_Info.FileSize % UPDATA_BUFF);
                 
                 // 读取写入应用程序
@@ -355,149 +480,141 @@ void BootLoader_State(void)
     }
 }
 
-static uint16_t Ymodem_CRC16(uint8_t *pdata, uint16_t length)
-{
-    uint16_t CrcInit = 0x0000;
-    uint16_t CrcPoly = 0x1021;
-
-    while(length --)
-    {
-        CrcInit = (*pdata ++ << 8) ^ CrcInit;
-
-        for(uint8_t i = 0; i < 8; i ++)
-        {
-            if(CrcInit & 0x8000) CrcInit = (CrcInit << 1) ^ CrcPoly;
-            else CrcInit = (CrcInit << 1);
-        }
-    }
-
-    return CrcInit;
-}
-
 /**
- * @brief  Ymodem 数据包校验函数，验证数据包的合法性
- * @param  packet: 指向接收到的数据包的指针
- * @param  size: 数据包的总长度
- * @param  data_len: 输出参数，返回数据包中有效数据的长度
- * @param  block_num: 输出参数，返回数据包中的块号
- * @retval bool: true, false
- */
-static bool Ymodem_CheckPacket(const uint8_t *packet, uint16_t size, uint16_t *data_len, uint8_t *block_num)
-{
-    if(size < 5)
-        return false;
-    uint16_t expected_len = 0;
-    if(packet[0] == SOH)        // SOH: 128 字节数据包
-        expected_len = 128;
-    else if(packet[0] == STX)   // STX: 1024 字节数据包
-        expected_len = 1024;
-    else
-        return false;
-
-    if(size != (uint16_t)(expected_len + 5))    // 数据包总长度应该是数据长度 + 5 (1 字节头 + 1 字节块号 + 1 字节块号补码 + 2 字节 CRC)
-        return false;
-
-    if((uint8_t)(packet[1] + packet[2]) != 0xFF)    // 块号和块号补码应该加起来等于 0xFF
-        return false;
-
-    {   // CRC 校验
-        uint16_t received_crc = ((uint16_t)packet[3 + expected_len] << 8) | packet[3 + expected_len + 1];
-        uint16_t calc_crc = Ymodem_CRC16((uint8_t *)(packet + 3), expected_len);
-        if(received_crc != calc_crc)
-            return false;
-    }
-
-    *data_len = expected_len;
-    *block_num = packet[1];
-    return true;
-}
-
-/**
- * @brief  Ymodem 头包解析函数，从头包中提取文件大小等信息
- * @param  data: 指向头包数据的指针
- * @param  data_len: 头包数据的长度
- * @param  file_size: 输出参数，返回文件大小
- * @param  is_end: 输出参数，返回是否是结束包（没有文件名和大小）
- * @retval bool: true, false
- */
-static bool Ymodem_ParseHeader(const uint8_t *data, uint16_t data_len, uint32_t *file_size, bool *is_end)
-{
-    const char *name = (const char *)data;
-    size_t name_len = 0;
-    while((name_len < data_len) && (name[name_len] != '\0'))    // 文件名以 null 结尾
-        name_len ++;
-    if(name_len == 0)   // 没有文件名，说明是结束包
-    {
-        *is_end = true;
-        *file_size = 0;
-        return true;
-    }
-
-    if(name_len + 1 >= data_len)    // 没有文件大小信息
-        return false;
-
-    const char *size_str = name + name_len + 1;
-    if(size_str >= (const char *)(data + data_len))
-        return false;
-
-    *file_size = (uint32_t)strtoul(size_str, NULL, 10);
-    *is_end = false;        // 头包不可能是结束包
-    return true;
-}
-
-/**
- * @brief  Ymodem 数据块写入函数，将接收到的数据块写入指定存储介质
- * @param  block_index: 数据块的索引，从 0 开始
- * @param  buf: 指向数据块内容的指针
- * @param  size: 数据块的大小，单位字节
+ * @brief  Bootloader 验证状态重置函数
+ * @note    在开始新的 OTA 传输时调用，重置所有与 OTA 验证相关的状态变量和缓冲区，确保新的传输过程不会受到之前状态的影响
+ * @param  None
  * @retval None
  */
-static void Ymodem_WriteBlock(uint32_t block_index, const uint8_t *buf, uint32_t size)
+static void Boot_ResetVerifyState(void)
 {
-    if(size == 0)
-        return;
+    if(g_sha_started)
+        mbedtls_sha256_free(&g_sha_ctx);
+    g_sha_started = false;
+    g_firmware_size = 0;
+    g_sig_received = 0;
+    g_sig_len = 0;
+    g_payload_received = 0;
+    g_hdr_received = 0;
+    mbedtls_platform_zeroize(g_hdr_buf, sizeof(g_hdr_buf));
+    mbedtls_platform_zeroize(g_sig_buf, sizeof(g_sig_buf));
+}
 
-    if(Where_to_store)      // 写入 MCU 的 Flash
+/**
+ * @brief  Bootloader 从 W25Q64 读取数据的函数，支持跨页读取
+ * @param  addr: 读取的起始地址
+ * @param  out: 输出缓冲区指针，读取的数据将存储在这里
+ * @param  len: 需要读取的字节数
+ * @retval None
+ */
+static void Boot_ReadW25Q64Bytes(uint32_t addr, uint8_t *out, uint32_t len)
+{
+    while(len > 0)
     {
-        MCU_WriteFlash(MCU_FLASH_A_START_ADDRESS + block_index * UPDATA_BUFF,
-            (uint32_t *)buf, size / 4);
-    }
-    else    // 写入 W25Q64
-    {
-        uint32_t page_base = block_index * (UPDATA_BUFF / W25Q64_PAGE_SIZE);
-        uint32_t offset = 0;    // 因为 W25Q64 的页大小是 256 字节，而我们每次写入 1024 字节，所以需要分 4 页来写入
-        while(offset < size)
+        uint16_t page = (uint16_t)(addr / W25Q64_PAGE_SIZE);    // 计算当前地址所在的页号
+        uint32_t offset = addr % W25Q64_PAGE_SIZE;              // 计算当前地址在页内的偏移
+        uint32_t chunk = W25Q64_PAGE_SIZE - offset;             // 计算当前页剩余的字节数
+        if(chunk > len)
+            chunk = len;
+
+        if(offset == 0 && chunk == W25Q64_PAGE_SIZE)    // 如果当前地址已经页对齐，并且需要读取整页数据，可以直接读取到输出缓冲区，避免中间的复制步骤
         {
-            uint32_t chunk = size - offset;
-            if(chunk > W25Q64_PAGE_SIZE)
-                chunk = W25Q64_PAGE_SIZE;
-            W25Q64_PageProgram((uint16_t)(page_base + (offset / W25Q64_PAGE_SIZE)),
-                (uint8_t *)(buf + offset), chunk);
-            offset += chunk;
+            W25Q64_ReadData(page, out, chunk);
         }
+        else        // 否则需要先读取到临时缓冲区，再从中复制到输出缓冲区
+        {
+            uint8_t temp[W25Q64_PAGE_SIZE];
+            W25Q64_ReadData(page, temp, W25Q64_PAGE_SIZE);
+            memcpy(out, temp + offset, chunk);
+        }
+
+        addr += chunk;  // 更新地址指针
+        out += chunk;   // 更新输出缓冲区指针
+        len -= chunk;   // 更新剩余字节数
     }
 }
 
 /**
- * @brief  Ymodem 传输完成处理函数，进行必要的收尾工作，如写入剩余数据、记录文件大小、清除 OTA 标志等
- * @param  start_time: 传输开始的时间戳，用于计算传输耗时
- * @retval None
+ * @brief  Bootloader 签名验证函数
+ * @note    使用 SHA-256 计算固件数据的摘要，并使用存储在 W25Q64 中的公钥验证签名的合法性
+ * @param  None
+ * @retval bool: true 验证成功，false 验证失败
  */
-static void Ymodem_Finalize(uint32_t start_time)
+bool Boot_VerifySignature(void)
 {
-    uint32_t end_time = HAL_GetTick();
-    
-    if(UpData_A.Ymodem_BytesInBuffer > 0)
-    {
-        Ymodem_WriteBlock(UpData_A.Ymodem_WriteBlockIndex,
-            UpData_A.UpAppBuffer, UpData_A.Ymodem_BytesInBuffer);
-    }
-    if(OTA_Info.FileSize == 0)
-        OTA_Info.FileSize = UpData_A.Ymodem_TotalReceived;
+    uint8_t digest[32];
+    uint8_t pubkey_buf[OTA_PUBKEY_LEN];     // 从 W25Q64 读取公钥
+    mbedtls_pk_context pk;          // 公钥上下文
+    int ret = 0;
 
-    AT24C64_WriteOTAInfo();
-    LOG_I("Download A program OK!");
-    LOG_I("Time: %dms", end_time - start_time);
+    if(!g_sha_started)
+        return false;
+    if(g_sig_len == 0 || g_sig_received < g_sig_len)
+        return false;
+
+    mbedtls_sha256_finish(&g_sha_ctx, digest);  // 计算 SHA-256 摘要
+    mbedtls_sha256_free(&g_sha_ctx);            // 释放 SHA-256 上下文
+    g_sha_started = false;
+
+    Boot_ReadW25Q64Bytes(OTA_PUBKEY_ADDR, pubkey_buf, OTA_PUBKEY_LEN);  // 从 W25Q64 读取公钥数据
+
+    mbedtls_pk_init(&pk);       // 初始化公钥上下文
+    ret = mbedtls_pk_parse_public_key(&pk, pubkey_buf, OTA_PUBKEY_LEN); // 解析公钥
+    if(ret != 0)
+    {
+        mbedtls_pk_free(&pk);
+        return false;
+    }
+
+    // 验证签名，digest 是固件数据的 SHA-256 摘要，g_sig_buf 是接收到的签名数据
+    ret = mbedtls_pk_verify(&pk, MBEDTLS_MD_SHA256, digest, 0, g_sig_buf, g_sig_len);
+    mbedtls_pk_free(&pk);
+
+    // 验证完成后清除敏感数据
+    mbedtls_platform_zeroize(digest, sizeof(digest));
+    return (ret == 0);
+}
+
+/**
+ * @brief  Bootloader 解析 OTA 头部函数
+ * @note    从接收到的数据中解析出 OTA 头部信息，包括魔数、头部大小、固件大小和签名长度，并进行基本的合法性验证
+ * @param  buf: 指向包含 OTA 头部数据的缓冲区的指针
+ * @param  len: 缓冲区中数据的长度
+ * @param  out: 输出参数，解析成功后将 OTA 头部信息存储在这里
+ * @retval bool: true 验证成功，false 验证失败
+ */
+static bool Boot_ParseOtaHeader(const uint8_t *buf, uint32_t len, OTA_Header_t *out)
+{
+    if(len < OTA_HDR_SIZE || out == NULL)
+        return false;
+
+    // stm32 是小端序，Ymodem 传输过来的数据也是小端序
+    // 将4个字节的字段从字节数组中解析出来，组合成一个 32 位的整数
+    uint32_t magic = (uint32_t)buf[0] |
+        ((uint32_t)buf[1] << 8) |
+        ((uint32_t)buf[2] << 16) |
+        ((uint32_t)buf[3] << 24);
+    uint32_t header_size = (uint32_t)buf[4] |
+        ((uint32_t)buf[5] << 8) |
+        ((uint32_t)buf[6] << 16) |
+        ((uint32_t)buf[7] << 24);
+    uint32_t fw_size = (uint32_t)buf[8] |
+        ((uint32_t)buf[9] << 8) |
+        ((uint32_t)buf[10] << 16) |
+        ((uint32_t)buf[11] << 24);
+    uint32_t sig_len = (uint32_t)buf[12] |
+        ((uint32_t)buf[13] << 8) |
+        ((uint32_t)buf[14] << 16) |
+        ((uint32_t)buf[15] << 24);
+
+    if(magic != OTA_HDR_MAGIC || header_size != OTA_HDR_SIZE)
+        return false;
+
+    out->magic = magic;
+    out->header_size = header_size;
+    out->fw_size = fw_size;
+    out->sig_len = sig_len;
+    return true;
 }
 
 // 设置 A 区 MSP 指针

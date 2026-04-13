@@ -13,9 +13,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#define RX_BUF_SIZE 8192  // 缓冲区大小
+#define RX_BUF_SIZE 4096  // 缓冲区大小
 #define RX_DATA_CELLING 1030 // 单次接收的数据包最大字节数 (YMODEM 1K: 1029)
-#define RX_BLOCK_NUM 8 // 缓冲区中可含有的块的最大数
+#define RX_BLOCK_NUM 4 // 缓冲区中可含有的块的最大数
 
 // 环形缓冲区的块
 typedef struct{

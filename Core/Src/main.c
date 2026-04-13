@@ -5,6 +5,8 @@
 #include "main.h"
 #include "dma.h"
 #include "i2c.h"
+#include "mbedtls.h"
+#include "rng.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -84,6 +86,8 @@ int main(void)
   MX_USART3_UART_Init();
   MX_I2C1_Init();
   MX_SPI3_Init();
+  MX_RNG_Init();
+  MX_MBEDTLS_Init();
   /* USER CODE BEGIN 2 */
   Uart_Init(uart_rb);
   /* USER CODE END 2 */
@@ -181,7 +185,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 4;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLQ = 8;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
