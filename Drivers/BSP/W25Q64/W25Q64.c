@@ -2,6 +2,8 @@
 #include "spi.h"
 #include "W25Q64.h"
 
+#include <string.h>
+
 /* W25Q64: 64Mbit = 8MByte, 
     共128个块(Blocks)，每块64KB，
     每块包含16个扇区(Sectors)，每扇区4KB，
@@ -206,4 +208,25 @@ void W25Q64_EraseSector(uint32_t SectorNum)
     HAL_SPI_Transmit(&hspi3, cmd, 4, HAL_MAX_DELAY);
     HAL_GPIO_WritePin(W25Q64_CS_GPIO_PORT, W25Q64_CS_PIN, GPIO_PIN_SET);
     W25Q64_WaitForWriteEnd();
+}
+
+/**
+ * @brief  从 W25Q64 读取 OTA 信息。
+ * @retval None
+ */
+void W25Q64_ReadOTAInfo(void)
+{
+    memset(&OTA_Info, 0, sizeof(OTA_Info));
+    W25Q64_ReadBytes(OTA_INFO_ADDR, (uint8_t *)&OTA_Info, sizeof(OTA_Info));
+}
+
+/**
+ * @brief  写入 OTA 信息到 W25Q64。
+ * @note   读取-修改-擦除-回写整个扇区
+ * @retval None
+ */
+void W25Q64_WriteOTAInfo(void)
+{
+    W25Q64_EraseSector(OTA_INFO_ADDR / W25Q64_SECTOR_SIZE);
+    W25Q64_WriteBytes(OTA_INFO_ADDR, (const uint8_t *)&OTA_Info, sizeof(OTA_Info));
 }

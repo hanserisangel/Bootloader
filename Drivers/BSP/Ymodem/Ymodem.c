@@ -2,8 +2,6 @@
 #include "main.h"
 #include <stdlib.h>
 
-static int page_offset = OTA_Firmware_ADDR % W25Q64_PAGE_SIZE;  // 固件数据在 W25Q64 中的页内偏移，初始值为固件起始地址对页大小取模的结果
-
 uint16_t Ymodem_CRC16(uint8_t *pdata, uint16_t length)
 {
     uint16_t CrcInit = 0x0000;
@@ -113,17 +111,8 @@ void Ymodem_WriteBlock(uint32_t block_index, const uint8_t *buf, uint32_t size, 
     }
     else    // 写入 W25Q64
     {
-        uint32_t page_base = block_index * (UPDATA_BUFF / W25Q64_PAGE_SIZE);
-        uint32_t offset = 0;    // 因为 W25Q64 的页大小是 256 字节，而我们每次写入 1024 字节，所以需要分 4 页来写入
-        while(offset < size)
-        {
-            uint32_t chunk = size - offset;
-            if(chunk > W25Q64_PAGE_SIZE)
-                chunk = W25Q64_PAGE_SIZE;
-            W25Q64_PageProgram((uint16_t)(page_offset + page_base + (offset / W25Q64_PAGE_SIZE)),
-                (uint8_t *)(buf + offset), chunk);
-            offset += chunk;
-        }
+        uint32_t addr = (OTA_Info.OTA_area == 0) ? OTA_Firmware_A_ADDR : OTA_Firmware_B_ADDR; // 计算固件所在的块地址
+        W25Q64_WriteBytes(addr + block_index * UPDATA_BUFF, buf, size);
     }
 }
 
@@ -150,6 +139,6 @@ void Ymodem_Finalize(bool Where_to_store, uint32_t g_firmware_size)
     }
 
     OTA_Info.FileSize = g_firmware_size;
-    AT24C64_WriteOTAInfo();
+    W25Q64_WriteOTAInfo();
     LOG_I("Download A program OK!");
 }

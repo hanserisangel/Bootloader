@@ -24,7 +24,6 @@ extern "C" {
 #include "Log.h"
 #include "Flash.h"
 #include "Uart.h"
-#include "AT24C64.h"
 #include "W25Q64.h"
 #include "Boot.h"
 /* USER CODE END Includes */
@@ -74,11 +73,11 @@ void Error_Handler(void);
 #define OTA_PUBKEY_LEN            125U    // P-256 公钥长度为 64 字节，但可能会有额外的头部信息，预留 125 字节
 
 // W25Q64 分区表
-#define OTA_PUBKEY_ADDR           0U      // 公钥，地址 0 开始，256 字节的空间
-#define OTA_INFO_ADDR             256U    // OTA 信息，地址 256 开始，256 字节的空间
-#define OTA_HEAT_ADDR             512U    // 断点续传热数据，地址 512 开始，64KB - 512 字节的空间
-#define OTA_Firmware_A_ADDR       0x10000U // 固件A区，地址 0x10000 开始，1MB 的空间
-#define OTA_Firmware_B_ADDR       (OTA_Firmware_A_ADDR + 1024 * 1024) // 固件B区，地址 0x110000 开始，1MB 的空间
+#define OTA_PUBKEY_ADDR           0U      // 公钥，地址 0 开始，4kB 的空间（1个扇区）
+#define OTA_INFO_ADDR             4096U   // OTA 信息，地址 4096 开始，4kB 的空间（1个扇区）
+#define OTA_HEAT_ADDR             (OTA_INFO_ADDR + 4096U)   // 断点续传热数据，地址 8192 开始，56KB 字节的空间
+#define OTA_Firmware_A_ADDR       0x10000U // 固件A区，地址 0x10000 开始，512KB 的空间
+#define OTA_Firmware_B_ADDR       (OTA_Firmware_A_ADDR + 512 * 1024) // 固件B区，地址 0x90000 开始，512KB 的空间
 
 // OTA header 结构体定义
 typedef struct{
@@ -92,6 +91,7 @@ typedef struct{
   uint32_t OTA_Flag;
   uint32_t FileSize;        // 服务器下发的整个应用程序的大小（字节）
   uint8_t OTA_version[12];  // OTA 版本号，字符串数组，格式: version-1.0
+  uint8_t OTA_area;          // 0 表示 A 区，1 表示 B 区
 }OTA_Info_t;
 extern OTA_Info_t OTA_Info;
 

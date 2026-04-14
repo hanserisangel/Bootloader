@@ -17,5 +17,7 @@ void W25Q64_EraseBlock(uint8_t BlockNum);
 void W25Q64_ReadBytes(uint32_t Address, uint8_t* pData, uint32_t Size);
 void W25Q64_WriteBytes(uint32_t Address, const uint8_t* pData, uint32_t Size);
 void W25Q64_EraseSector(uint32_t SectorNum);
+void W25Q64_ReadOTAInfo(void);
+void W25Q64_WriteOTAInfo(void);
 
 #endif // __W25Q64_H__

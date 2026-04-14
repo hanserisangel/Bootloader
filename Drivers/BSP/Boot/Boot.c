@@ -133,12 +133,21 @@ void BootLoader_Event(uint8_t* pdata)
             break;
         case '4': // 查询版本号
             LOG_I("Query version number Starting!");
-            AT24C64_ReadOTAInfo();
+            W25Q64_ReadOTAInfo();
             Uart_Printf("version number: %s\r\n", OTA_Info.OTA_version);
             break;
         case '5': // 串口 IAP 下载 A 区程序到 W25Q64
             LOG_I("Download Starting!");
-            W25Q64_EraseBlock(OTA_Firmware_A_ADDR / W25Q64_BLOCK_SIZE); // 擦除 W25Q64 中存储固件的块
+
+            // 擦除 W25Q64 中存储固件的512KB，准备接收新的固件数据
+            LOG_I("Erase W25Q64 block...");
+            uint32_t block_addr = (OTA_Info.OTA_area == 0) ? OTA_Firmware_A_ADDR : OTA_Firmware_B_ADDR; // 计算需要擦除的块地址
+            for(uint32_t addr = block_addr; addr < block_addr + 512 * 1024; addr += W25Q64_BLOCK_SIZE)
+            {
+                W25Q64_EraseBlock(addr / W25Q64_BLOCK_SIZE); // 擦除 W25Q64 中存储固件的块
+            }
+            LOG_I("Erase W25Q64 block OK!");
+
             OTA_state = IAP_YMODEM_START;
             UpData_A.Ymodem_Timer = 0;
             UpData_A.Ymodem_CRC = 0;
@@ -432,7 +441,7 @@ void BootLoader_State(void)
                 {
                     memset(OTA_Info.OTA_version, 0, 32);
                     memcpy(OTA_Info.OTA_version, data, 28);
-                    AT24C64_WriteOTAInfo();
+                    W25Q64_WriteOTAInfo();
                     LOG_I("Set version number OK!");
                     OTA_state = UART_CONSOLE_IDLE;
                 }
@@ -441,15 +450,15 @@ void BootLoader_State(void)
 
         // 从 W25Q24 读取数据更新 A 区应用程序
         case UPDATA_A_SET: 
-			AT24C64_ReadOTAInfo();
+			W25Q64_ReadOTAInfo();
             Uart_Printf("size: %d\r\n", OTA_Info.FileSize);
-            // if(UpData_A.W25Q24_Block % 4 == 0) // 4 字节已对齐, 因为 flash 是一次写入 4 个字节
-            // {
+
+            uint32_t block_addr = (OTA_Info.OTA_area == 0) ? OTA_Firmware_A_ADDR : OTA_Firmware_B_ADDR; // 计算固件所在的块地址
             uint8_t i = 0;
             for(i = 0; i < OTA_Info.FileSize/UPDATA_BUFF; i ++)
             {
                 // 1024 字节为单位从 W25Q64 读取应用程序
-                Boot_ReadW25Q64Bytes(OTA_Firmware_A_ADDR + i * UPDATA_BUFF, 
+                Boot_ReadW25Q64Bytes(block_addr + i * UPDATA_BUFF, 
                 UpData_A.UpAppBuffer, UPDATA_BUFF);
 
                 // 1024 字节为单位向 MCU 的 Flash 写入应用程序
@@ -459,7 +468,7 @@ void BootLoader_State(void)
             if(OTA_Info.FileSize % UPDATA_BUFF != 0)
             {
                 // 读取剩余应用程序
-                Boot_ReadW25Q64Bytes(OTA_Firmware_A_ADDR + i * UPDATA_BUFF, 
+                Boot_ReadW25Q64Bytes(block_addr + i * UPDATA_BUFF, 
                 UpData_A.UpAppBuffer, OTA_Info.FileSize % UPDATA_BUFF);
                 
                 // 读取写入应用程序
@@ -469,7 +478,7 @@ void BootLoader_State(void)
 
             // 清除 OTA 标志
             OTA_Info.OTA_Flag = 0;
-            AT24C64_WriteOTAInfo();
+            W25Q64_WriteOTAInfo();
             LOG_I("Download A program from W25Q64 OK!");
 
             OTA_state = UART_CONSOLE_IDLE;

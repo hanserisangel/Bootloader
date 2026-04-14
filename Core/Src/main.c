@@ -102,7 +102,7 @@ int main(void)
   // AT24C64_WriteOTAInfo();
   // uint16_t num = Xmodem_CRC16(data, 5);
   // LOG_D("CRC: %x\r\n", num);
-  AT24C64_ReadOTAInfo();
+  W25Q64_ReadOTAInfo();
   
   // Uart_Printf("%X\r\n", OTA_Info.OTA_Flag);
   // for(uint8_t i = 0; i < 7; i++)
