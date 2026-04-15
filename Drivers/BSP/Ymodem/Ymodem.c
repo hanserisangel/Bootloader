@@ -140,5 +140,6 @@ void Ymodem_Finalize(bool Where_to_store, uint32_t g_firmware_size)
 
     OTA_Info.FileSize = g_firmware_size;
     W25Q64_WriteOTAInfo();
+    
     LOG_I("Download A program OK!");
 }
