@@ -94,61 +94,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  // OTA_Info.OTA_Flag = 0x12121122;
-  // for(uint8_t i = 0; i < 7; i++)
-  // {
-  //     OTA_Info.FileSize[i] = i;
-  // }
-  // AT24C64_WriteOTAInfo();
-  // uint16_t num = Xmodem_CRC16(data, 5);
-  // LOG_D("CRC: %x\r\n", num);
   W25Q64_ReadOTAInfo();
   
-  // Uart_Printf("%X\r\n", OTA_Info.OTA_Flag);
-  // for(uint8_t i = 0; i < 7; i++)
-  // {
-  //     Uart_Printf("%X\r\n", OTA_Info.FileSize[i]);
-  // }
   BootLoader_Brance();
-  // for(uint32_t i = 0; i < 64; i++)
-  // {
-  //     data_to_write[i] = 0x12; // 初始化数据
-  // }
-  // AT24C64_Write(0x0000, data_to_write, 64);
-  // AT24C64_ReadPage(0x0000, data_to_read, 64);
-  // for(uint32_t i = 0; i < 64; i++)
-  // {
-  //     Uart_Printf("%X\r\n", data_to_read[i]);
-  // }
-  // W25Q64_EraseBlock(0); // 擦除第0块
-
-  // for(uint32_t i = 0; i < 1024; i++)
-  // {
-  //     data_to_write[i] = 0x12; // 初始化数据
-  // }
-  // W25Q64_PageProgram(0, data_to_write, 256); // 写入第0页
-  // W25Q64_PageProgram(1, data_to_write, 256); // 写入第0页
-  // W25Q64_PageProgram(2, data_to_write, 256); // 写入第0页
-  // W25Q64_PageProgram(3, data_to_write, 256); // 写入第0页
-  // W25Q64_ReadData(0, data_to_read, 1024); // 读取第0页
-  // for(uint32_t i = 0; i < 1024; i++)
-  // {
-  //     Uart_Printf("%X\r\n", data_to_read[i]);
-  // }
-  // MCU_EraseFlash(10, 1); // 擦除从扇区10开始的2个扇区
-  
-  // for(uint32_t i = 0; i < (1024); i++)
-  // {
-  //     data_to_write[i] = 0x12345678; // 初始化数据
-  // }
-  // MCU_WriteFlash(0x08000000 + (1024*896), data_to_write, 1024); // 写入数据
-  
-  // MCU_ReadFlash(0x08000000 + (1024*896), data_to_read, 1024); // 读取数据
-  
-  // for(uint32_t i = 0; i < 1024; i++)
-  // {
-  //     Uart_Printf("%X\r\n", data_to_read[i]);
-  // }
   
   while (1)
   {

@@ -70,7 +70,7 @@ void Error_Handler(void);
 #define OTA_HDR_MAGIC             0x4F544148U // "OTAH" little-endian
 #define OTA_HDR_SIZE              16U
 #define OTA_SIG_MAX               96U     // DER ECDSA(P-256) max size is typically <= 72
-#define OTA_PUBKEY_LEN            125U    // P-256 公钥长度为 64 字节，但可能会有额外的头部信息，预留 125 字节
+#define OTA_PUBKEY_LEN            91U    // P-256 公钥长度为 64 字节，但可能会有额外的头部信息，预留 125 字节
 
 #define OTA_ECDH_PUB_LEN           65U
 #define OTA_SALT_LEN               16U
@@ -78,11 +78,18 @@ void Error_Handler(void);
 #define OTA_META_LEN               (OTA_ECDH_PUB_LEN + OTA_SALT_LEN + OTA_IV_LEN)
 
 // W25Q64 分区表
-#define OTA_PUBKEY_ADDR           0U      // 公钥，地址 0 开始，4kB 的空间（1个扇区）
+/* 第一扇区 0~4KB */
+#define OTA_PUBKEY_ADDR           0U      // ECDSA 公钥，地址 0 开始，256 字节的空间（1个页）
+// #define OTA_ECDH_PUB_ADDR         256U    // ECDH 私钥，紧跟在 ECDSA 公钥之后，256字节的空间（1个页）
+/* 第二扇区 4KB~8KB */
 #define OTA_INFO_ADDR             4096U   // OTA 信息，地址 4096 开始，4kB 的空间（1个扇区）
-#define OTA_HEAT_ADDR             (OTA_INFO_ADDR + 4096U)   // 断点续传热数据，地址 8192 开始，56KB 字节的空间
-#define OTA_META_ADDR             OTA_HEAT_ADDR
-#define OTA_Firmware_A_ADDR       0x10000U // 固件A区，地址 0x10000 开始，512KB 的空间
+/* 第三扇区 8KB~12KB */
+#define OTA_META_ADDR             8192U   // OTA 元数据，地址 8192 开始，4KB 字节的空间（1个扇区）
+/* 第四扇区至第二块 12KB~64KB */
+#define OTA_HEAT_ADDR             (OTA_META_ADDR + 4096U)   // 断点续传热数据，地址 8192 开始，52KB 字节的空间
+
+/* 第二块*/
+#define OTA_Firmware_A_ADDR       0x100000U // 固件A区，地址 0x100000 开始，512KB 的空间
 #define OTA_Firmware_B_ADDR       (OTA_Firmware_A_ADDR + 512 * 1024) // 固件B区，地址 0x90000 开始，512KB 的空间
 
 // OTA header 结构体定义
@@ -118,7 +125,6 @@ typedef enum{
   UART_CONSOLE_IDLE = 0,
   IAP_YMODEM_START,
   IAP_YMODEM_RECEIVED,
-  IAP_YMODEM_END,
   SET_VERSION,
   UPDATA_A_SET,
 }OTA_State_t;

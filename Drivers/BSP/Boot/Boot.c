@@ -11,14 +11,20 @@ load_a Load_A;
 static uint8_t data[RX_DATA_CELLING];
 static bool Where_to_store;
 
+static const uint8_t k_ota_ec_pub[] = {
+    0x30, 0x59, 0x30, 0x13, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02, 0x01, 0x06, 0x08,
+    0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07, 0x03, 0x42, 0x00, 0x04, 0x35, 0x69, 0xe7, 
+    0xab, 0x4b, 0x12, 0x25, 0x12, 0x5d, 0xbe, 0x89, 0x12, 0x7f, 0xb6, 0x2c, 0xcd, 0x7d, 0x91, 
+    0xb3, 0xf9, 0x1d, 0x4a, 0x52, 0x11, 0x42, 0x39, 0xad, 0xe8, 0xd9, 0xa6, 0x4a, 0xec, 0xa7, 
+    0x45, 0x2a, 0xcf, 0x48, 0xc3, 0x09, 0x3b, 0x4e, 0x06, 0xa3, 0x7b, 0x16, 0x9d, 0xba, 0xe6, 
+    0x04, 0x44, 0xf0, 0x93, 0xb6, 0xd3, 0x87, 0x7b, 0x73, 0xe0, 0xa6, 0xf5, 0x27, 0xc4, 0xc5, 0x62
+};
+
 // 初级阶段的 Bootloader 设计
 static bool BootLoader_Console(uint16_t timeout);
 static void BootLoader_Menu(void);
 static void BootLoader_Clear(void);
 static void LOAD_A(uint32_t addr);
-
-// 进阶阶段的 Bootloader 设计
-// OTA verify state is kept in BootOta.c (g_ota)
 
 /**
  * @brief  Bootloader 主函数，负责引导流程控制
@@ -30,6 +36,7 @@ void BootLoader_Brance(void)
     {
         // 进入命令行
         LOG_I("Enter console success!");
+
         BootLoader_Menu();
         OTA_state = UART_CONSOLE_IDLE;
     }
@@ -242,9 +249,8 @@ void BootLoader_State(void)
             if((size == 1) && (data[0] == EOT)) // 传输结束
             {
                 Uart_Printf("\x06"); // ACK
-                Uart_Printf("%c", CRC_REQ); // Request final empty header
-                UpData_A.Ymodem_Timer = 0;
-                OTA_state = IAP_YMODEM_END;
+                Ymodem_Finalize(Where_to_store, g_ota.firmware_size);
+                OTA_state = UART_CONSOLE_IDLE;
                 break;
             }
 
@@ -253,7 +259,7 @@ void BootLoader_State(void)
 
             if(block_num == UpData_A.Ymodem_ExpectBlock)    // 收到期望的数据块
             {
-                uint32_t remaining = data_len;  // 计算剩余需要接收的字节数，data_len=1024
+                uint32_t remaining = data_len;  // 计算剩余需要接收的字节数
 
                 // 如果已经知道了文件总大小，就根据文件总大小和已经接收的字节数来计算当前数据块中实际需要处理的字节数，避免处理多余的数据
                 if(OTA_Info.FileSize > 0)
@@ -266,12 +272,12 @@ void BootLoader_State(void)
 
                 if(remaining > 0)
                 {
-                    uint32_t copy_len = remaining;      // 实际需要处理的数据长度，正常是 1024
+                    uint32_t copy_len = remaining;      // 实际需要处理的数据长度，一般为1024字节
                     uint32_t payload_offset = 0;        // 已经处理的数据偏移量
 
                     while(payload_offset < copy_len)
                     {
-                        uint32_t chunk = copy_len - payload_offset;
+                        uint32_t chunk = copy_len - payload_offset; // 一般为1024字节
 
                         // 1. 首先处理头部，直到接收完整个头部为止
                         if(g_ota.hdr_received < OTA_HDR_SIZE)
@@ -308,13 +314,13 @@ void BootLoader_State(void)
                                 g_ota.sig_len = hdr.sig_len;
                                 mbedtls_sha256_init(&g_ota.sha_ctx);
                                 mbedtls_sha256_starts(&g_ota.sha_ctx, 0);
-                                mbedtls_sha256_update(&g_ota.sha_ctx, g_ota.hdr_buf, OTA_HDR_SIZE);
+                                mbedtls_sha256_update(&g_ota.sha_ctx, g_ota.hdr_buf, OTA_HDR_SIZE); // 将头部数据也纳入 SHA-256 计算
                                 g_ota.sha_started = true;
                             }
                             continue;
                         }
 
-                        // 如果头部已经接收完成但元数据还没有接收完成，就继续处理元数据，直到接收完整个元数据为止
+                        // 2. 头部接收完成后，处理元数据
                         if(g_ota.meta_received < OTA_META_LEN)
                         {
                             uint32_t meta_left = OTA_META_LEN - g_ota.meta_received;
@@ -328,18 +334,22 @@ void BootLoader_State(void)
                             if(g_ota.meta_received == OTA_META_LEN)
                             {
                                 if(!Where_to_store)
+                                {
+                                    W25Q64_EraseSector(OTA_META_ADDR / W25Q64_SECTOR_SIZE); // 擦除存储元数据的扇区
                                     W25Q64_WriteBytes(OTA_META_ADDR, g_ota.meta_buf, OTA_META_LEN);
+                                }
+                                    
                             }
                             continue;
                         }
 
-                        // 2. 头部接收完成后，处理固件数据，直到接收完整个固件为止
+                        // 3. 处理固件数据，直到接收完整个固件为止
                         uint32_t stream_pos = g_ota.payload_received;
                         if(stream_pos < g_ota.firmware_size)
                         {
                             uint32_t fw_left = g_ota.firmware_size - stream_pos;    // 固件剩余字节数
                             uint32_t fw_chunk = (chunk < fw_left) ? chunk : fw_left;
-                            uint32_t fw_written = fw_chunk; // 一般1024字节
+                            uint32_t fw_written = fw_chunk;
 
                             // 如果已经开始但还没有接收完整个固件，就继续更新 SHA-256
                             if(g_ota.sha_started)
@@ -367,7 +377,7 @@ void BootLoader_State(void)
 
                             g_ota.payload_received += fw_written;
                         }
-                        else    // 3. 固件数据接收完成后，处理签名数据，直到接收完整个签名为止
+                        else    // 4. 处理签名数据，直到接收完整个签名为止
                         {
                             uint32_t sig_offset = stream_pos - g_ota.firmware_size;
                             if(sig_offset >= g_ota.sig_len)
@@ -404,48 +414,17 @@ void BootLoader_State(void)
             }
             break;
         }
-
-        case IAP_YMODEM_END:
-        {
-            uint16_t data_len = 0;
-            uint8_t block_num = 0;
-            bool is_end = false;
-            uint32_t file_size = 0;
-
-            // 解析最后的空头包，确认传输结束
-            if(Ymodem_CheckPacket(data, size, &data_len, &block_num) && (block_num == 0))
-            {
-                if(Ymodem_ParseHeader(data + 3, data_len, &file_size, &is_end) && is_end)
-                {
-                    Uart_Printf("\x06"); // ACK
-                    Ymodem_Finalize(Where_to_store, g_ota.firmware_size);
-                    OTA_state = UART_CONSOLE_IDLE;
-                    break;
-                }
-            }
-
-            if(UpData_A.Ymodem_Timer >= 200)    // 每 2 秒发送一次申请，直到收到最后的空头包
-            {
-                Ymodem_Finalize(Where_to_store, g_ota.firmware_size);
-                OTA_state = UART_CONSOLE_IDLE;
-            }
-            else
-            {
-                UpData_A.Ymodem_Timer ++;
-            }
-            break;
-        }
         
         // 设置程序的版本号
         case SET_VERSION:
-            if(size == 28)
+            if(size == 10)
             {
                 // 只是判断版本号格式是否正确，不用提取出参数
-                if (sscanf((char *)data, "version-%d.%d_%4d-%2d-%2d_%2d.%2d", 
-	                &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
+                if (sscanf((char *)data, "version%d.%d", 
+	                &temp, &temp) == 2)
                 {
                     memset(OTA_Info.OTA_version, 0, 32);
-                    memcpy(OTA_Info.OTA_version, data, 28);
+                    memcpy(OTA_Info.OTA_version, data, 10); // version1.0
                     W25Q64_WriteOTAInfo();
                     LOG_I("Set version number OK!");
                     OTA_state = UART_CONSOLE_IDLE;
@@ -456,7 +435,7 @@ void BootLoader_State(void)
         // 从 W25Q24 读取数据更新 A 区应用程序
         case UPDATA_A_SET: 
 			W25Q64_ReadOTAInfo();
-            Uart_Printf("size: %d\r\n", OTA_Info.FileSize);
+            Uart_Printf("size: %lu\r\n", OTA_Info.FileSize);
 
             uint32_t block_addr = (OTA_Info.OTA_area == 0) ? OTA_Firmware_A_ADDR : OTA_Firmware_B_ADDR; // 计算固件所在的块地址
             if(!Boot_DecryptW25Q64ToMcu(block_addr, OTA_Info.FileSize, MCU_FLASH_A_START_ADDRESS))

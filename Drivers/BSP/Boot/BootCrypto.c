@@ -8,9 +8,19 @@
 #include "mbedtls/md.h"
 #include "mbedtls/platform_util.h"
 
+static void Boot_PrintHex16(const char *tag, const uint8_t *buf, size_t len)
+{
+    size_t n = (len < 16U) ? len : 16U;
+    Uart_Printf("%s:", tag);
+    for(size_t i = 0; i < n; i++)
+        Uart_Printf(" %02X", buf[i]);
+    Uart_Printf("\r\n");
+}
+
 // Replace with the device ECDH private key (P-256), 32 bytes.
-static const uint8_t k_ota_ecdh_priv[32] = {
-    0x00
+static const uint8_t k_ota_ecdh_priv[] = {
+    0x0e, 0xa7, 0xb4, 0xed, 0x04, 0x45, 0xe8, 0x1e, 0x3e, 0xf8, 0x79, 0x98, 0x1c, 0x3f, 0x18, 0xd3,
+    0xe0, 0xf9, 0x7e, 0x39, 0x14, 0x15, 0x8a, 0xb1, 0xb7, 0xf5, 0xd2, 0xab, 0x55, 0x74, 0x28, 0xd8
 };
 
 /**
@@ -25,6 +35,7 @@ static bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
     const uint8_t *eph_pub = meta;
     const uint8_t *salt = meta + OTA_ECDH_PUB_LEN;
     uint8_t secret[64];     // ECDH 共享秘密，P-256 的输出长度为 32 字节，但预留空间以防万一
+    uint8_t secret32[32];
     size_t secret_len = 0;
     int ret = 0;
 
@@ -40,7 +51,21 @@ static bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
     if(ret != 0)
         goto cleanup;
 
+    ret = mbedtls_ecp_check_privkey(&ctx.grp, &ctx.d);
+    if(ret != 0)
+        goto cleanup;
+
+    if(eph_pub[0] != 0x04)
+    {
+        ret = MBEDTLS_ERR_ECP_INVALID_KEY;
+        goto cleanup;
+    }
+
     ret = mbedtls_ecp_point_read_binary(&ctx.grp, &ctx.Qp, eph_pub, OTA_ECDH_PUB_LEN);
+    if(ret != 0)
+        goto cleanup;
+
+    ret = mbedtls_ecp_check_pubkey(&ctx.grp, &ctx.Qp);
     if(ret != 0)
         goto cleanup;
 
@@ -48,6 +73,14 @@ static bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
     ret = mbedtls_ecdh_calc_secret(&ctx, &secret_len, secret, sizeof(secret), NULL, NULL);
     if(ret != 0)
         goto cleanup;
+
+    if(secret_len > sizeof(secret32))
+    {
+        ret = MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
+        goto cleanup;
+    }
+    memset(secret32, 0, sizeof(secret32));
+    memcpy(secret32 + sizeof(secret32) - secret_len, secret, secret_len);
 
     {
         // 2. 使用 HKDF 派生 AES 密钥，使用共享秘密作为输入密钥材料，盐来自元数据，info 固定为 "OTA-AES"
@@ -59,7 +92,7 @@ static bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
         }
         // 派生 AES 密钥，输出到 key 中，长度为 key_len
         ret = mbedtls_hkdf(md, salt, OTA_SALT_LEN,
-            secret, secret_len,
+            secret32, sizeof(secret32),
             (const unsigned char *)"OTA-AES", 7,
             key, key_len);
         if(ret != 0)
@@ -67,6 +100,9 @@ static bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
     }
 
 cleanup:
+    if(ret != 0)
+        LOG_E("Boot_DeriveAesKey failed, ret=%d", ret);
+    mbedtls_platform_zeroize(secret32, sizeof(secret32));
     mbedtls_platform_zeroize(secret, sizeof(secret));
     mbedtls_ecdh_free(&ctx);
     return (ret == 0);
@@ -88,6 +124,7 @@ bool Boot_DecryptW25Q64ToMcu(uint32_t cipher_addr, uint32_t fw_size, uint32_t fl
     size_t nc_off = 0;          // AES-CTR 模式的偏移量，初始为 0
     uint8_t stream_block[16];   // AES-CTR 模式的流块缓冲区
     uint8_t nonce_counter[16];  // AES-CTR 模式的 nonce+counter，初始值为 IV，后续会自动递增
+    // bool probe_printed = false;
 
     // 1. 从 W25Q64 读取元数据
     Boot_ReadW25Q64Bytes(OTA_META_ADDR, meta, OTA_META_LEN);
@@ -130,6 +167,15 @@ bool Boot_DecryptW25Q64ToMcu(uint32_t cipher_addr, uint32_t fw_size, uint32_t fl
             mbedtls_platform_zeroize(key, sizeof(key));
             return false;
         }
+
+        // if(!probe_printed)
+        // {
+        //     Boot_PrintHex16("DBG cipher[0:16]", cipher_buf, chunk);
+        //     Boot_PrintHex16("DBG key[0:16]", key, sizeof(key));
+        //     Boot_PrintHex16("DBG iv[0:16]", iv, OTA_IV_LEN);
+        //     Boot_PrintHex16("DBG plain[0:16]", plain_buf, chunk);
+        //     probe_printed = true;
+        // }
 
         // 将解密后的数据写入 MCU Flash，注意处理最后一个块的填充
         uint32_t padded = (chunk + 3U) & ~3U;

@@ -3,6 +3,7 @@
 #include "mbedtls/md.h"
 #include "mbedtls/pk.h"
 #include "mbedtls/platform_util.h"
+// #include "mbedtls/error.h"
 
 BootOtaContext g_ota;   // 全局 OTA 上下文，存储 OTA 验证状态和相关数据
 
@@ -50,7 +51,7 @@ void Boot_ReadW25Q64Bytes(uint32_t addr, uint8_t *out, uint32_t len)
         }
         else
         {
-            uint8_t temp[W25Q64_PAGE_SIZE];
+            static uint8_t temp[W25Q64_PAGE_SIZE];
             W25Q64_ReadData(page, temp, W25Q64_PAGE_SIZE);
             memcpy(out, temp + offset, chunk);
         }
@@ -107,8 +108,8 @@ bool Boot_ParseOtaHeader(const uint8_t *buf, uint32_t len, OTA_Header_t *out)
  */
 bool Boot_VerifySignature(void)
 {
-    uint8_t digest[32];
-    uint8_t pubkey_buf[OTA_PUBKEY_LEN];
+    static uint8_t digest[32];      // 存储 SHA-256 摘要的缓冲区
+    static uint8_t pubkey_buf[OTA_PUBKEY_LEN];
     mbedtls_pk_context pk;
     int ret = 0;
 
@@ -131,7 +132,9 @@ bool Boot_VerifySignature(void)
         return false;
     }
 
-    ret = mbedtls_pk_verify(&pk, MBEDTLS_MD_SHA256, digest, 0, g_ota.sig_buf, g_ota.sig_len);
+    ret = mbedtls_pk_verify(&pk, MBEDTLS_MD_SHA256, digest, 32, g_ota.sig_buf, g_ota.sig_len);
+    // LOG_E("Signature verify result: %d", ret);
+
     mbedtls_pk_free(&pk);
 
     mbedtls_platform_zeroize(digest, sizeof(digest));
