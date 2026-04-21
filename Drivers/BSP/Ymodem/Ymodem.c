@@ -93,27 +93,18 @@ bool Ymodem_ParseHeader(const uint8_t *data, uint16_t data_len, uint32_t *file_s
 }
 
 /**
- * @brief  Ymodem 数据块写入函数，将接收到的数据块写入指定存储介质
+ * @brief  Ymodem 数据块写入函数
  * @param  block_index: 数据块的索引，从 0 开始
  * @param  buf: 指向数据块内容的指针
  * @param  size: 数据块的大小，单位字节
  * @retval None
  */
-void Ymodem_WriteBlock(uint32_t block_index, const uint8_t *buf, uint32_t size, bool Where_to_store)
+void Ymodem_WriteBlock(uint32_t block_index, const uint8_t *buf, uint32_t size)
 {
     if(size == 0)
         return;
 
-    if(Where_to_store)      // 写入 MCU 的 Flash
-    {
-        MCU_WriteFlash(MCU_FLASH_A_START_ADDRESS + block_index * UPDATA_BUFF,
-            (uint32_t *)buf, size / 4);
-    }
-    else    // 写入 W25Q64
-    {
-        uint32_t addr = (OTA_Info.OTA_area == 0) ? OTA_Firmware_A_ADDR : OTA_Firmware_B_ADDR; // 计算固件所在的块地址
-        W25Q64_WriteBytes(addr + block_index * UPDATA_BUFF, buf, size);
-    }
+    W25Q64_WriteBytes(OTA_STAGING_ADDR + block_index * UPDATA_BUFF, buf, size);
 }
 
 /**
@@ -121,12 +112,12 @@ void Ymodem_WriteBlock(uint32_t block_index, const uint8_t *buf, uint32_t size, 
  * @param  start_time: 传输开始的时间戳，用于计算传输耗时
  * @retval None
  */
-void Ymodem_Finalize(bool Where_to_store, uint32_t g_firmware_size)
+void Ymodem_Finalize(uint32_t g_firmware_size)
 {
     if(UpData_A.Ymodem_BytesInBuffer > 0)   // 如果还有剩余数据没有写入，先写入剩余数据
     {
         Ymodem_WriteBlock(UpData_A.Ymodem_WriteBlockIndex,
-            UpData_A.UpAppBuffer, UpData_A.Ymodem_BytesInBuffer, Where_to_store);
+            UpData_A.UpAppBuffer, UpData_A.Ymodem_BytesInBuffer);
     }
     if(OTA_Info.FileSize == 0)
         OTA_Info.FileSize = UpData_A.Ymodem_TotalReceived;

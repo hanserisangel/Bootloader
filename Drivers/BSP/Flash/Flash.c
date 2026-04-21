@@ -21,7 +21,10 @@ void MCU_EraseFlash(uint8_t sector, uint8_t count)
     EraseInitStruct.NbSectors     = count; // 擦除的扇区数量
     
     // 执行擦除操作
-    HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError);
+    if(HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
+    {
+        LOG_E("MCU_EraseFlash failed, sector=%u count=%u err=%lu", sector, count, SectorError);
+    }
     
     // 锁定 Flash 控制寄存器
     HAL_FLASH_Lock();
@@ -42,7 +45,11 @@ void MCU_WriteFlash(uint32_t WriteAddress, uint32_t *pData, uint32_t Length)
     // 写入数据
     for (uint32_t i = 0; i < Length; i++)
     {
-        HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, WriteAddress + i*4, pData[i]);
+        if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, WriteAddress + i*4U, pData[i]) != HAL_OK)
+        {
+            LOG_E("MCU_WriteFlash failed, addr=0x%08lX idx=%lu", WriteAddress + i*4U, i);
+            break;
+        }
     }
     
     // 锁定 Flash 控制寄存器

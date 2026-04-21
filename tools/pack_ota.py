@@ -113,11 +113,11 @@ def pack_ota(
         raise SystemExit("Signature length did not stabilize")
 
     # 用于调试：输出包头+元数据+密文的 SHA-256 摘要
-    # to_sign = header + meta + ciphertext
-    # digest = hashlib.sha256(to_sign).hexdigest()
-    # print(f"sha256(header+meta+ciphertext)={digest}")
+    to_sign = header + meta + ciphertext
+    digest = hashlib.sha256(to_sign).hexdigest()
+    print(f"sha256(header+meta+ciphertext)={digest}")
 
-    # out_path.write_bytes(to_sign + signature)
+    out_path.write_bytes(to_sign + signature)
 
 
 def main() -> None:
@@ -143,3 +143,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# 差分压缩：.\hdiffi.exe -f -d -c-tinyuz .\OTA_A.bin .\OTA_B.bin delta.bin
+# 打补丁：.\hpatchi.exe .\OTA_A.bin .\delta.bin newfile.bin
+# 命令：python pack_ota.py --fw delta.bin --sign-priv .\ecdsa_key\ec_priv.pem --dev-pub .\ecdh_key\dev_ecdh_pub.pem --out delta_merge.bin --aes-len 16

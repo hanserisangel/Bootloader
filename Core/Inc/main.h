@@ -16,7 +16,7 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "dma.h"
-#include "i2c.h"
+// #include "i2c.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -55,14 +55,15 @@ void Error_Handler(void);
 #define SPI_CS_GPIO_Port GPIOG
 
 /* USER CODE BEGIN Private defines */
-#define MCU_FLASH_TOTAL_SIZE        1024U         // 总共 1MB 的Flash
-#define MCU_FLASH_TOTAL_PAGE        12U           // 总共 12 个页
-#define MCU_FLASH_B_PAGE_SIZE       64U         // flash 的B区大小为 64KB
-#define MCU_FLASH_A_PAGE_SIZE       (MCU_FLASH_TOTAL_SIZE - MCU_FLASH_B_PAGE_SIZE) // 剩下的都是A区
-#define MCU_FLASH_A_START_PAGE      4U      // A 区从第 4 页开始
-#define MCU_FLASH_A_PAGE_NUM        (8 - MCU_FLASH_A_START_PAGE) // A 区总页数
-
-#define MCU_FLASH_A_START_ADDRESS  (FLASH_BASE + MCU_FLASH_B_PAGE_SIZE * 1024U) // A区起始地址
+#define MCU_FLASH_APP_A_SLOT        0U
+#define MCU_FLASH_APP_B_SLOT        1U
+#define MCU_FLASH_APP_A_ADDR        (FLASH_BASE + 0x20000U) // A区起始地址
+#define MCU_FLASH_APP_B_ADDR        (FLASH_BASE + 0x80000U) // B区起始地址
+#define MCU_FLASH_APP_A_SECTOR      5U
+#define MCU_FLASH_APP_A_COUNT       3U
+#define MCU_FLASH_APP_B_SECTOR      8U
+#define MCU_FLASH_APP_B_COUNT       3U
+#define MCU_FLASH_SLOT_SIZE         (384U * 1024U)
 
 #define OTA_FLAG                  0xAABB1122
 
@@ -89,8 +90,10 @@ void Error_Handler(void);
 #define OTA_HEAT_ADDR             (OTA_META_ADDR + 4096U)   // 断点续传热数据，地址 8192 开始，52KB 字节的空间
 
 /* 第二块*/
-#define OTA_Firmware_A_ADDR       0x100000U // 固件A区，地址 0x100000 开始，512KB 的空间
-#define OTA_Firmware_B_ADDR       (OTA_Firmware_A_ADDR + 512 * 1024) // 固件B区，地址 0x90000 开始，512KB 的空间
+#define OTA_STAGING_ADDR          0x100000U // OTA 包暂存区，地址 1MB 开始，512KB 的空间（128个块）
+#define OTA_STAGING_SIZE          (512U * 1024U) // 512KB
+#define OTA_TUZ_DICT_MAX          (2U * 1024U)
+#define OTA_TUZ_CACHE_SIZE        1024U
 
 // OTA header 结构体定义
 typedef struct{
@@ -100,11 +103,18 @@ typedef struct{
   uint32_t sig_len;     // signature length in bytes
 }OTA_Header_t;
 
+typedef enum {
+  UPDATE = 0,      // OTA包已接收但未验证
+  NORMAL,
+  FAIL
+}OTA_status_t;
+
 typedef struct{
   uint32_t OTA_Flag;
   uint32_t FileSize;        // 服务器下发的整个应用程序的大小（字节）
   uint8_t OTA_version[12];  // OTA 版本号，字符串数组，格式: version-1.0
   uint8_t OTA_area;          // 0 表示 A 区，1 表示 B 区
+  OTA_status_t OTA_status;        // OTA 状态，用来自动回滚
 }OTA_Info_t;
 extern OTA_Info_t OTA_Info;
 
@@ -127,6 +137,7 @@ typedef enum{
   IAP_YMODEM_RECEIVED,
   SET_VERSION,
   UPDATA_A_SET,
+  UPDATA_DELTA_SET,
 }OTA_State_t;
 extern OTA_State_t OTA_state;
 

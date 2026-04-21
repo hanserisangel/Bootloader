@@ -6,6 +6,7 @@
 #include "mbedtls/sha256.h"
 #include "BootOta.h"
 #include "BootCrypto.h"
+#include "BootDelta.h"
 
 load_a Load_A;
 static uint8_t data[RX_DATA_CELLING];
@@ -25,6 +26,36 @@ static bool BootLoader_Console(uint16_t timeout);
 static void BootLoader_Menu(void);
 static void BootLoader_Clear(void);
 static void LOAD_A(uint32_t addr);
+static uint8_t Boot_GetActiveSlot(void);
+static uint8_t Boot_GetInactiveSlot(void);
+static uint32_t Boot_GetSlotStartAddr(uint8_t slot);
+static uint32_t Boot_GetSlotStartSector(uint8_t slot);
+static uint32_t Boot_GetSlotSectorCount(uint8_t slot);
+
+static uint8_t Boot_GetActiveSlot(void)
+{
+    return (OTA_Info.OTA_area == MCU_FLASH_APP_B_SLOT) ? MCU_FLASH_APP_B_SLOT : MCU_FLASH_APP_A_SLOT;
+}
+
+static uint8_t Boot_GetInactiveSlot(void)
+{
+    return (Boot_GetActiveSlot() == MCU_FLASH_APP_A_SLOT) ? MCU_FLASH_APP_B_SLOT : MCU_FLASH_APP_A_SLOT;
+}
+
+static uint32_t Boot_GetSlotStartAddr(uint8_t slot)
+{
+    return (slot == MCU_FLASH_APP_B_SLOT) ? MCU_FLASH_APP_B_ADDR : MCU_FLASH_APP_A_ADDR;
+}
+
+static uint32_t Boot_GetSlotStartSector(uint8_t slot)
+{
+    return (slot == MCU_FLASH_APP_B_SLOT) ? MCU_FLASH_APP_B_SECTOR : MCU_FLASH_APP_A_SECTOR;
+}
+
+static uint32_t Boot_GetSlotSectorCount(uint8_t slot)
+{
+    return (slot == MCU_FLASH_APP_B_SLOT) ? MCU_FLASH_APP_B_COUNT : MCU_FLASH_APP_A_COUNT;
+}
 
 /**
  * @brief  Bootloader 主函数，负责引导流程控制
@@ -32,6 +63,8 @@ static void LOAD_A(uint32_t addr);
  */
 void BootLoader_Brance(void)
 {
+    W25Q64_ReadOTAInfo();
+
     if(BootLoader_Console(20))
     {
         // 进入命令行
@@ -44,16 +77,32 @@ void BootLoader_Brance(void)
     {
         if(OTA_Info.OTA_Flag == OTA_FLAG)
         {
-            // 更新A区应用程序
-            LOG_I("OTA update!");
-			MCU_EraseFlash(MCU_FLASH_A_START_PAGE, MCU_FLASH_A_PAGE_NUM);
+            // OTA 包在外部 staging，解密并写入内部非激活槽
+            LOG_I("OTA update from staging");
             OTA_state = UPDATA_A_SET; // 设置状态为更新 A 区
         }
         else
         {
-            // 直接跳转到A区执行应用程序
-            LOG_I("OTA brance!");
-            LOAD_A(MCU_FLASH_A_START_ADDRESS);
+            uint8_t active_slot = Boot_GetActiveSlot();
+            uint8_t inactive_slot = Boot_GetInactiveSlot();
+
+            // A/B双分区自动回滚机制
+            // if(OTA_Info.OTA_status == FAIL)
+            // {
+            //     LOG_W("Previous OTA update failed, rollback to previous version");
+            //     active_slot = inactive_slot;
+            //     OTA_Info.OTA_area = active_slot; // 更新 OTA_Info 中的 active slot 信息
+            //     OTA_Info.OTA_status = SUCCESS; // 将状态重置为 SUCCESS，避免重复回滚
+            // }
+            // else if(OTA_Info.OTA_status == UPDATE)
+            // {
+            //     LOG_W("Previous OTA update not verified, skipping to new version");
+            //     OTA_Info.OTA_status = FAIL; // 将状态设置为 FAIL，等待本次版本验证结果，如果验证成功会在后续更新为 SUCCESS，如果验证失败则保持 FAIL，等待下次重启回滚
+            // }
+
+            // 跳转到激活槽的应用程序
+            LOG_I("Boot active slot %c", (active_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
+            LOAD_A(Boot_GetSlotStartAddr(active_slot));
         }
     }
 }
@@ -71,6 +120,7 @@ static void BootLoader_Menu(void)
     Uart_Printf("[5] Download A program into W25Q64\r\n");
     Uart_Printf("[6] Download A program from W25Q64\r\n");
     Uart_Printf("[7] Reset\r\n");
+    Uart_Printf("[8] Apply HPatchLite delta from W25Q64\r\n");
 }
 
 /**
@@ -101,12 +151,21 @@ void BootLoader_Event(uint8_t* pdata)
     switch(pdata[0])
     {
         case '1': // 擦除 A 区
-            MCU_EraseFlash(MCU_FLASH_A_START_PAGE, MCU_FLASH_A_PAGE_NUM);
-            LOG_I("Erase A area OK!");
+            MCU_EraseFlash(Boot_GetSlotStartSector(MCU_FLASH_APP_A_SLOT), Boot_GetSlotSectorCount(MCU_FLASH_APP_A_SLOT));
+            LOG_I("Erase slot A OK!");
             break;
         case '2': // 串口 IAP 下载 A 区程序到 MCU_Flash
             LOG_I("Uart IAP download A program Starting!");
-            MCU_EraseFlash(MCU_FLASH_A_START_PAGE, MCU_FLASH_A_PAGE_NUM); // 擦除 MCU 的 A 区的 Flash
+            // MCU_EraseFlash(Boot_GetSlotStartSector(MCU_FLASH_APP_A_SLOT), Boot_GetSlotSectorCount(MCU_FLASH_APP_A_SLOT));
+
+            // 擦除 staging 区，准备接收 OTA 包
+            LOG_I("Erase W25Q64 staging block...");
+            for(uint32_t addr = OTA_STAGING_ADDR; addr < OTA_STAGING_ADDR + 512U * 1024U; addr += W25Q64_BLOCK_SIZE)
+            {
+                W25Q64_EraseBlock(addr / W25Q64_BLOCK_SIZE); // 擦除 W25Q64 中存储固件的块
+            }
+            LOG_I("Erase W25Q64 staging OK!");
+            
             OTA_state = IAP_YMODEM_START; // 向 pc 发送申请
             UpData_A.Ymodem_Timer = 0;
             UpData_A.Ymodem_CRC = 0;
@@ -130,14 +189,13 @@ void BootLoader_Event(uint8_t* pdata)
         case '5': // 串口 IAP 下载 A 区程序到 W25Q64
             LOG_I("Download Starting!");
 
-            // 擦除 W25Q64 中存储固件的512KB，准备接收新的固件数据
-            LOG_I("Erase W25Q64 block...");
-            uint32_t block_addr = (OTA_Info.OTA_area == 0) ? OTA_Firmware_A_ADDR : OTA_Firmware_B_ADDR; // 计算需要擦除的块地址
-            for(uint32_t addr = block_addr; addr < block_addr + 512 * 1024; addr += W25Q64_BLOCK_SIZE)
+            // 擦除 staging 区，准备接收 OTA 包
+            LOG_I("Erase W25Q64 staging block...");
+            for(uint32_t addr = OTA_STAGING_ADDR; addr < OTA_STAGING_ADDR + 512U * 1024U; addr += W25Q64_BLOCK_SIZE)
             {
                 W25Q64_EraseBlock(addr / W25Q64_BLOCK_SIZE); // 擦除 W25Q64 中存储固件的块
             }
-            LOG_I("Erase W25Q64 block OK!");
+            LOG_I("Erase W25Q64 staging OK!");
             
             OTA_state = IAP_YMODEM_START;
             UpData_A.Ymodem_Timer = 0;
@@ -153,13 +211,16 @@ void BootLoader_Event(uint8_t* pdata)
             break;
         case '6': // 从 W25Q64 下载程序到 MCU 的 Flash
             LOG_I("Download Starting!");
-            MCU_EraseFlash(MCU_FLASH_A_START_PAGE, MCU_FLASH_A_PAGE_NUM); // 擦除 MCU 的 A 区的 Flash
             OTA_state = UPDATA_A_SET;
             break;
         case '7': // 重启
             LOG_I("Reset OK!");
             HAL_Delay(100);
             HAL_NVIC_SystemReset();
+            break;
+        case '8': // 从 W25Q64 应用 HPatchLite 差分包
+            LOG_I("Apply HPatchLite delta Starting!");
+            OTA_state = UPDATA_DELTA_SET;
             break;
         default:
             return;
@@ -248,9 +309,17 @@ void BootLoader_State(void)
 
             if((size == 1) && (data[0] == EOT)) // 传输结束
             {
-                Uart_Printf("\x06"); // ACK
-                Ymodem_Finalize(Where_to_store, g_ota.firmware_size);
-                OTA_state = UART_CONSOLE_IDLE;
+                Uart_Printf("\x15"); // NAK
+                Ymodem_Finalize(g_ota.firmware_size);
+
+                if(Where_to_store)  // 接收完成后自动刷写新固件到mcu flash
+                {
+                    // OTA_state = UPDATA_A_SET;
+                }
+                else{
+                    OTA_state = UART_CONSOLE_IDLE;
+                }
+                
                 break;
             }
 
@@ -309,6 +378,12 @@ void BootLoader_State(void)
                                     OTA_state = UART_CONSOLE_IDLE;
                                     break;
                                 }
+                                if(hdr.fw_size > MCU_FLASH_SLOT_SIZE)
+                                {
+                                    LOG_E("Firmware too large for slot: %lu", hdr.fw_size);
+                                    OTA_state = UART_CONSOLE_IDLE;
+                                    break;
+                                }
 
                                 g_ota.firmware_size = hdr.fw_size;
                                 g_ota.sig_len = hdr.sig_len;
@@ -333,12 +408,9 @@ void BootLoader_State(void)
 
                             if(g_ota.meta_received == OTA_META_LEN)
                             {
-                                if(!Where_to_store)
-                                {
-                                    W25Q64_EraseSector(OTA_META_ADDR / W25Q64_SECTOR_SIZE); // 擦除存储元数据的扇区
-                                    W25Q64_WriteBytes(OTA_META_ADDR, g_ota.meta_buf, OTA_META_LEN);
-                                }
-                                    
+                                // 元数据必须和当前payload保持一致，否则后续解密会使用陈旧key/iv导致写入内容错误。
+                                W25Q64_EraseSector(OTA_META_ADDR / W25Q64_SECTOR_SIZE);
+                                W25Q64_WriteBytes(OTA_META_ADDR, g_ota.meta_buf, OTA_META_LEN);
                             }
                             continue;
                         }
@@ -369,7 +441,7 @@ void BootLoader_State(void)
                                 if(UpData_A.Ymodem_BytesInBuffer >= UPDATA_BUFF)
                                 {
                                     Ymodem_WriteBlock(UpData_A.Ymodem_WriteBlockIndex,
-                                        UpData_A.UpAppBuffer, UPDATA_BUFF, Where_to_store);
+                                        UpData_A.UpAppBuffer, UPDATA_BUFF);
                                     UpData_A.Ymodem_WriteBlockIndex ++;
                                     UpData_A.Ymodem_BytesInBuffer = 0;
                                 }
@@ -437,28 +509,86 @@ void BootLoader_State(void)
 			W25Q64_ReadOTAInfo();
             Uart_Printf("size: %lu\r\n", OTA_Info.FileSize);
 
-            uint32_t block_addr = (OTA_Info.OTA_area == 0) ? OTA_Firmware_A_ADDR : OTA_Firmware_B_ADDR; // 计算固件所在的块地址
-            if(!Boot_DecryptW25Q64ToMcu(block_addr, OTA_Info.FileSize, MCU_FLASH_A_START_ADDRESS))
             {
-                LOG_E("Decrypt and write failed");
-                OTA_state = UART_CONSOLE_IDLE;
-                break;
+                uint8_t target_slot = Boot_GetInactiveSlot();
+                uint32_t target_addr = Boot_GetSlotStartAddr(target_slot);
+                MCU_EraseFlash(Boot_GetSlotStartSector(target_slot), Boot_GetSlotSectorCount(target_slot));
+
+                if(OTA_Info.FileSize > MCU_FLASH_SLOT_SIZE)
+                {
+                    LOG_E("Firmware size exceeds slot: %lu", OTA_Info.FileSize);
+                    OTA_state = UART_CONSOLE_IDLE;
+                    break;
+                }
+
+                if(!Boot_DecryptW25Q64ToMcu(OTA_STAGING_ADDR, OTA_Info.FileSize, target_addr))
+                {
+                    LOG_E("Decrypt and write failed");
+                    OTA_state = UART_CONSOLE_IDLE;
+                    break;
+                }
+
+                OTA_Info.OTA_area = target_slot;
             }
 
             // 清除 OTA 标志
             OTA_Info.OTA_Flag = 0;
+            // OTA_Info.OTA_status = UPDATE; // 刚接收但未验证
             W25Q64_WriteOTAInfo();
-            LOG_I("Download A program from W25Q64 OK!");
+            LOG_I("Program slot %c from staging OK!", (OTA_Info.OTA_area == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
 
             OTA_state = UART_CONSOLE_IDLE;
             break;
+
+        case UPDATA_DELTA_SET:
+        {
+            uint8_t active_slot = Boot_GetActiveSlot();
+            uint8_t target_slot = Boot_GetInactiveSlot();
+            uint32_t base_addr = Boot_GetSlotStartAddr(active_slot);
+            uint32_t target_addr = Boot_GetSlotStartAddr(target_slot);
+
+            W25Q64_ReadOTAInfo();
+            Uart_Printf("delta size: %lu\r\n", OTA_Info.FileSize);
+            // Uart_Printf("delta route active=%u target=%u ota_area=%u base=0x%08lX target=0x%08lX\r\n",
+            //     active_slot,
+            //     target_slot,
+            //     OTA_Info.OTA_area,
+            //     (unsigned long)base_addr,
+            //     (unsigned long)target_addr);
+
+            if(OTA_Info.FileSize == 0U || OTA_Info.FileSize > OTA_STAGING_SIZE)
+            {
+                LOG_E("Delta size invalid");
+                OTA_state = UART_CONSOLE_IDLE;
+                break;
+            }
+
+            MCU_EraseFlash(Boot_GetSlotStartSector(target_slot), Boot_GetSlotSectorCount(target_slot));
+            // 密文差分包全程流式处理：staging密文 -> 解密 -> (tinyuz) -> 差分还原 -> 写入目标槽
+            if(!Boot_ApplyDeltaFromW25Q64(OTA_STAGING_ADDR, OTA_Info.FileSize, base_addr, target_addr))
+            {
+                LOG_E("Delta apply failed");
+                OTA_state = UART_CONSOLE_IDLE;
+                break;
+            }
+
+            OTA_Info.OTA_area = target_slot;
+            OTA_Info.OTA_Flag = 0;
+            // OTA_Info.OTA_status = UPDATE; // 刚接收但未验证
+
+            W25Q64_WriteOTAInfo();
+            LOG_I("Delta program to slot %c OK!", (target_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
+
+            OTA_state = UART_CONSOLE_IDLE;
+            break;
+        }
+
         default:
             OTA_state = UART_CONSOLE_IDLE;
             break;
     }
 }
 
-// OTA helpers are in BootOta.c
 // 设置 A 区 MSP 指针
  __asm void MSP_setSP(uint32_t addr)
  {
@@ -483,7 +613,7 @@ static void LOAD_A(uint32_t addr)
 // 清空外设
 static void BootLoader_Clear(void)
 {
-    HAL_I2C_MspDeInit(&hi2c1);
+    // HAL_I2C_MspDeInit(&hi2c1);
     HAL_UART_DMAStop(&huart3); // 必须要先停止 DMA，要不然会和 A 区冲突
     HAL_UART_MspDeInit(&huart3);
     HAL_SPI_MspDeInit(&hspi3);

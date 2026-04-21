@@ -1,6 +1,7 @@
 #include "BootCrypto.h"
 #include <string.h>
 #include "main.h"
+#include "rng.h"
 #include "BootOta.h"
 #include "mbedtls/aes.h"
 #include "mbedtls/ecdh.h"
@@ -23,6 +24,29 @@ static const uint8_t k_ota_ecdh_priv[] = {
     0xe0, 0xf9, 0x7e, 0x39, 0x14, 0x15, 0x8a, 0xb1, 0xb7, 0xf5, 0xd2, 0xab, 0x55, 0x74, 0x28, 0xd8
 };
 
+static int Boot_EcdhRng(void *ctx, unsigned char *output, size_t len)
+{
+    (void)ctx;
+    size_t offset = 0;
+
+    while(offset < len)
+    {
+        uint32_t rnd = 0;
+        size_t n = len - offset;
+
+        if(HAL_RNG_GenerateRandomNumber(&hrng, &rnd) != HAL_OK)
+            return MBEDTLS_ERR_ECP_RANDOM_FAILED;
+
+        if(n > sizeof(rnd))
+            n = sizeof(rnd);
+
+        memcpy(output + offset, &rnd, n);
+        offset += n;
+    }
+
+    return 0;
+}
+
 /**
  * @brief  从元数据中派生 AES 密钥，使用 ECDH 公钥和盐作为输入。
  * @param  key: 输出缓冲区，用于存储派生的 AES 密钥。
@@ -30,7 +54,7 @@ static const uint8_t k_ota_ecdh_priv[] = {
  * @param  meta: 输入的元数据，包含 ECDH 公钥、盐和 IV。
  * @retval true 表示成功派生 AES 密钥，false 表示失败。
  */
-static bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
+bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
 {
     const uint8_t *eph_pub = meta;
     const uint8_t *salt = meta + OTA_ECDH_PUB_LEN;
@@ -70,7 +94,7 @@ static bool Boot_DeriveAesKey(uint8_t *key, size_t key_len, const uint8_t *meta)
         goto cleanup;
 
     // 计算共享秘密，结果存储在 secret 中，长度存储在 secret_len 中
-    ret = mbedtls_ecdh_calc_secret(&ctx, &secret_len, secret, sizeof(secret), NULL, NULL);
+    ret = mbedtls_ecdh_calc_secret(&ctx, &secret_len, secret, sizeof(secret), Boot_EcdhRng, NULL);
     if(ret != 0)
         goto cleanup;
 
@@ -191,3 +215,67 @@ bool Boot_DecryptW25Q64ToMcu(uint32_t cipher_addr, uint32_t fw_size, uint32_t fl
     mbedtls_platform_zeroize(key, sizeof(key));
     return true;
 }
+
+// /**
+//  * @brief  从 W25Q64 读取数据并解密到 W25Q64。(AES-CTR 模式)
+//  * @param  cipher_addr: W25Q64 中加密固件的起始地址。
+//  * @param  fw_size: 固件大小（以字节为单位）。
+//  * @param  out_addr: W25Q64 中存储解密后数据的起始地址。
+//  * @retval None
+//  */
+// bool Boot_DecryptW25Q64ToW25Q64(uint32_t cipher_addr, uint32_t fw_size, uint32_t out_addr)
+// {
+//     uint8_t meta[OTA_META_LEN];
+//     uint8_t key[16];
+//     const uint8_t *iv;
+//     mbedtls_aes_context aes;
+//     size_t nc_off = 0;
+//     uint8_t stream_block[16];
+//     uint8_t nonce_counter[16];
+
+//     Boot_ReadW25Q64Bytes(OTA_META_ADDR, meta, OTA_META_LEN);
+
+//     if(!Boot_DeriveAesKey(key, sizeof(key), meta))
+//         return false;
+
+//     iv = meta + OTA_ECDH_PUB_LEN + OTA_SALT_LEN;
+//     memcpy(nonce_counter, iv, sizeof(nonce_counter));
+//     memset(stream_block, 0, sizeof(stream_block));
+
+//     mbedtls_aes_init(&aes);
+//     if(mbedtls_aes_setkey_enc(&aes, key, 128) != 0)
+//     {
+//         mbedtls_aes_free(&aes);
+//         mbedtls_platform_zeroize(key, sizeof(key));
+//         return false;
+//     }
+
+//     // 3. 解密固件数据并写入 W25Q64 的另一个区域
+//     for(uint32_t offset = 0; offset < fw_size; )
+//     {
+//         uint32_t chunk = fw_size - offset;
+//         static uint8_t cipher_buf[UPDATA_BUFF];
+//         static uint8_t plain_buf[UPDATA_BUFF];
+
+//         if(chunk > UPDATA_BUFF)
+//             chunk = UPDATA_BUFF;
+
+//         Boot_ReadW25Q64Bytes(cipher_addr + offset, cipher_buf, chunk);
+
+//         if(mbedtls_aes_crypt_ctr(&aes, chunk, &nc_off, nonce_counter, stream_block,
+//             cipher_buf, plain_buf) != 0)
+//         {
+//             mbedtls_aes_free(&aes);
+//             mbedtls_platform_zeroize(key, sizeof(key));
+//             return false;
+//         }
+
+//         // 写入解密后的数据到 W25Q64
+//         W25Q64_WriteBytes(out_addr + offset, plain_buf, chunk);
+//         offset += chunk;
+//     }
+
+//     mbedtls_aes_free(&aes);
+//     mbedtls_platform_zeroize(key, sizeof(key));
+//     return true;
+// }

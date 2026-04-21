@@ -4,7 +4,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
-#include "i2c.h"
+// #include "i2c.h"
 #include "mbedtls.h"
 #include "rng.h"
 #include "spi.h"
@@ -84,7 +84,7 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_USART3_UART_Init();
-  MX_I2C1_Init();
+  // MX_I2C1_Init();
   MX_SPI3_Init();
   MX_RNG_Init();
   MX_MBEDTLS_Init();
