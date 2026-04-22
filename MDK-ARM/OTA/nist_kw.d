@@ -1,0 +1,10 @@
+ota\nist_kw.o: ../Middlewares/Third_Party/mbedTLS/library/nist_kw.c
+ota\nist_kw.o: ../MBEDTLS/App/mbedtls_config.h
+ota\nist_kw.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\nist_kw.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\nist_kw.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/nist_kw.h
+ota\nist_kw.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h
+ota\nist_kw.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\nist_kw.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\nist_kw.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\nist_kw.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

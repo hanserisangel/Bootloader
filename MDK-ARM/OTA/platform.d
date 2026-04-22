@@ -1,0 +1,10 @@
+ota\platform.o: ../Middlewares/Third_Party/mbedTLS/library/platform.c
+ota\platform.o: ../MBEDTLS/App/mbedtls_config.h
+ota\platform.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\platform.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\platform.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h
+ota\platform.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
+ota\platform.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+ota\platform.o: D:\Keil5\ARM\ARMCC\Bin\..\include\time.h
+ota\platform.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\platform.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h

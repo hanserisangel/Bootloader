@@ -1,0 +1,9 @@
+ota\sha512.o: ../Middlewares/Third_Party/mbedTLS/library/sha512.c
+ota\sha512.o: ../MBEDTLS/App/mbedtls_config.h
+ota\sha512.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\sha512.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\sha512.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha512.h
+ota\sha512.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\sha512.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\sha512.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\sha512.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

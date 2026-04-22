@@ -1,0 +1,11 @@
+ota\ecdh.o: ../Middlewares/Third_Party/mbedTLS/library/ecdh.c
+ota\ecdh.o: ../MBEDTLS/App/mbedtls_config.h
+ota\ecdh.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\ecdh.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\ecdh.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdh.h
+ota\ecdh.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h
+ota\ecdh.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h
+ota\ecdh.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\ecdh.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\ecdh.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\ecdh.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

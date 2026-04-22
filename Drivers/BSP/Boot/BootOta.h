@@ -28,5 +28,6 @@ void Boot_ResetVerifyState(void);
 void Boot_ReadW25Q64Bytes(uint32_t addr, uint8_t *out, uint32_t len);
 bool Boot_ParseOtaHeader(const uint8_t *buf, uint32_t len, OTA_Header_t *out);
 bool Boot_VerifySignature(void);
+bool Boot_VerifySignatureFromW25Q64(OTA_Header_t *out_hdr);
 
 #endif /* __BOOT_OTA_H__ */

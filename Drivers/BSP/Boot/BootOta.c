@@ -82,20 +82,27 @@ bool Boot_ParseOtaHeader(const uint8_t *buf, uint32_t len, OTA_Header_t *out)
         ((uint32_t)buf[5] << 8) |
         ((uint32_t)buf[6] << 16) |
         ((uint32_t)buf[7] << 24);
-    uint32_t fw_size = (uint32_t)buf[8] |
+    uint32_t pkg_type = (uint32_t)buf[8] |
         ((uint32_t)buf[9] << 8) |
         ((uint32_t)buf[10] << 16) |
         ((uint32_t)buf[11] << 24);
-    uint32_t sig_len = (uint32_t)buf[12] |
+    uint32_t fw_size = (uint32_t)buf[12] |
         ((uint32_t)buf[13] << 8) |
         ((uint32_t)buf[14] << 16) |
         ((uint32_t)buf[15] << 24);
+    uint32_t sig_len = (uint32_t)buf[16] |
+        ((uint32_t)buf[17] << 8) |
+        ((uint32_t)buf[18] << 16) |
+        ((uint32_t)buf[19] << 24);
 
     if(magic != OTA_HDR_MAGIC || header_size != OTA_HDR_SIZE)
+        return false;
+    if(pkg_type != OTA_PKG_TYPE_FULL && pkg_type != OTA_PKG_TYPE_DELTA)
         return false;
 
     out->magic = magic;
     out->header_size = header_size;
+    out->pkg_type = pkg_type;
     out->fw_size = fw_size;
     out->sig_len = sig_len;
     return true;
@@ -137,6 +144,74 @@ bool Boot_VerifySignature(void)
 
     mbedtls_pk_free(&pk);
 
+    mbedtls_platform_zeroize(digest, sizeof(digest));
+    return (ret == 0);
+}
+
+bool Boot_VerifySignatureFromW25Q64(OTA_Header_t *out_hdr)
+{
+    OTA_Header_t hdr;
+    static uint8_t hdr_buf[OTA_HDR_SIZE];
+    static uint8_t sig_buf[OTA_SIG_MAX];
+    static uint8_t io_buf[UPDATA_BUFF];
+    static uint8_t digest[32];
+    static uint8_t pubkey_buf[OTA_PUBKEY_LEN];
+    mbedtls_sha256_context sha_ctx;
+    mbedtls_pk_context pk;
+    uint32_t remain;
+    uint32_t addr;
+    int ret = 0;
+
+    Boot_ReadW25Q64Bytes(OTA_HDR_ADDR, hdr_buf, OTA_HDR_SIZE);
+    if(!Boot_ParseOtaHeader(hdr_buf, OTA_HDR_SIZE, &hdr))
+        return false;
+
+    if(hdr.sig_len == 0U || hdr.sig_len > OTA_SIG_MAX)
+        return false;
+
+    Boot_ReadW25Q64Bytes(OTA_SIG_ADDR, sig_buf, hdr.sig_len);
+
+    mbedtls_sha256_init(&sha_ctx);
+    mbedtls_sha256_starts(&sha_ctx, 0);
+    mbedtls_sha256_update(&sha_ctx, hdr_buf, OTA_HDR_SIZE);
+
+    Boot_ReadW25Q64Bytes(OTA_META_ADDR, io_buf, OTA_META_LEN);
+    mbedtls_sha256_update(&sha_ctx, io_buf, OTA_META_LEN);
+
+    addr = OTA_STAGING_ADDR;
+    remain = hdr.fw_size;
+    while(remain > 0U)
+    {
+        uint32_t chunk = (remain > UPDATA_BUFF) ? UPDATA_BUFF : remain;
+        Boot_ReadW25Q64Bytes(addr, io_buf, chunk);
+        mbedtls_sha256_update(&sha_ctx, io_buf, chunk);
+        addr += chunk;
+        remain -= chunk;
+    }
+
+    mbedtls_sha256_finish(&sha_ctx, digest);
+    mbedtls_sha256_free(&sha_ctx);
+
+    Boot_ReadW25Q64Bytes(OTA_PUBKEY_ADDR, pubkey_buf, OTA_PUBKEY_LEN);
+    mbedtls_pk_init(&pk);
+    ret = mbedtls_pk_parse_public_key(&pk, pubkey_buf, OTA_PUBKEY_LEN);
+    if(ret != 0)
+    {
+        mbedtls_pk_free(&pk);
+        mbedtls_platform_zeroize(sig_buf, sizeof(sig_buf));
+        mbedtls_platform_zeroize(io_buf, sizeof(io_buf));
+        mbedtls_platform_zeroize(digest, sizeof(digest));
+        return false;
+    }
+
+    ret = mbedtls_pk_verify(&pk, MBEDTLS_MD_SHA256, digest, sizeof(digest), sig_buf, hdr.sig_len);
+    mbedtls_pk_free(&pk);
+
+    if(out_hdr != NULL)
+        *out_hdr = hdr;
+
+    mbedtls_platform_zeroize(sig_buf, sizeof(sig_buf));
+    mbedtls_platform_zeroize(io_buf, sizeof(io_buf));
     mbedtls_platform_zeroize(digest, sizeof(digest));
     return (ret == 0);
 }

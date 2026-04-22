@@ -1,0 +1,10 @@
+ota\gcm.o: ../Middlewares/Third_Party/mbedTLS/library/gcm.c
+ota\gcm.o: ../MBEDTLS/App/mbedtls_config.h
+ota\gcm.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\gcm.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\gcm.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/gcm.h
+ota\gcm.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h
+ota\gcm.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\gcm.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\gcm.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\gcm.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

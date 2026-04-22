@@ -10,7 +10,7 @@ pack_ota.py: Pack OTA with ECDH+HKDF+AES and ECDSA signature
 - 生成一个格式为 [OTA 包头][元数据][密文][签名] 的完整 OTA 包
 - 同时还可以验证 ECDH 公钥和设备私钥是否匹配，确保生成的包能被设备正确解密
 
-- OTA 包头: 16 字节, 包含魔数(4 字节)、包头长度(4 字节)、固件长度(4 字节)、签名长度(4 字节)
+- OTA 包头: 20 字节, 包含魔数(4 字节)、包头长度(4 字节)、包类型(4 字节)、固件长度(4 字节)、签名长度(4 字节)
 - 元数据: 97 字节，包含 ECDH 公钥(65 字节)、HKDF 盐值(16 字节)、AES IV(16 字节)
 - 密文: 同明文固件字节，对固件进行 AES-CTR 加密后的数据
 - 签名: 70-72 字节，对包头+元数据+密文进行 ECDSA-SHA256 签名后的 DER 编码
@@ -28,7 +28,9 @@ except Exception as exc:
     raise SystemExit("Missing dependency: cryptography (pip install cryptography)") from exc
 
 OTA_MAGIC = 0x4F544148
-OTA_HDR_SIZE = 16
+OTA_HDR_SIZE = 20
+OTA_PKG_TYPE_FULL = 0
+OTA_PKG_TYPE_DELTA = 1
 OTA_ECDH_PUB_LEN = 65
 OTA_SALT_LEN = 16
 OTA_IV_LEN = 16
@@ -50,6 +52,7 @@ def pack_ota(
     dev_pub_path: Path,
     out_path: Path,
     aes_len: int,
+    pkg_type: int,
     dev_priv_check_path: Path | None = None,
 ) -> None:
     fw_bytes = fw_path.read_bytes()
@@ -102,7 +105,7 @@ def pack_ota(
     signature = b""
     # 签名长度可能会因为 DER 编码的变化而变化，因此需要循环直到长度稳定
     for _ in range(8):
-        header = struct.pack("<IIII", OTA_MAGIC, OTA_HDR_SIZE, fw_size, sig_len)
+        header = struct.pack("<IIIII", OTA_MAGIC, OTA_HDR_SIZE, pkg_type, fw_size, sig_len)
         to_sign = header + meta + ciphertext
         signature = sign_priv.sign(to_sign, ec.ECDSA(hashes.SHA256()))
         new_sig_len = len(signature)
@@ -128,15 +131,18 @@ def main() -> None:
     parser.add_argument("--dev-priv-check", help="Optional: device ECDH private key PEM for keypair consistency check")
     parser.add_argument("--out", required=True, help="Output OTA package path")
     parser.add_argument("--aes-len", type=int, default=16, choices=[16, 32], help="AES key length (16 or 32)")
+    parser.add_argument("--pkg-type", default="full", choices=["full", "delta"], help="OTA package type")
     args = parser.parse_args()
 
     dev_priv_check = Path(args.dev_priv_check) if args.dev_priv_check else None
+    pkg_type = OTA_PKG_TYPE_FULL if args.pkg_type == "full" else OTA_PKG_TYPE_DELTA
     pack_ota(
         Path(args.fw),
         Path(args.sign_priv),
         Path(args.dev_pub),
         Path(args.out),
         args.aes_len,
+        pkg_type,
         dev_priv_check,
     )
 
@@ -146,4 +152,4 @@ if __name__ == "__main__":
 
 # 差分压缩：.\hdiffi.exe -f -d -c-tinyuz .\OTA_A.bin .\OTA_B.bin delta.bin
 # 打补丁：.\hpatchi.exe .\OTA_A.bin .\delta.bin newfile.bin
-# 命令：python pack_ota.py --fw delta.bin --sign-priv .\ecdsa_key\ec_priv.pem --dev-pub .\ecdh_key\dev_ecdh_pub.pem --out delta_merge.bin --aes-len 16
+# 命令：python pack_ota.py --fw delta.bin --sign-priv .\ecdsa_key\ec_priv.pem --dev-pub .\ecdh_key\dev_ecdh_pub.pem --out delta_merge.bin --aes-len 16 --pkg-type delta

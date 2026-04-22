@@ -67,11 +67,12 @@ void Error_Handler(void);
 
 #define OTA_FLAG                  0xAABB1122
 
-// OTA header + signature/public key parameters (override as needed)
-#define OTA_HDR_MAGIC             0x4F544148U // "OTAH" little-endian
-#define OTA_HDR_SIZE              16U
-#define OTA_SIG_MAX               96U     // DER ECDSA(P-256) max size is typically <= 72
-#define OTA_PUBKEY_LEN            91U    // P-256 公钥长度为 64 字节，但可能会有额外的头部信息，预留 125 字节
+#define OTA_HDR_MAGIC             0x4F544148U
+#define OTA_HDR_SIZE              20U
+#define OTA_SIG_MAX               96U
+#define OTA_PUBKEY_LEN            91U    // P-256 公钥长度为 64 字节，但可能会有额外的头部信息，预留 91 字节
+#define OTA_PKG_TYPE_FULL         0U
+#define OTA_PKG_TYPE_DELTA        1U
 
 #define OTA_ECDH_PUB_LEN           65U
 #define OTA_SALT_LEN               16U
@@ -80,18 +81,20 @@ void Error_Handler(void);
 
 // W25Q64 分区表
 /* 第一扇区 0~4KB */
-#define OTA_PUBKEY_ADDR           0U      // ECDSA 公钥，地址 0 开始，256 字节的空间（1个页）
-// #define OTA_ECDH_PUB_ADDR         256U    // ECDH 私钥，紧跟在 ECDSA 公钥之后，256字节的空间（1个页）
+#define OTA_PUBKEY_ADDR           0U
 /* 第二扇区 4KB~8KB */
-#define OTA_INFO_ADDR             4096U   // OTA 信息，地址 4096 开始，4kB 的空间（1个扇区）
+#define OTA_INFO_ADDR             (OTA_PUBKEY_ADDR + 4096U)
 /* 第三扇区 8KB~12KB */
-#define OTA_META_ADDR             8192U   // OTA 元数据，地址 8192 开始，4KB 字节的空间（1个扇区）
-/* 第四扇区至第二块 12KB~64KB */
-#define OTA_HEAT_ADDR             (OTA_META_ADDR + 4096U)   // 断点续传热数据，地址 8192 开始，52KB 字节的空间
+#define OTA_META_ADDR             (OTA_INFO_ADDR + 4096U)
+/* 第四扇区 12KB~16KB */
+#define OTA_HDR_ADDR              (OTA_META_ADDR + 4096U)
+#define OTA_SIG_ADDR              (OTA_HDR_ADDR + OTA_HDR_SIZE) 
+/* 第五扇区到第二块 16KB~64KB */
+#define OTA_HEAT_ADDR             (OTA_HDR_ADDR + 4096U) 
 
 /* 第二块*/
-#define OTA_STAGING_ADDR          0x100000U // OTA 包暂存区，地址 1MB 开始，512KB 的空间（128个块）
-#define OTA_STAGING_SIZE          (512U * 1024U) // 512KB
+#define OTA_STAGING_ADDR          0x100000U
+#define OTA_STAGING_SIZE          (384U * 1024U)
 #define OTA_TUZ_DICT_MAX          (2U * 1024U)
 #define OTA_TUZ_CACHE_SIZE        1024U
 
@@ -99,6 +102,7 @@ void Error_Handler(void);
 typedef struct{
   uint32_t magic;       // OTA_HDR_MAGIC
   uint32_t header_size; // OTA_HDR_SIZE
+  uint32_t pkg_type;    // 0: full, 1: delta
   uint32_t fw_size;     // firmware size in bytes
   uint32_t sig_len;     // signature length in bytes
 }OTA_Header_t;
@@ -114,9 +118,11 @@ typedef struct{
   uint32_t FileSize;        // 服务器下发的整个应用程序的大小（字节）
   uint8_t OTA_version[12];  // OTA 版本号，字符串数组，格式: version-1.0
   uint8_t OTA_area;          // 0 表示 A 区，1 表示 B 区
+  uint8_t OTA_type;          // 0 表示全量更新，1 表示增量更新
   OTA_status_t OTA_status;        // OTA 状态，用来自动回滚
 }OTA_Info_t;
 extern OTA_Info_t OTA_Info;
+
 
 #define UPDATA_BUFF                  1024
 typedef struct{
@@ -128,16 +134,16 @@ typedef struct{
   uint16_t Ymodem_BytesInBuffer;      // 当前缓存的有效字节数
   uint8_t Ymodem_ExpectBlock;         // 期望的数据块号
   uint8_t Ymodem_HeaderReceived;      // 是否已接收头包
-}UpData_A_t;
-extern UpData_A_t UpData_A;
+}Local_UpDate_t;
+extern Local_UpDate_t Local_UpDate;
 
 typedef enum{
   UART_CONSOLE_IDLE = 0,
   IAP_YMODEM_START,
   IAP_YMODEM_RECEIVED,
   SET_VERSION,
-  UPDATA_A_SET,
-  UPDATA_DELTA_SET,
+  UPDATA_FULL_SET,    // 全量更新状态
+  UPDATA_DELTA_SET,   // 增量更新状态
 }OTA_State_t;
 extern OTA_State_t OTA_state;
 

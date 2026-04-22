@@ -1,0 +1,14 @@
+ota\bignum.o: ../Middlewares/Third_Party/mbedTLS/library/bignum.c
+ota\bignum.o: ../MBEDTLS/App/mbedtls_config.h
+ota\bignum.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\bignum.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\bignum.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h
+ota\bignum.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\bignum.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\bignum.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/bn_mul.h
+ota\bignum.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\bignum.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+ota\bignum.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h
+ota\bignum.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
+ota\bignum.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+ota\bignum.o: D:\Keil5\ARM\ARMCC\Bin\..\include\time.h

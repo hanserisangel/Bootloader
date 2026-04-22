@@ -46,7 +46,7 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 OTA_Info_t OTA_Info;
-UpData_A_t UpData_A;
+Local_UpDate_t Local_UpDate;
 OTA_State_t OTA_state;
 // OTA_Version_t OTA_Version;
 // uint8_t data_to_write[1024];

@@ -1,0 +1,11 @@
+ota\entropy.o: ../Middlewares/Third_Party/mbedTLS/library/entropy.c
+ota\entropy.o: ../MBEDTLS/App/mbedtls_config.h
+ota\entropy.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\entropy.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\entropy.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy.h
+ota\entropy.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\entropy.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h
+ota\entropy.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\entropy.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy_poll.h
+ota\entropy.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\entropy.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

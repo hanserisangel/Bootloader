@@ -114,24 +114,17 @@ void Ymodem_WriteBlock(uint32_t block_index, const uint8_t *buf, uint32_t size)
  */
 void Ymodem_Finalize(uint32_t g_firmware_size)
 {
-    if(UpData_A.Ymodem_BytesInBuffer > 0)   // 如果还有剩余数据没有写入，先写入剩余数据
+    if(Local_UpDate.Ymodem_BytesInBuffer > 0)   // 如果还有剩余数据没有写入，先写入剩余数据
     {
-        Ymodem_WriteBlock(UpData_A.Ymodem_WriteBlockIndex,
-            UpData_A.UpAppBuffer, UpData_A.Ymodem_BytesInBuffer);
+        Ymodem_WriteBlock(Local_UpDate.Ymodem_WriteBlockIndex,
+            Local_UpDate.UpAppBuffer, Local_UpDate.Ymodem_BytesInBuffer);
     }
     if(OTA_Info.FileSize == 0)
-        OTA_Info.FileSize = UpData_A.Ymodem_TotalReceived;
-
-    if(!Boot_VerifySignature()) // 签名验证失败，说明固件不合法，不能更新
-    {
-        LOG_E("Signature verify failed");
-        OTA_Info.FileSize = 0;
-        return;
-    }
+        OTA_Info.FileSize = Local_UpDate.Ymodem_TotalReceived;
 
     HAL_Delay(500);    // 等待写入完成
     OTA_Info.FileSize = g_firmware_size;
     W25Q64_WriteOTAInfo();
     
-    LOG_I("Download A program OK!");
+    LOG_I("Download package OK!");
 }

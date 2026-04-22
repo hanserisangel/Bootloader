@@ -65,11 +65,9 @@ void BootLoader_Brance(void)
 {
     W25Q64_ReadOTAInfo();
 
-    if(BootLoader_Console(20))
+    if(BootLoader_Console(20))  // 进入命令行
     {
-        // 进入命令行
         LOG_I("Enter console success!");
-
         BootLoader_Menu();
         OTA_state = UART_CONSOLE_IDLE;
     }
@@ -77,9 +75,16 @@ void BootLoader_Brance(void)
     {
         if(OTA_Info.OTA_Flag == OTA_FLAG)
         {
-            // OTA 包在外部 staging，解密并写入内部非激活槽
-            LOG_I("OTA update from staging");
-            OTA_state = UPDATA_A_SET; // 设置状态为更新 A 区
+            LOG_I("OTA update from staging");   // OTA 包在外部 staging，解密并写入内部非激活槽
+
+            if(OTA_Info.OTA_type == 0)      // 全量更新
+            {
+                OTA_state = UPDATA_FULL_SET;
+            }
+            else if(OTA_Info.OTA_type == 1) // 增量更新
+            {
+                OTA_state = UPDATA_DELTA_SET;
+            }
         }
         else
         {
@@ -87,18 +92,19 @@ void BootLoader_Brance(void)
             uint8_t inactive_slot = Boot_GetInactiveSlot();
 
             // A/B双分区自动回滚机制
-            // if(OTA_Info.OTA_status == FAIL)
-            // {
-            //     LOG_W("Previous OTA update failed, rollback to previous version");
-            //     active_slot = inactive_slot;
-            //     OTA_Info.OTA_area = active_slot; // 更新 OTA_Info 中的 active slot 信息
-            //     OTA_Info.OTA_status = SUCCESS; // 将状态重置为 SUCCESS，避免重复回滚
-            // }
-            // else if(OTA_Info.OTA_status == UPDATE)
-            // {
-            //     LOG_W("Previous OTA update not verified, skipping to new version");
-            //     OTA_Info.OTA_status = FAIL; // 将状态设置为 FAIL，等待本次版本验证结果，如果验证成功会在后续更新为 SUCCESS，如果验证失败则保持 FAIL，等待下次重启回滚
-            // }
+            if(OTA_Info.OTA_status == FAIL)
+            {
+                LOG_W("Previous OTA update failed, rollback to previous version");
+                active_slot = inactive_slot;
+                OTA_Info.OTA_area = active_slot; // 更新 OTA_Info 中的 active slot 信息
+                OTA_Info.OTA_status = SUCCESS; // 将状态重置为 SUCCESS，避免重复回滚
+            }
+            else if(OTA_Info.OTA_status == UPDATE)
+            {
+                LOG_W("Previous OTA update not verified, skipping to new version");
+                OTA_Info.OTA_status = FAIL;
+                // 将状态设置为 FAIL，等待本次版本验证结果，如果验证成功会在后续更新为 SUCCESS，如果验证失败则保持 FAIL，等待下次重启回滚
+            }
 
             // 跳转到激活槽的应用程序
             LOG_I("Boot active slot %c", (active_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
@@ -113,14 +119,14 @@ void BootLoader_Brance(void)
  */
 static void BootLoader_Menu(void)
 {
-    Uart_Printf("[1] Erase A area\r\n");
-    Uart_Printf("[2] Uart IAP download A program\r\n");
+    Uart_Printf("[1] Erase inactive area\r\n");
+    Uart_Printf("[2] Uart IAP download package into mcu\r\n");
     Uart_Printf("[3] Set version number\r\n");
     Uart_Printf("[4] Query version number\r\n");
-    Uart_Printf("[5] Download A program into W25Q64\r\n");
-    Uart_Printf("[6] Download A program from W25Q64\r\n");
+    Uart_Printf("[5] Download package into W25Q64\r\n");
+    Uart_Printf("[6] Download package from W25Q64\r\n");
     Uart_Printf("[7] Reset\r\n");
-    Uart_Printf("[8] Apply HPatchLite delta from W25Q64\r\n");
+    Uart_Printf("[8] Apply delta package from W25Q64\r\n");
 }
 
 /**
@@ -150,12 +156,13 @@ void BootLoader_Event(uint8_t* pdata)
 {
     switch(pdata[0])
     {
-        case '1': // 擦除 A 区
-            MCU_EraseFlash(Boot_GetSlotStartSector(MCU_FLASH_APP_A_SLOT), Boot_GetSlotSectorCount(MCU_FLASH_APP_A_SLOT));
-            LOG_I("Erase slot A OK!");
+        case '1': // 擦除非活动分区
+            uint8_t inactive_slot = Boot_GetInactiveSlot();
+            MCU_EraseFlash(Boot_GetSlotStartSector(inactive_slot), Boot_GetSlotSectorCount(inactive_slot));
+            LOG_I("Erase slot %c OK!", (inactive_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
             break;
-        case '2': // 串口 IAP 下载 A 区程序到 MCU_Flash
-            LOG_I("Uart IAP download A program Starting!");
+        case '2': // 串口 IAP 下载固件到 MCU_Flash
+            LOG_I("Uart IAP download package into mcu Starting!");
             // MCU_EraseFlash(Boot_GetSlotStartSector(MCU_FLASH_APP_A_SLOT), Boot_GetSlotSectorCount(MCU_FLASH_APP_A_SLOT));
 
             // 擦除 staging 区，准备接收 OTA 包
@@ -167,13 +174,13 @@ void BootLoader_Event(uint8_t* pdata)
             LOG_I("Erase W25Q64 staging OK!");
             
             OTA_state = IAP_YMODEM_START; // 向 pc 发送申请
-            UpData_A.Ymodem_Timer = 0;
-            UpData_A.Ymodem_CRC = 0;
-            UpData_A.Ymodem_TotalReceived = 0;
-            UpData_A.Ymodem_WriteBlockIndex = 0;
-            UpData_A.Ymodem_BytesInBuffer = 0;
-            UpData_A.Ymodem_ExpectBlock = 0;
-            UpData_A.Ymodem_HeaderReceived = 0;
+            Local_UpDate.Ymodem_Timer = 0;
+            Local_UpDate.Ymodem_CRC = 0;
+            Local_UpDate.Ymodem_TotalReceived = 0;
+            Local_UpDate.Ymodem_WriteBlockIndex = 0;
+            Local_UpDate.Ymodem_BytesInBuffer = 0;
+            Local_UpDate.Ymodem_ExpectBlock = 0;
+            Local_UpDate.Ymodem_HeaderReceived = 0;
             Boot_ResetVerifyState();            // 重置 OTA 验证状态
             Where_to_store = true;              // 设置存储位置为 MCU 的 Flash
             break;
@@ -198,20 +205,20 @@ void BootLoader_Event(uint8_t* pdata)
             LOG_I("Erase W25Q64 staging OK!");
             
             OTA_state = IAP_YMODEM_START;
-            UpData_A.Ymodem_Timer = 0;
-            UpData_A.Ymodem_CRC = 0;
-            UpData_A.Ymodem_TotalReceived = 0;
-            UpData_A.Ymodem_WriteBlockIndex = 0;
-            UpData_A.Ymodem_BytesInBuffer = 0;
-            UpData_A.Ymodem_ExpectBlock = 0;
-            UpData_A.Ymodem_HeaderReceived = 0;
+            Local_UpDate.Ymodem_Timer = 0;
+            Local_UpDate.Ymodem_CRC = 0;
+            Local_UpDate.Ymodem_TotalReceived = 0;
+            Local_UpDate.Ymodem_WriteBlockIndex = 0;
+            Local_UpDate.Ymodem_BytesInBuffer = 0;
+            Local_UpDate.Ymodem_ExpectBlock = 0;
+            Local_UpDate.Ymodem_HeaderReceived = 0;
             Boot_ResetVerifyState();
             Where_to_store = false;              // 设置存储位置为 W25Q64
             OTA_Info.FileSize = 0;
             break;
         case '6': // 从 W25Q64 下载程序到 MCU 的 Flash
             LOG_I("Download Starting!");
-            OTA_state = UPDATA_A_SET;
+            OTA_state = UPDATA_FULL_SET;
             break;
         case '7': // 重启
             LOG_I("Reset OK!");
@@ -278,8 +285,8 @@ void BootLoader_State(void)
                     g_ota.hdr_received = 0;
                     g_ota.meta_received = 0;
                     g_ota.sha_started = false;
-                    UpData_A.Ymodem_HeaderReceived = 1;
-                    UpData_A.Ymodem_ExpectBlock = 1;
+                    Local_UpDate.Ymodem_HeaderReceived = 1;
+                    Local_UpDate.Ymodem_ExpectBlock = 1;
 
                     Uart_Printf("\x06"); // ACK
                     Uart_Printf("%c", CRC_REQ); // Request data packets
@@ -291,12 +298,12 @@ void BootLoader_State(void)
             else
             {
                 HAL_Delay(10);
-                if(UpData_A.Ymodem_Timer >= 100)    // 每 1 秒发送一次申请，直到收到头包
+                if(Local_UpDate.Ymodem_Timer >= 100)    // 每 1 秒发送一次申请，直到收到头包
                 {
                     Uart_Printf("%c", CRC_REQ);
-                    UpData_A.Ymodem_Timer = 0;
+                    Local_UpDate.Ymodem_Timer = 0;
                 }
-                UpData_A.Ymodem_Timer ++;
+                Local_UpDate.Ymodem_Timer ++;
             }
             break;
         }
@@ -314,7 +321,14 @@ void BootLoader_State(void)
 
                 if(Where_to_store)  // 接收完成后自动刷写新固件到mcu flash
                 {
-                    // OTA_state = UPDATA_A_SET;
+                    if(OTA_Info.OTA_type == 0)      // 全量更新
+                    {
+                        OTA_state = UPDATA_FULL_SET;
+                    }
+                    else if(OTA_Info.OTA_type == 1) // 增量更新
+                    {
+                        OTA_state = UPDATA_DELTA_SET;
+                    }
                 }
                 else{
                     OTA_state = UART_CONSOLE_IDLE;
@@ -326,17 +340,17 @@ void BootLoader_State(void)
             if(!Ymodem_CheckPacket(data, size, &data_len, &block_num))  // 数据包校验失败
                 break;
 
-            if(block_num == UpData_A.Ymodem_ExpectBlock)    // 收到期望的数据块
+            if(block_num == Local_UpDate.Ymodem_ExpectBlock)    // 收到期望的数据块
             {
                 uint32_t remaining = data_len;  // 计算剩余需要接收的字节数
 
                 // 如果已经知道了文件总大小，就根据文件总大小和已经接收的字节数来计算当前数据块中实际需要处理的字节数，避免处理多余的数据
                 if(OTA_Info.FileSize > 0)
                 {
-                    if(UpData_A.Ymodem_TotalReceived >= OTA_Info.FileSize)
+                    if(Local_UpDate.Ymodem_TotalReceived >= OTA_Info.FileSize)
                         remaining = 0;
-                    else if(UpData_A.Ymodem_TotalReceived + data_len > OTA_Info.FileSize)
-                        remaining = OTA_Info.FileSize - UpData_A.Ymodem_TotalReceived;
+                    else if(Local_UpDate.Ymodem_TotalReceived + data_len > OTA_Info.FileSize)
+                        remaining = OTA_Info.FileSize - Local_UpDate.Ymodem_TotalReceived;
                 }
 
                 if(remaining > 0)
@@ -387,10 +401,12 @@ void BootLoader_State(void)
 
                                 g_ota.firmware_size = hdr.fw_size;
                                 g_ota.sig_len = hdr.sig_len;
-                                mbedtls_sha256_init(&g_ota.sha_ctx);
-                                mbedtls_sha256_starts(&g_ota.sha_ctx, 0);
-                                mbedtls_sha256_update(&g_ota.sha_ctx, g_ota.hdr_buf, OTA_HDR_SIZE); // 将头部数据也纳入 SHA-256 计算
-                                g_ota.sha_started = true;
+                                OTA_Info.OTA_type = (uint8_t)hdr.pkg_type;
+
+                                W25Q64_EraseSector(OTA_HDR_ADDR / W25Q64_SECTOR_SIZE);
+                                W25Q64_WriteBytes(OTA_HDR_ADDR, g_ota.hdr_buf, OTA_HDR_SIZE);
+
+                                g_ota.sha_started = false;
                             }
                             continue;
                         }
@@ -401,8 +417,6 @@ void BootLoader_State(void)
                             uint32_t meta_left = OTA_META_LEN - g_ota.meta_received;
                             uint32_t meta_chunk = (chunk < meta_left) ? chunk : meta_left;
                             memcpy(g_ota.meta_buf + g_ota.meta_received, data + 3 + payload_offset, meta_chunk);
-                            if(g_ota.sha_started)
-                                mbedtls_sha256_update(&g_ota.sha_ctx, data + 3 + payload_offset, meta_chunk);
                             g_ota.meta_received += meta_chunk;
                             payload_offset += meta_chunk;
 
@@ -424,26 +438,23 @@ void BootLoader_State(void)
                             uint32_t fw_written = fw_chunk;
 
                             // 如果已经开始但还没有接收完整个固件，就继续更新 SHA-256
-                            if(g_ota.sha_started)
-                                mbedtls_sha256_update(&g_ota.sha_ctx, data + 3 + payload_offset, fw_chunk);
-
                             // 将数据写入缓存，满 1024 字节就写入 Flash
                             while(fw_chunk > 0)
                             {
-                                uint32_t space = UPDATA_BUFF - UpData_A.Ymodem_BytesInBuffer;
+                                uint32_t space = UPDATA_BUFF - Local_UpDate.Ymodem_BytesInBuffer;
                                 uint32_t n = (fw_chunk < space) ? fw_chunk : space;
-                                memcpy(&UpData_A.UpAppBuffer[UpData_A.Ymodem_BytesInBuffer],
+                                memcpy(&Local_UpDate.UpAppBuffer[Local_UpDate.Ymodem_BytesInBuffer],
                                     data + 3 + payload_offset, n);
-                                UpData_A.Ymodem_BytesInBuffer += n;
+                                Local_UpDate.Ymodem_BytesInBuffer += n;
                                 payload_offset += n;
                                 fw_chunk -= n;
 
-                                if(UpData_A.Ymodem_BytesInBuffer >= UPDATA_BUFF)
+                                if(Local_UpDate.Ymodem_BytesInBuffer >= UPDATA_BUFF)
                                 {
-                                    Ymodem_WriteBlock(UpData_A.Ymodem_WriteBlockIndex,
-                                        UpData_A.UpAppBuffer, UPDATA_BUFF);
-                                    UpData_A.Ymodem_WriteBlockIndex ++;
-                                    UpData_A.Ymodem_BytesInBuffer = 0;
+                                    Ymodem_WriteBlock(Local_UpDate.Ymodem_WriteBlockIndex,
+                                        Local_UpDate.UpAppBuffer, UPDATA_BUFF);
+                                    Local_UpDate.Ymodem_WriteBlockIndex ++;
+                                    Local_UpDate.Ymodem_BytesInBuffer = 0;
                                 }
                             }
 
@@ -464,19 +475,20 @@ void BootLoader_State(void)
                                 memcpy(&g_ota.sig_buf[sig_offset], data + 3 + payload_offset, sig_chunk);
                                 if(g_ota.sig_received < sig_offset + sig_chunk)
                                     g_ota.sig_received = sig_offset + sig_chunk;
+                                W25Q64_WriteBytes(OTA_SIG_ADDR + sig_offset, data + 3 + payload_offset, sig_chunk);
                                 payload_offset += sig_chunk;
                                 g_ota.payload_received += sig_chunk;
                             }
                         }
                     }
 
-                    UpData_A.Ymodem_TotalReceived += copy_len;
+                    Local_UpDate.Ymodem_TotalReceived += copy_len;
                 }
 
-                UpData_A.Ymodem_ExpectBlock ++;
+                Local_UpDate.Ymodem_ExpectBlock ++;
                 Uart_Printf("\x06"); // ACK
             }
-            else if(block_num == (uint8_t)(UpData_A.Ymodem_ExpectBlock - 1))    // 收到重复的数据块，可能是上一个 ACK 丢失了
+            else if(block_num == (uint8_t)(Local_UpDate.Ymodem_ExpectBlock - 1))    // 收到重复的数据块，可能是上一个 ACK 丢失了
             {
                 Uart_Printf("\x06"); // ACK duplicate
             }
@@ -505,8 +517,26 @@ void BootLoader_State(void)
             break;
 
         // 从 W25Q24 读取数据更新 A 区应用程序
-        case UPDATA_A_SET: 
+        case UPDATA_FULL_SET: 
 			W25Q64_ReadOTAInfo();
+            {
+                OTA_Header_t hdr;
+                if(!Boot_VerifySignatureFromW25Q64(&hdr))
+                {
+                    LOG_E("Verify package in W25Q64 failed");
+                    OTA_state = UART_CONSOLE_IDLE;
+                    break;
+                }
+                if(hdr.pkg_type != OTA_PKG_TYPE_FULL)
+                {
+                    LOG_E("Package type mismatch, expect full");
+                    OTA_state = UART_CONSOLE_IDLE;
+                    break;
+                }
+
+                OTA_Info.FileSize = hdr.fw_size;
+                OTA_Info.OTA_type = (uint8_t)hdr.pkg_type;
+            }
             Uart_Printf("size: %lu\r\n", OTA_Info.FileSize);
 
             {
@@ -533,7 +563,7 @@ void BootLoader_State(void)
 
             // 清除 OTA 标志
             OTA_Info.OTA_Flag = 0;
-            // OTA_Info.OTA_status = UPDATE; // 刚接收但未验证
+            OTA_Info.OTA_status = UPDATE; // 刚接收但未验证
             W25Q64_WriteOTAInfo();
             LOG_I("Program slot %c from staging OK!", (OTA_Info.OTA_area == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
 
@@ -546,8 +576,24 @@ void BootLoader_State(void)
             uint8_t target_slot = Boot_GetInactiveSlot();
             uint32_t base_addr = Boot_GetSlotStartAddr(active_slot);
             uint32_t target_addr = Boot_GetSlotStartAddr(target_slot);
+            OTA_Header_t hdr;
 
             W25Q64_ReadOTAInfo();
+            if(!Boot_VerifySignatureFromW25Q64(&hdr))
+            {
+                LOG_E("Verify package in W25Q64 failed");
+                OTA_state = UART_CONSOLE_IDLE;
+                break;
+            }
+            if(hdr.pkg_type != OTA_PKG_TYPE_DELTA)
+            {
+                LOG_E("Package type mismatch, expect delta");
+                OTA_state = UART_CONSOLE_IDLE;
+                break;
+            }
+
+            OTA_Info.FileSize = hdr.fw_size;
+            OTA_Info.OTA_type = (uint8_t)hdr.pkg_type;
             Uart_Printf("delta size: %lu\r\n", OTA_Info.FileSize);
             // Uart_Printf("delta route active=%u target=%u ota_area=%u base=0x%08lX target=0x%08lX\r\n",
             //     active_slot,
@@ -574,7 +620,7 @@ void BootLoader_State(void)
 
             OTA_Info.OTA_area = target_slot;
             OTA_Info.OTA_Flag = 0;
-            // OTA_Info.OTA_status = UPDATE; // 刚接收但未验证
+            OTA_Info.OTA_status = UPDATE; // 刚接收但未验证
 
             W25Q64_WriteOTAInfo();
             LOG_I("Delta program to slot %c OK!", (target_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');

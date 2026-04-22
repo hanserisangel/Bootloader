@@ -1,0 +1,9 @@
+ota\sha256.o: ../Middlewares/Third_Party/mbedTLS/library/sha256.c
+ota\sha256.o: ../MBEDTLS/App/mbedtls_config.h
+ota\sha256.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\sha256.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\sha256.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h
+ota\sha256.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\sha256.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\sha256.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\sha256.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

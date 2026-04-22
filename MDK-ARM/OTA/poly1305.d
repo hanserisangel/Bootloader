@@ -1,0 +1,9 @@
+ota\poly1305.o: ../Middlewares/Third_Party/mbedTLS/library/poly1305.c
+ota\poly1305.o: ../MBEDTLS/App/mbedtls_config.h
+ota\poly1305.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
+ota\poly1305.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+ota\poly1305.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/poly1305.h
+ota\poly1305.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+ota\poly1305.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+ota\poly1305.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
+ota\poly1305.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
