@@ -26,7 +26,7 @@
 ### 1.1 具体工作流程
 本项目的工作流程图如下所示：
 <div style="text-align: center;">
-    <img src="boot.drawio.svg" width="100%" height="100%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/boot.drawio.svg" width="100%" height="100%" alt="工作流程">
 </div>
 
 本项目的升级流程分为**固件接收**、**安全校验与解密**、**差分还原与写入**三个阶段，全程实现流式处理，明文差分包不落地存储，兼顾安全与性能。
@@ -52,7 +52,10 @@
 
 ### 1.2 固件包的格式
 
-![alt text](OTAremote.drawio-1.svg)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/OTAremote.drawio.svg" width="100%" height="100%" alt="工作流程">
+</div>
+
 说明：
 1. **头部**：20 byte, 包含`魔数(4 字节)、包头长度(4 字节)、包类型(4 字节)、固件长度(4 字节)、签名长度(4 字节)`
    - 包头长度：20
@@ -171,7 +174,56 @@ static const uint8_t k_ota_ec_pub[] = {
 
 ## 3. 理论介绍
 ### 3.1 程序跳转与中断向量表映射
-这里涉及到 stm32 的上电启动流程
+Bootloader的核心功能之一，就是实现从 Bootloader 到 APP 程序的跳转，并正确处理中断向量表的映射，确保 APP 运行时中断功能正常。
+**前置知识**
+要理解跳转原理，需要先回顾STM32的上电启动流程：
+1.  **上电启动流程**
+    从上电到运行`main`函数，内核会依次执行以下步骤：
+    - 设置`MSP`栈指针的初始值，并让`PC`程序计数器指向`Reset`复位中断函数。
+    - 执行`Reset`复位中断函数，跳转到`SystemInit`初始化时钟树。
+    - 返回后，跳转到编译器实现的`__main`函数，初始化内存段和C语言运行环境。
+    - 最终跳转到用户的`main`函数执行。
+2.  **地址重映射与中断向量表**
+    - STM32上电时总是从`0x00`地址开始执行，因此Flash区域（从`0x0800_0000`开始）会被映射到`0x00`地址处。
+    - `startup.s`启动文件中定义了**中断向量表**，它位于程序的最开始位置，其中第一个元素是`MSP`栈指针初始值，第二个元素是`Reset`复位函数地址。
+    - 本项目的Bootloader本质上也是一个APP程序，因此它的bin文件也包含自己的中断向量表。同理，A/B分区中的固件也各自包含独立的中断向量表。
+
+**程序跳转原理：模拟上电启动**
+程序跳转的核心，就是在Bootloader中**模拟一次上电启动流程**：
+1.  从目标APP的中断向量表中，读取第一个元素（`MSP`栈指针初始值），设置主栈指针。
+2.  读取第二个元素（`Reset`复位函数地址），并跳转到该地址执行。
+3.  跳转后，后续的时钟初始化、内存初始化、运行`main`函数等流程，都由APP的启动文件自动完成。
+
+```c
+/**
+ * @brief  跳转到应用程序入口地址，开始执行新固件
+ * @param  addr: 应用程序的入口地址，通常是分区起始地址
+ * @retval None
+ */
+static void LOAD_A(uint32_t addr)
+{
+    // (uint32_t *)addr 表示 addr 是地址，*(uint32_t *)addr 表示读取该地址处的值
+    // flash 最前面是中断向量表，第一条是初始栈指针，第二条是复位中断处理函数地址
+    if((*(uint32_t *)addr >= SRAM1_BASE) && (*(uint32_t *)addr <= SRAM2_BASE))
+    {
+        MSP_setSP(*(uint32_t *)addr);       // 设置 MSP 为新固件的初始栈指针
+        Load_A = (load_a)*(uint32_t *)(addr + 4);   // 获取新固件的复位处理函数地址，并强制转换为函数指针类型
+        BootLoader_Clear();                 // 清空外设，避免新固件运行时受到干扰
+        Load_A();                           // 跳转到新固件的复位处理函数，开始执行新固件
+    } else LOG_E("Brance failed!");
+}
+```
+**中断向量表映射**
+由于A/B分区的APP固件不是从`0x0800_0000`地址开始存放的，其内部的中断向量表地址也发生了偏移。为了让内核在 APP 运行时能正确找到中断服务程序，必须修改中断向量表的映射地址：
+1.  **核心机制**：Cortex-M 内核的`SCB`（系统控制块）中，有一个名为`VTOR`（向量表偏移寄存器）的寄存器，它决定了中断向量表的基地址。
+2.  **实现方法**：在跳转前，将`VTOR`寄存器的值设置为目标 APP 的起始地址。这样，内核在响应中断时，就会从APP程序的起始位置去查找中断向量表，确保中断功能正常工作。
+
+![alt text](局部截取_20260423_194800.png)
+修改文件中的这个值，完成映射。这里我写的是 0x20000 是因为这是 A 分区的 APP 程序，根据第 5 节的分区表中 A 分区在 128KB 开始的区域；如果是 B 分区的 APP程序，这里要填 0x80000，因为 B 分区在 128+384KB 开始的区域
+
+如果使用 keil5 直接下载 A/B 分区的应用程序，还需要修改下图的值
+![alt text](UV4.exe_20260423_195152.png)
+![alt text](UV4.exe_20260423_195234.png)
 ### 3.2 安全算法介绍与对比
 本项目采用了一套工业级的安全算法组合，在保障固件传输与存储安全的同时，兼顾了嵌入式平台的性能与内存限制。以下是核心算法的功能介绍与选型对比：
 <table style="width:100%">
@@ -284,39 +336,58 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 ## 4. demo 演示
 ### 4.1 串口交互命令行
 交互命令行的设计主要是为了方便调试，实际应用中可以删除这个功能，当然保留也不构成问题。上电启动后在 2s 内输入w，否则就会跳过命令行状态，跳转到应用程序。
-![alt text](SecureCRT.exe_20260422_205356.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%E4%B8%B2%E5%8F%A3%E8%8F%9C%E5%8D%95.png" width="100%" height="100%" alt="工作流程">
+</div>
+
 可以看到串口显示菜单
 ### 4.2 擦除非活动分区
 擦除mcu内部的目前非活动分区
-![alt text](局部截取_20260422_205659.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B1%5D.png" width="30%" height="30%" alt="工作流程">
+</div>
 显示擦除成功
 ### 4.3 把固件下载到 mcu 非活动分区
 如果是全量升级，那么这个命令行的功能，等同于`4.6 + 4.7`这两个命令行合在一起 
 如果是增量升级，那么这个命令行的功能，等同于`4.6 + 4.8`这两个命令行合在一起
-![alt text](局部截取_20260422_211836.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B2%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 下载成功，并自动切换了活动分区
 ### 4.4 设置版本号
 在 SecureCRT 右键粘贴版本号，我设置的版本号格式是`version-1.0`，版本号格式可以自己修改，修改时需要改变版本号的最大长度，在`main.h`的`OTA_VERSION_MAX_LEN`宏定义
-![alt text](局部截取_20260422_211943.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B3%5D.png" width="50%" height="50%" alt="工作流程">
+</div>
 显示设置成功
 ### 4.5 查询版本号
 查看版本号，版本号被改变有两种方式：
 - 通过`4.4`命令改变
 - 通过 APP 远程 OTA 升级的时候会改变，因为 ONENET 服务器在发送固件之前会发送固件的版本号，APP 下载完后会将版本号写入
-![alt text](局部截取_20260422_212005.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B4%5D.png" width="50%" height="50%" alt="工作流程">
+</div>
 目前的版本号是`version-1.0`
 ### 4.6 把固件下载到 W25Q64 中
 下载的位置可查看第5.1节的分区表，也可以直接查看`main.h`头文件
-![alt text](局部截取_20260422_212042.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B5%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 显示下载成功
 ### 4.7 把全量固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是全量固件，就用这个命令将固件下载到 mcu 的非活动区
-![alt text](局部截取_20260422_212225.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B6%5D.png" width="60%" height="60%" alt="工作流程">
+</div>
 显示下载成功
 ### 4.8 把差分固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是增量固件，就用这个命令将固件下载到 mcu 的非活动区
-![alt text](局部截取_20260422_212117.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B8%5D.png" width="60%" height="60%" alt="工作流程">
+</div>
 显示下载成功
+
+**需要注意的是，差分升级用到了旧固件和差分固件两个输入来源，旧固件直接读取mcu内部flash的活动分区，差分固件则是本地/远程下载来的，所以进行差分升级的时候，务必要保证mcu内部flash的活动分区运行的是旧固件，要不然差分还原的结果是错的，得到的新固件也是运行不起来的。**
 
 ---
 
@@ -401,15 +472,15 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
     </tr>
     <tr>
         <td style="text-align:center"><b>APP 分区 A</b></td>
-        <td style="text-align:center">0x0800_0000</td>
         <td style="text-align:center">0x0802_0000</td>
+        <td style="text-align:center">0x0808_0000</td>
         <td style="text-align:center">384KB</td>
         <td style="text-align:center">5-7</td>
     </tr>
     <tr>
         <td style="text-align:center"><b>APP 分区 B</b></td>
-        <td style="text-align:center">0x0800_0000</td>
-        <td style="text-align:center">0x0802_0000</td>
+        <td style="text-align:center">0x0808_0000</td>
+        <td style="text-align:center">0x080e_0000</td>
         <td style="text-align:center">384KB</td>
         <td style="text-align:center">8-10</td>
     </tr>
@@ -418,17 +489,17 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 ---
 
 ## 6. 裁剪
-本项目将本地固件升级、远程OTA升级、全量升级、差分升级全都集成到了一起，这使得bootloader体积偏大，所以大家移植使用这个项目的时候，可以根据需求进行裁剪，去掉你的项目中用不到的功能
+本项目将本地升级、远程OTA升级、全量升级、差分升级全都集成到了一起，这使得 bootloader 体积偏大，所以大家移植使用这个项目的时候，可以根据需求进行裁剪，去掉你的项目中用不到的功能
 
-### 6.1 删除串口交互菜单
+1. **删除串口交互菜单**
 适用于仅需要删除串口交互菜单，删除菜单后其它功能不变，不会造成影响
 
-### 6.1 远程 OTA 升级 + 差分升级
+2. **远程 OTA 升级 + 差分升级**
 适用于仅需要 OTA 升级 + 差分升级，并且删除本地升级和全量升级。但是，需要注意的是，你的 APP 程序需要能够下载服务器的固件到外部 flash，要不然用不了这个部分的裁剪，关于这个 APP 程序的模板，请查看我的另一个存储库（还未更新）
 
-### 6.2 远程 OTA 升级+全量升级
+3. **远程 OTA 升级 + 全量升级**
 适用于仅需要 OTA 升级 + 全量升级，并且删除本地升级和差分升级。但是，需要注意的是，你的 APP 程序需要能够下载服务器的固件到外部 flash，要不然用不了这个部分的裁剪，关于这个 APP 程序的模板，请查看我的另一个存储库（还未更新）
-### 6.3 本地固件升级+差分升级
+4. **本地固件升级 + 差分升级**
 适用于仅需要本地升级 + 差分升级，并且删除远程 OTA 升级和全量升级。因为不需要 APP 程序从服务器下载固件，所以可以直接使用这个部分的裁剪，但是 APP 程序在成功运行后要向外部 flash 写入`运行正常标志`，才不会自动回滚
-### 6.4 本地固件升级+全量升级
+5. **本地固件升级 + 全量升级**
 适用于仅需要本地升级 + 全量升级，并且删除远程 OTA 升级和差分升级。因为不需要 APP 程序从服务器下载固件，所以可以直接使用这个部分的裁剪，但是 APP 程序在成功运行后要向外部 flash 写入`运行正常标志`，才不会自动回滚

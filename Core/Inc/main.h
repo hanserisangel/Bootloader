@@ -1,8 +1,3 @@
-/* USER CODE BEGIN Header */
-
-/* USER CODE END Header */
-
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
 
@@ -10,51 +5,82 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
 #include "dma.h"
-// #include "i2c.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
+#include "rng.h"
 
+#include "mbedtls.h"
 #include "Log.h"
 #include "Flash.h"
 #include "Uart.h"
 #include "W25Q64.h"
 #include "Boot.h"
-/* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
-
-/* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
-
-/* Private defines -----------------------------------------------------------*/
 #define SPI_CS_Pin GPIO_PIN_3
 #define SPI_CS_GPIO_Port GPIOG
 
-/* USER CODE BEGIN Private defines */
+/*
+ * Bootloader feature trim profiles (set one of these to 1, others keep 0):
+ * 1) BOOT_CFG_TRIM_NO_CONSOLE: disable UART command console only.
+ * 2) BOOT_CFG_TRIM_OTA_DELTA_ONLY: keep OTA(auto) + delta upgrade only.
+ * 3) BOOT_CFG_TRIM_OTA_FULL_ONLY: keep OTA(auto) + full upgrade only.
+ * 4) BOOT_CFG_TRIM_LOCAL_DELTA_ONLY: keep local(UART) + delta upgrade only.
+ * 5) BOOT_CFG_TRIM_LOCAL_FULL_ONLY: keep local(UART) + full upgrade only.
+ */
+#define BOOT_CFG_TRIM_NO_CONSOLE         0
+#define BOOT_CFG_TRIM_OTA_DELTA_ONLY     0
+#define BOOT_CFG_TRIM_OTA_FULL_ONLY      0
+#define BOOT_CFG_TRIM_LOCAL_DELTA_ONLY   0
+#define BOOT_CFG_TRIM_LOCAL_FULL_ONLY    0
+
+#if ((BOOT_CFG_TRIM_NO_CONSOLE + BOOT_CFG_TRIM_OTA_DELTA_ONLY + BOOT_CFG_TRIM_OTA_FULL_ONLY + \
+  BOOT_CFG_TRIM_LOCAL_DELTA_ONLY + BOOT_CFG_TRIM_LOCAL_FULL_ONLY) > 1)
+#error "Only one BOOT_CFG_TRIM_* profile can be enabled at a time."
+#endif
+
+#if BOOT_CFG_TRIM_NO_CONSOLE
+#define BOOT_USE_CONSOLE      0
+#define BOOT_USE_LOCAL        1
+#define BOOT_USE_OTA_AUTO     1
+#define BOOT_USE_FULL         1
+#define BOOT_USE_DELTA        1
+#elif BOOT_CFG_TRIM_OTA_DELTA_ONLY
+#define BOOT_USE_CONSOLE      0
+#define BOOT_USE_LOCAL        0
+#define BOOT_USE_OTA_AUTO     1
+#define BOOT_USE_FULL         0
+#define BOOT_USE_DELTA        1
+#elif BOOT_CFG_TRIM_OTA_FULL_ONLY
+#define BOOT_USE_CONSOLE      0
+#define BOOT_USE_LOCAL        0
+#define BOOT_USE_OTA_AUTO     1
+#define BOOT_USE_FULL         1
+#define BOOT_USE_DELTA        0
+#elif BOOT_CFG_TRIM_LOCAL_DELTA_ONLY
+#define BOOT_USE_CONSOLE      1
+#define BOOT_USE_LOCAL        1
+#define BOOT_USE_OTA_AUTO     0
+#define BOOT_USE_FULL         0
+#define BOOT_USE_DELTA        1
+#elif BOOT_CFG_TRIM_LOCAL_FULL_ONLY
+#define BOOT_USE_CONSOLE      1
+#define BOOT_USE_LOCAL        1
+#define BOOT_USE_OTA_AUTO     0
+#define BOOT_USE_FULL         1
+#define BOOT_USE_DELTA        0
+#else
+#define BOOT_USE_CONSOLE      1
+#define BOOT_USE_LOCAL        1
+#define BOOT_USE_OTA_AUTO     1
+#define BOOT_USE_FULL         1
+#define BOOT_USE_DELTA        1
+#endif
+
 #define MCU_FLASH_APP_A_SLOT        0U
 #define MCU_FLASH_APP_B_SLOT        1U
 #define MCU_FLASH_APP_A_ADDR        (FLASH_BASE + 0x20000U) // A区起始地址
@@ -78,6 +104,7 @@ void Error_Handler(void);
 #define OTA_SALT_LEN               16U
 #define OTA_IV_LEN                 16U
 #define OTA_META_LEN               (OTA_ECDH_PUB_LEN + OTA_SALT_LEN + OTA_IV_LEN)
+#define OTA_VERSION_MAX_LEN         12
 
 // W25Q64 分区表
 /* 第一扇区 0~4KB */
@@ -98,6 +125,7 @@ void Error_Handler(void);
 #define OTA_TUZ_DICT_MAX          (2U * 1024U)
 #define OTA_TUZ_CACHE_SIZE        1024U
 
+
 // OTA header 结构体定义
 typedef struct{
   uint32_t magic;       // OTA_HDR_MAGIC
@@ -113,8 +141,6 @@ typedef enum {
   FAIL
 }OTA_status_t;
 
-#define OTA_VERSION_MAX_LEN 12
-
 typedef struct{
   uint32_t OTA_Flag;
   uint32_t FileSize;        // 服务器下发的整个应用程序的大小（字节）
@@ -124,7 +150,6 @@ typedef struct{
   OTA_status_t OTA_status;        // OTA 状态，用来自动回滚
 }OTA_Info_t;
 extern OTA_Info_t OTA_Info;
-
 
 #define UPDATA_BUFF                  1024
 typedef struct{
@@ -148,8 +173,6 @@ typedef enum{
   UPDATA_DELTA_SET,   // 增量更新状态
 }OTA_State_t;
 extern OTA_State_t OTA_state;
-
-/* USER CODE END Private defines */
 
 #ifdef __cplusplus
 }

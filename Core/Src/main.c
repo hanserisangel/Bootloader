@@ -1,112 +1,32 @@
-/* USER CODE BEGIN Header */
-
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "dma.h"
-// #include "i2c.h"
-#include "mbedtls.h"
-#include "rng.h"
-#include "spi.h"
-#include "usart.h"
-#include "gpio.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
 OTA_Info_t OTA_Info;
 Local_UpDate_t Local_UpDate;
 OTA_State_t OTA_state;
-// OTA_Version_t OTA_Version;
-// uint8_t data_to_write[1024];
-// uint8_t data_to_read[1024];
-/* USER CODE END 0 */
 
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
+    HAL_Init();
+    SystemClock_Config();
 
-  /* USER CODE BEGIN 1 */
+    // 初始化外设
+    MX_GPIO_Init();
+    MX_DMA_Init();
+    MX_USART3_UART_Init();
+    MX_SPI3_Init();
+    MX_RNG_Init();
+    MX_MBEDTLS_Init();
 
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
-  SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_USART3_UART_Init();
-  // MX_I2C1_Init();
-  MX_SPI3_Init();
-  MX_RNG_Init();
-  MX_MBEDTLS_Init();
-  /* USER CODE BEGIN 2 */
-  Uart_Init(uart_rb);
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  W25Q64_ReadOTAInfo();
+    // 初始化应用层
+    Uart_Init(uart_rb);
+    W25Q64_ReadOTAInfo();
+    BootLoader_Brance();
   
-  BootLoader_Brance();
-  
-  while (1)
-  {
-    BootLoader_State();
-    
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
+    while (1)
+    {
+      BootLoader_State();
+    }
 }
 
 /**
@@ -153,10 +73,6 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
-
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.

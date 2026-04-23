@@ -31,6 +31,7 @@ static uint8_t Boot_GetInactiveSlot(void);
 static uint32_t Boot_GetSlotStartAddr(uint8_t slot);
 static uint32_t Boot_GetSlotStartSector(uint8_t slot);
 static uint32_t Boot_GetSlotSectorCount(uint8_t slot);
+static void Boot_EnterUpgradeByType(uint8_t pkg_type);
 
 static uint8_t Boot_GetActiveSlot(void)
 {
@@ -57,6 +58,33 @@ static uint32_t Boot_GetSlotSectorCount(uint8_t slot)
     return (slot == MCU_FLASH_APP_B_SLOT) ? MCU_FLASH_APP_B_COUNT : MCU_FLASH_APP_A_COUNT;
 }
 
+static void Boot_EnterUpgradeByType(uint8_t pkg_type)
+{
+    if(pkg_type == OTA_PKG_TYPE_FULL)
+    {
+#if BOOT_USE_FULL
+        OTA_state = UPDATA_FULL_SET;
+#else
+        LOG_E("Full upgrade disabled by config");
+        OTA_state = UART_CONSOLE_IDLE;
+#endif
+    }
+    else if(pkg_type == OTA_PKG_TYPE_DELTA)
+    {
+#if BOOT_USE_DELTA
+        OTA_state = UPDATA_DELTA_SET;
+#else
+        LOG_E("Delta upgrade disabled by config");
+        OTA_state = UART_CONSOLE_IDLE;
+#endif
+    }
+    else
+    {
+        LOG_E("Unknown OTA package type: %u", pkg_type);
+        OTA_state = UART_CONSOLE_IDLE;
+    }
+}
+
 /**
  * @brief  Bootloader 主函数，负责引导流程控制
  * @retval None
@@ -65,6 +93,7 @@ void BootLoader_Brance(void)
 {
     W25Q64_ReadOTAInfo();
 
+#if BOOT_USE_CONSOLE
     if(BootLoader_Console(20))  // 进入命令行
     {
         LOG_I("Enter console success!");
@@ -76,15 +105,16 @@ void BootLoader_Brance(void)
         if(OTA_Info.OTA_Flag == OTA_FLAG)
         {
             LOG_I("OTA update from staging");   // OTA 包在外部 staging，解密并写入内部非激活槽
-
-            if(OTA_Info.OTA_type == 0)      // 全量更新
+#if BOOT_USE_OTA_AUTO
+            Boot_EnterUpgradeByType(OTA_Info.OTA_type);
+#else
+            LOG_W("OTA auto upgrade disabled by config");
             {
-                OTA_state = UPDATA_FULL_SET;
+                uint8_t active_slot = Boot_GetActiveSlot();
+                LOG_I("Boot active slot %c", (active_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
+                LOAD_A(Boot_GetSlotStartAddr(active_slot));
             }
-            else if(OTA_Info.OTA_type == 1) // 增量更新
-            {
-                OTA_state = UPDATA_DELTA_SET;
-            }
+#endif
         }
         else
         {
@@ -111,6 +141,26 @@ void BootLoader_Brance(void)
             LOAD_A(Boot_GetSlotStartAddr(active_slot));
         }
     }
+#else
+    if(OTA_Info.OTA_Flag == OTA_FLAG)
+    {
+#if BOOT_USE_OTA_AUTO
+        LOG_I("OTA update from staging");
+        Boot_EnterUpgradeByType(OTA_Info.OTA_type);
+#else
+        LOG_W("Console and OTA auto are disabled, boot active app directly");
+        uint8_t active_slot = Boot_GetActiveSlot();
+        LOG_I("Boot active slot %c", (active_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
+        LOAD_A(Boot_GetSlotStartAddr(active_slot));
+#endif
+    }
+    else
+    {
+        uint8_t active_slot = Boot_GetActiveSlot();
+        LOG_I("Boot active slot %c", (active_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
+        LOAD_A(Boot_GetSlotStartAddr(active_slot));
+    }
+#endif
 }
 
 /**
@@ -119,14 +169,24 @@ void BootLoader_Brance(void)
  */
 static void BootLoader_Menu(void)
 {
+#if BOOT_USE_CONSOLE
     Uart_Printf("[1] Erase inactive area\r\n");
+#if BOOT_USE_LOCAL
     Uart_Printf("[2] Uart IAP download package into mcu\r\n");
+#endif
     Uart_Printf("[3] Set version number\r\n");
     Uart_Printf("[4] Query version number\r\n");
+#if BOOT_USE_LOCAL
     Uart_Printf("[5] Download package into W25Q64\r\n");
-    Uart_Printf("[6] Download package from W25Q64\r\n");
+#endif
+#if BOOT_USE_FULL
+    Uart_Printf("[6] Download full package from W25Q64\r\n");
+#endif
     Uart_Printf("[7] Reset\r\n");
+#if BOOT_USE_DELTA
     Uart_Printf("[8] Apply delta package from W25Q64\r\n");
+#endif
+#endif
 }
 
 /**
@@ -154,13 +214,17 @@ static bool BootLoader_Console(uint16_t timeout)
  */
 void BootLoader_Event(uint8_t* pdata)
 {
+#if BOOT_USE_CONSOLE
     switch(pdata[0])
     {
         case '1': // 擦除非活动分区
+        {
             uint8_t inactive_slot = Boot_GetInactiveSlot();
             MCU_EraseFlash(Boot_GetSlotStartSector(inactive_slot), Boot_GetSlotSectorCount(inactive_slot));
             LOG_I("Erase slot %c OK!", (inactive_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
             break;
+        }
+#if BOOT_USE_LOCAL
         case '2': // 串口 IAP 下载固件到 MCU_Flash
             LOG_I("Uart IAP download package into mcu Starting!");
             // MCU_EraseFlash(Boot_GetSlotStartSector(MCU_FLASH_APP_A_SLOT), Boot_GetSlotSectorCount(MCU_FLASH_APP_A_SLOT));
@@ -184,6 +248,7 @@ void BootLoader_Event(uint8_t* pdata)
             Boot_ResetVerifyState();            // 重置 OTA 验证状态
             Where_to_store = true;              // 设置存储位置为 MCU 的 Flash
             break;
+#endif
         case '3': // 设置版本号
             LOG_I("Set version number Starting!");
             OTA_state = SET_VERSION;
@@ -193,6 +258,7 @@ void BootLoader_Event(uint8_t* pdata)
             W25Q64_ReadOTAInfo();
             Uart_Printf("version number: %s\r\n", OTA_Info.OTA_version);
             break;
+#if BOOT_USE_LOCAL
         case '5': // 串口 IAP 下载 A 区程序到 W25Q64
             LOG_I("Download Starting!");
 
@@ -216,22 +282,30 @@ void BootLoader_Event(uint8_t* pdata)
             Where_to_store = false;              // 设置存储位置为 W25Q64
             OTA_Info.FileSize = 0;
             break;
+#endif
+#if BOOT_USE_FULL
         case '6': // 从 W25Q64 下载程序到 MCU 的 Flash
             LOG_I("Download Starting!");
             OTA_state = UPDATA_FULL_SET;
             break;
+#endif
         case '7': // 重启
             LOG_I("Reset OK!");
             HAL_Delay(100);
             HAL_NVIC_SystemReset();
             break;
+#if BOOT_USE_DELTA
         case '8': // 从 W25Q64 应用 HPatchLite 差分包
             LOG_I("Apply HPatchLite delta Starting!");
             OTA_state = UPDATA_DELTA_SET;
             break;
+#endif
         default:
             return;
     }
+#else
+    (void)pdata;
+#endif
 }
 
 /**
@@ -249,8 +323,13 @@ void BootLoader_State(void)
     switch(OTA_state)
     {
         case UART_CONSOLE_IDLE:  // 串口命令行
+#if BOOT_USE_CONSOLE
             if(size == 1)  BootLoader_Event(data);
+#else
+            (void)size;
+#endif
             break;
+#if BOOT_USE_LOCAL
         case IAP_YMODEM_START:
         {
             uint16_t data_len = 0;
@@ -321,14 +400,7 @@ void BootLoader_State(void)
 
                 if(Where_to_store)  // 接收完成后自动刷写新固件到mcu flash
                 {
-                    if(OTA_Info.OTA_type == 0)      // 全量更新
-                    {
-                        OTA_state = UPDATA_FULL_SET;
-                    }
-                    else if(OTA_Info.OTA_type == 1) // 增量更新
-                    {
-                        OTA_state = UPDATA_DELTA_SET;
-                    }
+                    Boot_EnterUpgradeByType(OTA_Info.OTA_type);
                 }
                 else{
                     OTA_state = UART_CONSOLE_IDLE;
@@ -498,9 +570,11 @@ void BootLoader_State(void)
             }
             break;
         }
+#endif
         
         // 设置程序的版本号
         case SET_VERSION:
+#if BOOT_USE_CONSOLE
             if(size == OTA_VERSION_MAX_LEN - 1)
             {
                 // 只是判断版本号格式是否正确，不用提取出参数
@@ -514,8 +588,10 @@ void BootLoader_State(void)
                     OTA_state = UART_CONSOLE_IDLE;
                 }
             }
+#endif
             break;
 
+#if BOOT_USE_FULL
         // 从 W25Q24 读取数据更新 A 区应用程序
         case UPDATA_FULL_SET: 
 			W25Q64_ReadOTAInfo();
@@ -569,7 +645,9 @@ void BootLoader_State(void)
 
             OTA_state = UART_CONSOLE_IDLE;
             break;
+#endif
 
+#if BOOT_USE_DELTA
         case UPDATA_DELTA_SET:
         {
             uint8_t active_slot = Boot_GetActiveSlot();
@@ -628,6 +706,7 @@ void BootLoader_State(void)
             OTA_state = UART_CONSOLE_IDLE;
             break;
         }
+#endif
 
         default:
             OTA_state = UART_CONSOLE_IDLE;
@@ -635,31 +714,33 @@ void BootLoader_State(void)
     }
 }
 
-// 设置 A 区 MSP 指针
- __asm void MSP_setSP(uint32_t addr)
- {
-     MSR MSP, r0 // ARM 函数调用规范中，第一个参数存在 r0 寄存器
-     BX r14
- }
+__asm void MSP_setSP(uint32_t addr)
+{
+    MSR MSP, r0
+    BX r14
+}
 
+/**
+ * @brief  跳转到应用程序入口地址，开始执行新固件
+ * @param  addr: 应用程序的入口地址，通常是分区起始地址
+ * @retval None
+ */
 static void LOAD_A(uint32_t addr)
 {
-    // SP 指针位于 RAM 内存中，地址为 0x2000_0000~0x2001_C000，112KB大小
+    // (uint32_t *)addr 表示 addr 是地址，*(uint32_t *)addr 表示读取该地址处的值
+    // flash 最前面是中断向量表，第一条是初始栈指针，第二条是复位中断处理函数地址
     if((*(uint32_t *)addr >= SRAM1_BASE) && (*(uint32_t *)addr <= SRAM2_BASE))
     {
-        // 中断向量表的初始SP
-        MSP_setSP(*(uint32_t *)addr);
-//        __set_MSP(*(uint32_t *)addr);
-        Load_A = (load_a)*(uint32_t *)(addr + 4); // 中断向量表的reset中断函数
-        BootLoader_Clear();
-        Load_A(); // reset中断函数
+        MSP_setSP(*(uint32_t *)addr);       // 设置 MSP 为新固件的初始栈指针
+        Load_A = (load_a)*(uint32_t *)(addr + 4);   // 获取新固件的复位处理函数地址，并强制转换为函数指针类型
+        BootLoader_Clear();                 // 清空外设，避免新固件运行时受到干扰
+        Load_A();                           // 跳转到新固件的复位处理函数，开始执行新固件
     } else LOG_E("Brance failed!");
 }
 
 // 清空外设
 static void BootLoader_Clear(void)
 {
-    // HAL_I2C_MspDeInit(&hi2c1);
     HAL_UART_DMAStop(&huart3); // 必须要先停止 DMA，要不然会和 A 区冲突
     HAL_UART_MspDeInit(&huart3);
     HAL_SPI_MspDeInit(&hspi3);
