@@ -295,7 +295,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 ### 4.2 擦除非活动分区
 擦除mcu内部的目前非活动分区
 <div style="text-align: center;">
-    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B1%5D.png" width="50%" height="50%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B1%5D.png" width="30%" height="30%" alt="工作流程">
 </div>
 显示擦除成功
 ### 4.3 把固件下载到 mcu 非活动分区
@@ -308,7 +308,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 ### 4.4 设置版本号
 在 SecureCRT 右键粘贴版本号，我设置的版本号格式是`version-1.0`，版本号格式可以自己修改，修改时需要改变版本号的最大长度，在`main.h`的`OTA_VERSION_MAX_LEN`宏定义
 <div style="text-align: center;">
-    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B3%5D.png" width="100%" height="100%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B3%5D.png" width="50%" height="50%" alt="工作流程">
 </div>
 显示设置成功
 ### 4.5 查询版本号
@@ -316,7 +316,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 - 通过`4.4`命令改变
 - 通过 APP 远程 OTA 升级的时候会改变，因为 ONENET 服务器在发送固件之前会发送固件的版本号，APP 下载完后会将版本号写入
 <div style="text-align: center;">
-    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B4%5D.png" width="100%" height="100%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B4%5D.png" width="50%" height="50%" alt="工作流程">
 </div>
 目前的版本号是`version-1.0`
 ### 4.6 把固件下载到 W25Q64 中
@@ -328,13 +328,13 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 ### 4.7 把全量固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是全量固件，就用这个命令将固件下载到 mcu 的非活动区
 <div style="text-align: center;">
-    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B6%5D.png" width="100%" height="100%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B6%5D.png" width="60%" height="60%" alt="工作流程">
 </div>
 显示下载成功
 ### 4.8 把差分固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是增量固件，就用这个命令将固件下载到 mcu 的非活动区
 <div style="text-align: center;">
-    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B8%5D.png" width="100%" height="100%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B8%5D.png" width="60%" height="60%" alt="工作流程">
 </div>
 显示下载成功
 
