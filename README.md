@@ -52,7 +52,7 @@
 
 ### 1.2 固件包的格式
 
-![alt text](OTAremote.drawio-1.svg)
+![固件包格式](https://github.com/hanserisangel/Bootloader/blob/master/image/OTAremote.drawio.svg)
 说明：
 1. **头部**：20 byte, 包含`魔数(4 字节)、包头长度(4 字节)、包类型(4 字节)、固件长度(4 字节)、签名长度(4 字节)`
    - 包头长度：20
