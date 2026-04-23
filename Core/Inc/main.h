@@ -113,10 +113,12 @@ typedef enum {
   FAIL
 }OTA_status_t;
 
+#define OTA_VERSION_MAX_LEN 12
+
 typedef struct{
   uint32_t OTA_Flag;
   uint32_t FileSize;        // 服务器下发的整个应用程序的大小（字节）
-  uint8_t OTA_version[12];  // OTA 版本号，字符串数组，格式: version-1.0
+  uint8_t OTA_version[OTA_VERSION_MAX_LEN];  // OTA 版本号，字符串数组，格式: version-1.0
   uint8_t OTA_area;          // 0 表示 A 区，1 表示 B 区
   uint8_t OTA_type;          // 0 表示全量更新，1 表示增量更新
   OTA_status_t OTA_status;        // OTA 状态，用来自动回滚

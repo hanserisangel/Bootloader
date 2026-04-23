@@ -113,7 +113,7 @@ python pack_ota.py --fw [固件] --sign-priv [ecdsa 私钥(pem 格式)] --dev-pu
         $ openssl pkey -in dev_ecdh_priv.pem -pubout -out dev_ecdh_pub.pem
         $ openssl pkey -in dev_ecdh_priv.pem -outform DER -out dev_ecdh_priv.der
         ```
-- 说明：密钥的格式有两种，一个是 pem 格式，一个是 der 格式，两种格式都一样，只是 pem 格式是文本形式的，der 格式是二进制形式。上面的 python 命令用 pem 格式的密钥，程序里面用的是 der 格式的密钥，可以先用print_ecdsa_pubkey.py 和 print_ecdh_prikey.py 脚本打印 der 格式的密钥，然后复制到程序中的密钥数组里。
+- 说明：密钥的格式有两种，一个是 pem 格式，一个是 der 格式，两种格式都一样，只是 pem 格式是文本形式，der 格式是二进制形式。上面的 python 命令用 pem 格式的密钥，程序里面用的是 der 格式的密钥，可以先用 print_ecdsa_pubkey.py 和 print_ecdh_prikey.py 脚本打印 der 格式的密钥，然后复制到程序中的密钥数组里。
 
 ecdh 私钥：（本来应该写在OTP分区里的，但是这个分区只能写一次，为了避免造成不可逆的影响，这里把私钥写在程序里）
 ```c
@@ -164,7 +164,7 @@ static const uint8_t k_ota_ec_pub[] = {
 
 #### 强制要求
 以下两点是运行本项目的硬性前提：
-1.  **MCU内部Flash空间**：必须大于 `Bootloader大小 + 2 × APP分区大小`（本项目当前Bootloader体积约66KB，分区大小可根据实际需求调整，裁剪功能可进一步减小体积）。
+1.  **MCU内部Flash空间**：必须大于 `Bootloader大小 + 2 × APP分区大小`（本项目当前Bootloader体积约66KB，裁剪功能可进一步减小体积；APP 分区大小可根据实际需求调整）。
 2.  **外部Flash**：必须搭载SPI Flash（本项目使用W25Q64），用于缓存固件升级包和其他关键参数。
 
 ---
@@ -270,7 +270,7 @@ else if(OTA_Info.OTA_status == UPDATE)
 {
     LOG_W("Previous OTA update not verified, skipping to new version");
     OTA_Info.OTA_status = FAIL;
-    // 将状态设置为 FAIL，等待本次版本验证结果，如果验证成功会在后续更新为 SUCCESS，如果验证失败则保持 FAIL，等待下次重启回滚
+    // 将状态设置为 FAIL，等待本次版本验证结果，如果验证成功会在后续 APP 程序里更新为 SUCCESS，如果验证失败则保持 FAIL，等待下次重启回滚
 }
 
 // 跳转到激活槽的应用程序
@@ -283,7 +283,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 
 ## 4. demo 演示
 ### 4.1 串口交互命令行
-交互命令行的设计主要是为了方便调试，实际应用中可以删除这个功能，当然保留也不构成问题。上电启动后输入w
+交互命令行的设计主要是为了方便调试，实际应用中可以删除这个功能，当然保留也不构成问题。上电启动后在 2s 内输入w，否则就会跳过命令行状态，跳转到应用程序。
 ![alt text](SecureCRT.exe_20260422_205356.png)
 可以看到串口显示菜单
 ### 4.2 擦除非活动分区
@@ -294,23 +294,30 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 如果是全量升级，那么这个命令行的功能，等同于`4.6 + 4.7`这两个命令行合在一起 
 如果是增量升级，那么这个命令行的功能，等同于`4.6 + 4.8`这两个命令行合在一起
 ![alt text](局部截取_20260422_211836.png)
-下载成功，并切换了活动分区
+下载成功，并自动切换了活动分区
 ### 4.4 设置版本号
-在 SecureCRT 右键粘贴版本号，我设置的版本号格式是`version1.0`，这里的1.0可以改，改成`1.2/2.1`都可以
+在 SecureCRT 右键粘贴版本号，我设置的版本号格式是`version-1.0`，版本号格式可以自己修改，修改时需要改变版本号的最大长度，在`main.h`的`OTA_VERSION_MAX_LEN`宏定义
 ![alt text](局部截取_20260422_211943.png)
+显示设置成功
 ### 4.5 查询版本号
 查看版本号，版本号被改变有两种方式：
 - 通过`4.4`命令改变
 - 通过 APP 远程 OTA 升级的时候会改变，因为 ONENET 服务器在发送固件之前会发送固件的版本号，APP 下载完后会将版本号写入
 ![alt text](局部截取_20260422_212005.png)
+目前的版本号是`version-1.0`
 ### 4.6 把固件下载到 W25Q64 中
+下载的位置可查看第5.1节的分区表，也可以直接查看`main.h`头文件
 ![alt text](局部截取_20260422_212042.png)
+显示下载成功
 ### 4.7 把全量固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是全量固件，就用这个命令将固件下载到 mcu 的非活动区
 ![alt text](局部截取_20260422_212225.png)
+显示下载成功
 ### 4.8 把差分固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是增量固件，就用这个命令将固件下载到 mcu 的非活动区
 ![alt text](局部截取_20260422_212117.png)
+显示下载成功
+
 ---
 
 ## 5. FLASH 分区表

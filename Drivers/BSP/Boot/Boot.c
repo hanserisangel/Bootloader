@@ -501,14 +501,14 @@ void BootLoader_State(void)
         
         // 设置程序的版本号
         case SET_VERSION:
-            if(size == 10)
+            if(size == OTA_VERSION_MAX_LEN - 1)
             {
                 // 只是判断版本号格式是否正确，不用提取出参数
                 if (sscanf((char *)data, "version%d.%d", 
 	                &temp, &temp) == 2)
                 {
-                    memset(OTA_Info.OTA_version, 0, 32);
-                    memcpy(OTA_Info.OTA_version, data, 10); // version1.0
+                    memset(OTA_Info.OTA_version, 0, OTA_VERSION_MAX_LEN);
+                    memcpy(OTA_Info.OTA_version, data, size);
                     W25Q64_WriteOTAInfo();
                     LOG_I("Set version number OK!");
                     OTA_state = UART_CONSOLE_IDLE;
