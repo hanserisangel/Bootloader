@@ -26,7 +26,7 @@
 ### 1.1 具体工作流程
 本项目的工作流程图如下所示：
 <div style="text-align: center;">
-    <img src="../image/boot.drawio.svg" width="100%" height="100%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/boot.drawio.svg" width="100%" height="100%" alt="工作流程">
 </div>
 
 本项目的升级流程分为**固件接收**、**安全校验与解密**、**差分还原与写入**三个阶段，全程实现流式处理，明文差分包不落地存储，兼顾安全与性能。
