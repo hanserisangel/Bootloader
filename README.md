@@ -337,6 +337,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
     <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B8%5D.png" width="60%" height="60%" alt="工作流程">
 </div>
 显示下载成功
+
 **需要注意的是，差分升级用到了旧固件和差分固件两个输入来源，旧固件直接读取mcu内部flash的活动分区，差分固件则是本地/远程下载来的，所以进行差分升级的时候，务必要保证mcu内部flash的活动分区运行的是旧固件，要不然差分还原的结果是错的，得到的新固件也是运行不起来的。**
 
 ---
