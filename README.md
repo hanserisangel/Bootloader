@@ -52,7 +52,10 @@
 
 ### 1.2 固件包的格式
 
-![固件包格式](https://github.com/hanserisangel/Bootloader/blob/master/image/OTAremote.drawio.svg)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/OTAremote.drawio.svg" width="100%" height="100%" alt="工作流程">
+</div>
+
 说明：
 1. **头部**：20 byte, 包含`魔数(4 字节)、包头长度(4 字节)、包类型(4 字节)、固件长度(4 字节)、签名长度(4 字节)`
    - 包头长度：20
@@ -284,38 +287,55 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 ## 4. demo 演示
 ### 4.1 串口交互命令行
 交互命令行的设计主要是为了方便调试，实际应用中可以删除这个功能，当然保留也不构成问题。上电启动后在 2s 内输入w，否则就会跳过命令行状态，跳转到应用程序。
-![alt text](SecureCRT.exe_20260422_205356.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%E4%B8%B2%E5%8F%A3%E8%8F%9C%E5%8D%95.png" width="100%" height="100%" alt="工作流程">
+</div>
+
 可以看到串口显示菜单
 ### 4.2 擦除非活动分区
 擦除mcu内部的目前非活动分区
-![alt text](局部截取_20260422_205659.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B1%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 显示擦除成功
 ### 4.3 把固件下载到 mcu 非活动分区
 如果是全量升级，那么这个命令行的功能，等同于`4.6 + 4.7`这两个命令行合在一起 
 如果是增量升级，那么这个命令行的功能，等同于`4.6 + 4.8`这两个命令行合在一起
-![alt text](局部截取_20260422_211836.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B2%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 下载成功，并自动切换了活动分区
 ### 4.4 设置版本号
 在 SecureCRT 右键粘贴版本号，我设置的版本号格式是`version-1.0`，版本号格式可以自己修改，修改时需要改变版本号的最大长度，在`main.h`的`OTA_VERSION_MAX_LEN`宏定义
-![alt text](局部截取_20260422_211943.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B3%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 显示设置成功
 ### 4.5 查询版本号
 查看版本号，版本号被改变有两种方式：
 - 通过`4.4`命令改变
 - 通过 APP 远程 OTA 升级的时候会改变，因为 ONENET 服务器在发送固件之前会发送固件的版本号，APP 下载完后会将版本号写入
-![alt text](局部截取_20260422_212005.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B4%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 目前的版本号是`version-1.0`
 ### 4.6 把固件下载到 W25Q64 中
 下载的位置可查看第5.1节的分区表，也可以直接查看`main.h`头文件
-![alt text](局部截取_20260422_212042.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B5%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 显示下载成功
 ### 4.7 把全量固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是全量固件，就用这个命令将固件下载到 mcu 的非活动区
-![alt text](局部截取_20260422_212225.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B6%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 显示下载成功
 ### 4.8 把差分固件从 W25Q64 下载到 mcu 非活动分区
 如果 W25Q64 中是增量固件，就用这个命令将固件下载到 mcu 的非活动区
-![alt text](局部截取_20260422_212117.png)
+<div style="text-align: center;">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B8%5D.png" width="100%" height="100%" alt="工作流程">
+</div>
 显示下载成功
 
 ---
