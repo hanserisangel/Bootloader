@@ -295,7 +295,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 ### 4.2 擦除非活动分区
 擦除mcu内部的目前非活动分区
 <div style="text-align: center;">
-    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B1%5D.png" width="100%" height="100%" alt="工作流程">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%5B1%5D.png" width="50%" height="50%" alt="工作流程">
 </div>
 显示擦除成功
 ### 4.3 把固件下载到 mcu 非活动分区
