@@ -222,12 +222,14 @@ static void LOAD_A(uint32_t addr)
     <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8%E6%98%A0%E5%B0%84.png" width="100%" height="100%" alt="中断向量表映射">
 </div>
 
-修改文件中的这个值，完成映射。这里我写的是 0x20000 是因为这是 A 分区的 APP 程序，根据第 5 节的分区表中 A 分区在 128KB 开始的区域；如果是 B 分区的 APP程序，这里要填 0x80000，因为 B 分区在 128+384KB 开始的区域
+修改文件中的这个值，完成映射。这里我写的是`0x20000`是因为这是 A 分区的 APP 程序，根据第 5 节的分区表中 A 分区在 128KB 开始的区域；如果是 B 分区的 APP程序，这里要填 0x80000，因为 B 分区在 128+384KB 开始的区域
 
-如果使用 keil5 直接下载 A/B 分区的应用程序，还需要修改下图的值
+如果使用 keil5 直接下载 A/B 分区的应用程序，还需要按照下图修改：
+A 分区的 APP 工程：
 <div style="text-align: center;">
     <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/UV4.exe_20260423_195152.png" width="100%" height="100%" alt="A分区APP">
 </div>
+B 分区的 APP 工程：
 <div style="text-align: center;">
     <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/UV4.exe_20260423_195234.png" width="100%" height="100%" alt="B分区APP">
 </div>
@@ -440,7 +442,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
         <td style="text-align:center">16KB</td>
         <td style="text-align:center">4KB</td>
         <td style="text-align:center">包头+签名数据</td>
-        <td style="text-align:center">20+70~20+72 byte</td>
+        <td style="text-align:center">(20+70) ~ (20+72) byte</td>
         <td style="text-align:center">&#10062</td>
     </tr>
     <tr>
@@ -514,7 +516,7 @@ APP 固件程序需要在程序一开始向 W25Q64 写入`OTA_Info.OTA_area = NO
 
 裁剪方法：通过使能`main.h`中不同的宏定义
 <div style="text-align: center;">
-    <img src="hhttps://github.com/hanserisangel/Bootloader/blob/master/image/%E8%A3%81%E5%89%AA.png" width="100%" height="100%" alt="裁剪宏定义">
+    <img src="https://github.com/hanserisangel/Bootloader/blob/master/image/%E8%A3%81%E5%89%AA.png" width="100%" height="100%" alt="裁剪宏定义">
 </div>
 
 比如：如果你仅想使用OTA远程升级+差分升级，你只需要把`BOOT_CFG_TRIM_OTA_DELTA_ONLY`置 1 使能就可以了；如果你想用全部功能，那保持默认，即都不使能，就可以了
