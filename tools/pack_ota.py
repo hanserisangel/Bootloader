@@ -152,4 +152,4 @@ if __name__ == "__main__":
 
 # 差分压缩：.\hdiffi.exe -f -d -c-tinyuz .\OTA_A.bin .\OTA_B.bin delta.bin
 # 打补丁：.\hpatchi.exe .\OTA_A.bin .\delta.bin newfile.bin
-# 命令：python pack_ota.py --fw delta.bin --sign-priv .\ecdsa_key\ec_priv.pem --dev-pub .\ecdh_key\dev_ecdh_pub.pem --out delta_merge.bin --aes-len 16 --pkg-type delta
+# 命令：python pack_ota.py --fw Microwave.bin --sign-priv .\ecdsa_key\ec_priv.pem --dev-pub .\ecdh_key\dev_ecdh_pub.pem --out micro_merge.bin --aes-len 16 --pkg-type full

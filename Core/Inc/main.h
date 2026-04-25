@@ -1,10 +1,6 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "stm32f4xx_hal.h"
 #include "dma.h"
 #include "spi.h"
@@ -173,9 +169,5 @@ typedef enum{
   UPDATA_DELTA_SET,   // 增量更新状态
 }OTA_State_t;
 extern OTA_State_t OTA_state;
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __MAIN_H */

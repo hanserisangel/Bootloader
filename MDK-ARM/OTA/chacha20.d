@@ -1,9 +1,0 @@
-ota\chacha20.o: ../Middlewares/Third_Party/mbedTLS/library/chacha20.c
-ota\chacha20.o: ../MBEDTLS/App/mbedtls_config.h
-ota\chacha20.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
-ota\chacha20.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
-ota\chacha20.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/chacha20.h
-ota\chacha20.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
-ota\chacha20.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
-ota\chacha20.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
-ota\chacha20.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

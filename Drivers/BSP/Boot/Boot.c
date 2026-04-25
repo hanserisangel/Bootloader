@@ -601,12 +601,21 @@ void BootLoader_State(void)
                 {
                     LOG_E("Verify package in W25Q64 failed");
                     OTA_state = UART_CONSOLE_IDLE;
+
+                    OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                    OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                    W25Q64_WriteOTAInfo();
                     break;
                 }
                 if(hdr.pkg_type != OTA_PKG_TYPE_FULL)
                 {
                     LOG_E("Package type mismatch, expect full");
                     OTA_state = UART_CONSOLE_IDLE;
+
+                    OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                    OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                    W25Q64_WriteOTAInfo();
+
                     break;
                 }
 
@@ -624,6 +633,11 @@ void BootLoader_State(void)
                 {
                     LOG_E("Firmware size exceeds slot: %lu", OTA_Info.FileSize);
                     OTA_state = UART_CONSOLE_IDLE;
+
+                    OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                    OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                    W25Q64_WriteOTAInfo();
+
                     break;
                 }
 
@@ -631,6 +645,11 @@ void BootLoader_State(void)
                 {
                     LOG_E("Decrypt and write failed");
                     OTA_state = UART_CONSOLE_IDLE;
+
+                    OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                    OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                    W25Q64_WriteOTAInfo();
+
                     break;
                 }
 
@@ -661,12 +680,20 @@ void BootLoader_State(void)
             {
                 LOG_E("Verify package in W25Q64 failed");
                 OTA_state = UART_CONSOLE_IDLE;
+
+                OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                W25Q64_WriteOTAInfo();
                 break;
             }
             if(hdr.pkg_type != OTA_PKG_TYPE_DELTA)
             {
                 LOG_E("Package type mismatch, expect delta");
                 OTA_state = UART_CONSOLE_IDLE;
+
+                OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                W25Q64_WriteOTAInfo();
                 break;
             }
 
@@ -684,6 +711,10 @@ void BootLoader_State(void)
             {
                 LOG_E("Delta size invalid");
                 OTA_state = UART_CONSOLE_IDLE;
+
+                OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                W25Q64_WriteOTAInfo();
                 break;
             }
 
@@ -693,6 +724,10 @@ void BootLoader_State(void)
             {
                 LOG_E("Delta apply failed");
                 OTA_state = UART_CONSOLE_IDLE;
+
+                OTA_Info.OTA_status = FAIL; // 验证失败，标记 OTA 失败状态，等待下次重启回滚
+                OTA_Info.OTA_Flag = 0; // 清除 OTA 标志，避免重启后继续使用这个失败的差分包
+                W25Q64_WriteOTAInfo();
                 break;
             }
 

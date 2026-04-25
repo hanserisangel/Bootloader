@@ -20,12 +20,12 @@ int main(void)
 
     // 初始化应用层
     Uart_Init(uart_rb);
-    W25Q64_ReadOTAInfo();
-    BootLoader_Brance();
+    W25Q64_ReadOTAInfo();   // 读取OTA信息
+    BootLoader_Brance();    // 进入Bootloader分支
   
     while (1)
     {
-      BootLoader_State();
+      BootLoader_State();   // 进入Bootloader状态机
     }
 }
 

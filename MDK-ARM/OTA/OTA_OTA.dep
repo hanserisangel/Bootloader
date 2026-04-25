@@ -1,1997 +1,0 @@
-Dependencies for Project 'OTA', Target 'OTA': (DO NOT MODIFY !)
-CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (startup_stm32f407xx.s)(0x69E76D8F)(--cpu Cortex-M4.fp.sp -g --apcs=interwork -I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include--pd "__UVISION_VERSION SETA 540" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f407xx.lst --xref -o ota\startup_stm32f407xx.o --depend ota\startup_stm32f407xx.d)
-F (../Core/Src/main.c)(0x69E80CE6)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\main.o --omf_browse ota\main.crf --depend ota\main.d)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-I (../MBEDTLS/App/mbedtls.h)(0x69DA58BF)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl_ciphersuites.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crt.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdh.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ctr_drbg.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/aes.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/debug.h)(0x69465603)
-I (../Core/Inc/rng.h)(0x69DA58C2)
-F (../Core/Src/gpio.c)(0x697C8788)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\gpio.o --omf_browse ota\gpio.crf --depend ota\gpio.d)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (../Core/Src/dma.c)(0x69817E3A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\dma.o --omf_browse ota\dma.crf --depend ota\dma.d)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (../Core/Src/rng.c)(0x69DA58C2)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\rng.o --omf_browse ota\rng.crf --depend ota\rng.d)
-I (../Core/Inc/rng.h)(0x69DA58C2)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (../Core/Src/spi.c)(0x69776902)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\spi.o --omf_browse ota\spi.crf --depend ota\spi.d)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (../Core/Src/usart.c)(0x69E180EB)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\usart.o --omf_browse ota\usart.crf --depend ota\usart.d)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (../Core/Src/stm32f4xx_it.c)(0x69DA1751)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_it.o --omf_browse ota\stm32f4xx_it.crf --depend ota\stm32f4xx_it.d)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-I (../Core/Inc/stm32f4xx_it.h)(0x69776903)
-F (../Core/Src/stm32f4xx_hal_msp.c)(0x69776903)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_msp.o --omf_browse ota\stm32f4xx_hal_msp.crf --depend ota\stm32f4xx_hal_msp.d)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_i2c.o --omf_browse ota\stm32f4xx_hal_i2c.crf --depend ota\stm32f4xx_hal_i2c.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_i2c_ex.o --omf_browse ota\stm32f4xx_hal_i2c_ex.crf --depend ota\stm32f4xx_hal_i2c_ex.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_rcc.o --omf_browse ota\stm32f4xx_hal_rcc.crf --depend ota\stm32f4xx_hal_rcc.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_rcc_ex.o --omf_browse ota\stm32f4xx_hal_rcc_ex.crf --depend ota\stm32f4xx_hal_rcc_ex.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_flash.o --omf_browse ota\stm32f4xx_hal_flash.crf --depend ota\stm32f4xx_hal_flash.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_flash_ex.o --omf_browse ota\stm32f4xx_hal_flash_ex.crf --depend ota\stm32f4xx_hal_flash_ex.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_flash_ramfunc.o --omf_browse ota\stm32f4xx_hal_flash_ramfunc.crf --depend ota\stm32f4xx_hal_flash_ramfunc.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_gpio.o --omf_browse ota\stm32f4xx_hal_gpio.crf --depend ota\stm32f4xx_hal_gpio.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_dma_ex.o --omf_browse ota\stm32f4xx_hal_dma_ex.crf --depend ota\stm32f4xx_hal_dma_ex.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_dma.o --omf_browse ota\stm32f4xx_hal_dma.crf --depend ota\stm32f4xx_hal_dma.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_pwr.o --omf_browse ota\stm32f4xx_hal_pwr.crf --depend ota\stm32f4xx_hal_pwr.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_pwr_ex.o --omf_browse ota\stm32f4xx_hal_pwr_ex.crf --depend ota\stm32f4xx_hal_pwr_ex.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_cortex.o --omf_browse ota\stm32f4xx_hal_cortex.crf --depend ota\stm32f4xx_hal_cortex.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal.o --omf_browse ota\stm32f4xx_hal.crf --depend ota\stm32f4xx_hal.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_exti.o --omf_browse ota\stm32f4xx_hal_exti.crf --depend ota\stm32f4xx_hal_exti.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_rng.o --omf_browse ota\stm32f4xx_hal_rng.crf --depend ota\stm32f4xx_hal_rng.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_spi.o --omf_browse ota\stm32f4xx_hal_spi.crf --depend ota\stm32f4xx_hal_spi.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c)(0x694656BD)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\stm32f4xx_hal_uart.o --omf_browse ota\stm32f4xx_hal_uart.crf --depend ota\stm32f4xx_hal_uart.d)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (../Core/Src/system_stm32f4xx.c)(0x697C8BAE)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\system_stm32f4xx.o --omf_browse ota\system_stm32f4xx.crf --depend ota\system_stm32f4xx.d)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-F (..\Drivers\BSP\Uart\Uart.c)(0x69DA1759)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\uart.o --omf_browse ota\uart.crf --depend ota\uart.d)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (..\Drivers\BSP\Uart\Uart.h)(0x69DB0D6C)()
-F (..\Drivers\BSP\Log.h)(0x696CBD8A)()
-F (..\Drivers\BSP\Flash\Flash.c)(0x69E629D7)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\flash.o --omf_browse ota\flash.crf --depend ota\flash.d)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (..\Drivers\BSP\Flash\Flash.h)(0x6979FAEA)()
-F (..\Drivers\BSP\W25Q64\W25Q64.c)(0x69DD807A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\w25q64.o --omf_browse ota\w25q64.crf --depend ota\w25q64.d)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-F (..\Drivers\BSP\W25Q64\W25Q64.h)(0x69DCF144)()
-F (..\Drivers\BSP\Boot\Boot.c)(0x69E8D15D)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\boot.o --omf_browse ota\boot.crf --depend ota\boot.d)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-I (../Drivers/BSP/Ymodem/Ymodem.h)(0x69E56A4A)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (..\Drivers\BSP\Boot\BootOta.h)(0x69E8C0D7)
-I (..\Drivers\BSP\Boot\BootCrypto.h)(0x69E6B8E7)
-I (..\Drivers\BSP\Boot\BootDelta.h)(0x69E61207)
-F (..\Drivers\BSP\Boot\Boot.h)(0x69DB5B1D)()
-F (..\Drivers\BSP\Ymodem\Ymodem.c)(0x69E8CA21)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ymodem.o --omf_browse ota\ymodem.crf --depend ota\ymodem.d)
-I (..\Drivers\BSP\Ymodem\Ymodem.h)(0x69E56A4A)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-F (..\Drivers\BSP\Ymodem\Ymodem.h)(0x69E56A4A)()
-F (..\Drivers\BSP\Boot\BootOta.c)(0x69E8D174)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\bootota.o --omf_browse ota\bootota.crf --depend ota\bootota.d)
-I (..\Drivers\BSP\Boot\BootOta.h)(0x69E8C0D7)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-F (..\Drivers\BSP\Boot\BootOta.h)(0x69E8C0D7)()
-F (..\Drivers\BSP\Boot\BootCrypto.c)(0x69E6B8D9)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\bootcrypto.o --omf_browse ota\bootcrypto.crf --depend ota\bootcrypto.d)
-I (..\Drivers\BSP\Boot\BootCrypto.h)(0x69E6B8E7)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-I (../Core/Inc/rng.h)(0x69DA58C2)
-I (..\Drivers\BSP\Boot\BootOta.h)(0x69E8C0D7)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/aes.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdh.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/hkdf.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-F (..\Drivers\BSP\Boot\BootCrypto.h)(0x69E6B8E7)()
-F (..\Drivers\BSP\Boot\BootDelta.c)(0x69E77700)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\bootdelta.o --omf_browse ota\bootdelta.crf --depend ota\bootdelta.d)
-I (..\Drivers\BSP\Boot\BootDelta.h)(0x69E61207)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Core/Inc/main.h)(0x69E8D022)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x694656BD)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69DA58C2)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x694656BD)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x694656BD)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x694656BD)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x694656BD)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x694656BD)
-I (../Core/Inc/dma.h)(0x69776902)
-I (../Core/Inc/spi.h)(0x697C872D)
-I (../Core/Inc/usart.h)(0x698BF6E1)
-I (../Core/Inc/gpio.h)(0x69776902)
-I (../Drivers/BSP/Log.h)(0x696CBD8A)
-I (../Drivers/BSP/Uart/Uart.h)(0x69DB0D6C)
-I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Drivers/BSP/Flash/Flash.h)(0x6979FAEA)
-I (../Drivers/BSP/W25Q64/W25Q64.h)(0x69DCF144)
-I (../Drivers/BSP/Boot/Boot.h)(0x69DB5B1D)
-I (..\Drivers\BSP\Boot\BootOta.h)(0x69E8C0D7)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (..\Drivers\BSP\Boot\BootCrypto.h)(0x69E6B8E7)
-I (../third_party/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite.h)(0x68CE90A6)
-I (../third_party/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite_types.h)(0x68CE90A6)
-I (D:\Keil5\ARM\ARMCC\include\assert.h)(0x60252378)
-I (../third_party/tinyuz/decompress/tuz_dec.h)(0x68DE7F51)
-I (../third_party/tinyuz/decompress/tuz_types.h)(0x68DE7F51)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/aes.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-F (..\Drivers\BSP\Boot\BootDelta.h)(0x69E61207)()
-F (..\third_party\HDiffPatch\libHDiffPatch\HPatchLite\hpatch_lite.c)(0x68CE90A6)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\hpatch_lite.o --omf_browse ota\hpatch_lite.crf --depend ota\hpatch_lite.d)
-I (..\third_party\HDiffPatch\libHDiffPatch\HPatchLite\hpatch_lite.h)(0x68CE90A6)
-I (..\third_party\HDiffPatch\libHDiffPatch\HPatchLite\hpatch_lite_types.h)(0x68CE90A6)
-I (D:\Keil5\ARM\ARMCC\include\assert.h)(0x60252378)
-I (..\third_party\HDiffPatch\libHDiffPatch\HPatchLite\hpatch_lite_input_cache.h)(0x68CE90A6)
-F (..\third_party\tinyuz\decompress\tuz_dec.c)(0x68DE7F51)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\tuz_dec.o --omf_browse ota\tuz_dec.crf --depend ota\tuz_dec.d)
-I (..\third_party\tinyuz\decompress\tuz_dec.h)(0x68DE7F51)
-I (..\third_party\tinyuz\decompress\tuz_types.h)(0x68DE7F51)
-I (D:\Keil5\ARM\ARMCC\include\assert.h)(0x60252378)
-I (..\third_party\tinyuz\decompress\tuz_types_private.h)(0x68DE7F51)
-F (../MBEDTLS/Target/hardware_rng.c)(0x69DA58C0)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\hardware_rng.o --omf_browse ota\hardware_rng.crf --depend ota\hardware_rng.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../MBEDTLS/App/mbedtls.c)(0x69DA58BF)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\mbedtls.o --omf_browse ota\mbedtls.crf --depend ota\mbedtls.d)
-I (../MBEDTLS/App/mbedtls.h)(0x69DA58BF)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl_ciphersuites.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crt.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdh.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ctr_drbg.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/aes.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/debug.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/aes.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\aes.o --omf_browse ota\aes.crf --depend ota\aes.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/aes.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/asn1parse.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\asn1parse.o --omf_browse ota\asn1parse.crf --depend ota\asn1parse.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/asn1write.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\asn1write.o --omf_browse ota\asn1write.crf --depend ota\asn1write.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1write.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/base64.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\base64.o --omf_browse ota\base64.crf --depend ota\base64.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/base64.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/bignum.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\bignum.o --omf_browse ota\bignum.crf --depend ota\bignum.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bn_mul.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/camellia.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\camellia.o --omf_browse ota\camellia.crf --depend ota\camellia.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../Middlewares/Third_Party/mbedTLS/library/chacha20.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\chacha20.o --omf_browse ota\chacha20.crf --depend ota\chacha20.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/chacha20.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/chachapoly.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\chachapoly.o --omf_browse ota\chachapoly.crf --depend ota\chachapoly.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/chachapoly.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/poly1305.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/chacha20.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/cipher.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\cipher.o --omf_browse ota\cipher.crf --depend ota\cipher.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher_internal.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/chachapoly.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/poly1305.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/chacha20.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/gcm.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/cipher_wrap.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\cipher_wrap.o --omf_browse ota\cipher_wrap.crf --depend ota\cipher_wrap.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher_internal.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/chachapoly.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/poly1305.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/chacha20.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/aes.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/gcm.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/ctr_drbg.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ctr_drbg.o --omf_browse ota\ctr_drbg.crf --depend ota\ctr_drbg.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ctr_drbg.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/aes.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/dhm.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\dhm.o --omf_browse ota\dhm.crf --depend ota\dhm.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../Middlewares/Third_Party/mbedTLS/library/ecdh.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ecdh.o --omf_browse ota\ecdh.crf --depend ota\ecdh.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdh.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/ecdsa.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ecdsa.o --omf_browse ota\ecdsa.crf --depend ota\ecdsa.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1write.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/ecp.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ecp.o --omf_browse ota\ecp.crf --depend ota\ecp.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/threading.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp_internal.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/ecp_curves.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ecp_curves.o --omf_browse ota\ecp_curves.crf --depend ota\ecp_curves.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/entropy.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\entropy.o --omf_browse ota\entropy.crf --depend ota\entropy.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy_poll.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/entropy_poll.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\entropy_poll.o --omf_browse ota\entropy_poll.crf --depend ota\entropy_poll.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/entropy_poll.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/gcm.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\gcm.o --omf_browse ota\gcm.crf --depend ota\gcm.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/gcm.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/hkdf.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\hkdf.o --omf_browse ota\hkdf.crf --depend ota\hkdf.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/hkdf.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/md.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\md.o --omf_browse ota\md.crf --depend ota\md.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md_internal.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/md_wrap.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\md_wrap.o --omf_browse ota\md_wrap.crf --depend ota\md_wrap.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md_internal.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/memory_buffer_alloc.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\memory_buffer_alloc.o --omf_browse ota\memory_buffer_alloc.crf --depend ota\memory_buffer_alloc.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../Middlewares/Third_Party/mbedTLS/library/oid.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\oid.o --omf_browse ota\oid.crf --depend ota\oid.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/oid.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/rsa.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/pem.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\pem.o --omf_browse ota\pem.crf --depend ota\pem.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../Middlewares/Third_Party/mbedTLS/library/pk.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\pk.o --omf_browse ota\pk.crf --depend ota\pk.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk_internal.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/pkparse.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\pkparse.o --omf_browse ota\pkparse.crf --depend ota\pkparse.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/oid.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/pk_wrap.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\pk_wrap.o --omf_browse ota\pk_wrap.crf --depend ota\pk_wrap.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk_internal.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/rsa.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/platform.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\platform.o --omf_browse ota\platform.crf --depend ota\platform.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/platform_util.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\platform_util.o --omf_browse ota\platform_util.crf --depend ota\platform_util.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/threading.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/poly1305.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\poly1305.o --omf_browse ota\poly1305.crf --depend ota\poly1305.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/poly1305.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/rsa_internal.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\rsa_internal.o --omf_browse ota\rsa_internal.crf --depend ota\rsa_internal.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../Middlewares/Third_Party/mbedTLS/library/sha256.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\sha256.o --omf_browse ota\sha256.crf --depend ota\sha256.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/ssl_ciphersuites.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ssl_ciphersuites.o --omf_browse ota\ssl_ciphersuites.crf --depend ota\ssl_ciphersuites.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl_ciphersuites.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crt.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdh.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (../Middlewares/Third_Party/mbedTLS/library/ssl_cli.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ssl_cli.o --omf_browse ota\ssl_cli.crf --depend ota\ssl_cli.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../Middlewares/Third_Party/mbedTLS/library/ssl_tls.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\ssl_tls.o --omf_browse ota\ssl_tls.crf --depend ota\ssl_tls.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/debug.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl_ciphersuites.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crt.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdh.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ssl_internal.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/sha256.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/oid.h)(0x69465603)
-F (../Middlewares/Third_Party/mbedTLS/library/version_features.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\version_features.o --omf_browse ota\version_features.crf --depend ota\version_features.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-F (../Middlewares/Third_Party/mbedTLS/library/x509.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\x509.o --omf_browse ota\x509.crf --depend ota\x509.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/oid.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/library/x509_crt.c)(0x69465603)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Flash -I ../Drivers/BSP/Uart -I ../Drivers/BSP/W25Q64 -I ../Drivers/BSP -I ../Drivers/BSP/Boot -I ../MBEDTLS/App -I ../Middlewares/Third_Party/mbedTLS/include/mbedtls -I ../Middlewares/Third_Party/mbedTLS/include -I ../Drivers/BSP/Ymodem -I ../third_party/HDiffPatch/libHDiffPatch/HPatchLite -I ../third_party/tinyuz/decompress-I.\RTE\_OTA-ID:\Keil5\ARM\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DMBEDTLS_CONFIG_FILE="<mbedtls_config.h>"-o ota\x509_crt.o --omf_browse ota\x509_crt.crf --depend ota\x509_crt.d)
-I (../MBEDTLS/App/mbedtls_config.h)(0x69E21F52)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\limits.h)(0x60252376)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crt.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/asn1.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/bignum.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/pk.h)(0x69E2118D)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecp.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/ecdsa.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/x509_crl.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/oid.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/cipher.h)(0x69465603)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform.h)(0x69465603)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (D:\Keil5\ARM\ARMCC\include\time.h)(0x60252378)
-F (../Middlewares/Third_Party/mbedTLS/include/CMakeLists.txt)(0x69465603)()

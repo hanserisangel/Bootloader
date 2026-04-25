@@ -1,9 +1,0 @@
-ota\hkdf.o: ../Middlewares/Third_Party/mbedTLS/library/hkdf.c
-ota\hkdf.o: ../MBEDTLS/App/mbedtls_config.h
-ota\hkdf.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/check_config.h
-ota\hkdf.o: D:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
-ota\hkdf.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
-ota\hkdf.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/hkdf.h
-ota\hkdf.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/md.h
-ota\hkdf.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
-ota\hkdf.o: ../Middlewares/Third_Party/mbedTLS/include/mbedtls/platform_util.h
