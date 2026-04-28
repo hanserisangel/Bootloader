@@ -105,13 +105,13 @@ python pack_ota.py --fw [固件] --sign-priv [ecdsa 私钥(pem 格式)] --dev-pu
 说明：符号 `[]` 表示需要根据你的实际目录路径进行替换
 - 密钥生成方式：我是在 ubantu 上用 openssl 命令生成的，如果没有 openssl 包，请安装一个
     - ECDSA
-        ```shell
+        ```powershell
         $ openssl ecparam -name prime256v1 -genkey -noout -out ec_priv.pem
         $ openssl ec -in ec_priv.pem -pubout -out ec_pub.pem
         $ openssl ec -in ec_priv.pem -pubout -outform DER -out ec_pub.der
         ```
     - ECDH
-        ```shell
+        ```powershell
         $ openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 -out dev_ecdh_priv.pem
         $ openssl pkey -in dev_ecdh_priv.pem -pubout -out dev_ecdh_pub.pem
         $ openssl pkey -in dev_ecdh_priv.pem -outform DER -out dev_ecdh_priv.der
@@ -138,11 +138,11 @@ static const uint8_t k_ota_ec_pub[] = {
 ```
 ### 1.4 生成差分压缩固件
 使用tools里面的hdiffi.exe，命令的具体使用方法可以见 [here](https://github.com/sisong/HPatchLite)
-```shell
+```powershell
 .\hdiffi.exe -f -d -c-tinyuz [旧固件] [新固件] [输出的差分压缩固件]
 ```
 可以现在 pc 上试一试差分还原能不能成功：
-```shell
+```powershell
 .\hpatchi.exe [旧固件] [差分压缩固件] [输出的新固件]
 ```
 
@@ -326,7 +326,7 @@ if(OTA_Info.OTA_status == FAIL)
     LOG_W("Previous OTA update failed, rollback to previous version");
     active_slot = inactive_slot;
     OTA_Info.OTA_area = active_slot; // 更新 OTA_Info 中的 active slot 信息
-    OTA_Info.OTA_status = SUCCESS; // 将状态重置为 SUCCESS，避免重复回滚
+    OTA_Info.OTA_status = NORMAL; // 将状态重置为 NORMAL，避免重复回滚
 }
 else if(OTA_Info.OTA_status == UPDATE)
 {
@@ -334,7 +334,7 @@ else if(OTA_Info.OTA_status == UPDATE)
     OTA_Info.OTA_status = FAIL;
     // 将状态设置为 FAIL，等待本次版本验证结果，如果验证成功会在后续 APP 程序里更新为 SUCCESS，如果验证失败则保持 FAIL，等待下次重启回滚
 }
-
+W25Q64_WriteOTAInfo();
 // 跳转到激活槽的应用程序
 LOG_I("Boot active slot %c", (active_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
 LOAD_A(Boot_GetSlotStartAddr(active_slot));

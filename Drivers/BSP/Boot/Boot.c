@@ -127,7 +127,7 @@ void BootLoader_Brance(void)
                 LOG_W("Previous OTA update failed, rollback to previous version");
                 active_slot = inactive_slot;
                 OTA_Info.OTA_area = active_slot; // 更新 OTA_Info 中的 active slot 信息
-                OTA_Info.OTA_status = SUCCESS; // 将状态重置为 SUCCESS，避免重复回滚
+                OTA_Info.OTA_status = NORMAL; // 将状态重置为 SUCCESS，避免重复回滚
             }
             else if(OTA_Info.OTA_status == UPDATE)
             {
@@ -135,7 +135,8 @@ void BootLoader_Brance(void)
                 OTA_Info.OTA_status = FAIL;
                 // 将状态设置为 FAIL，等待本次版本验证结果，如果验证成功会在后续更新为 SUCCESS，如果验证失败则保持 FAIL，等待下次重启回滚
             }
-
+			
+			W25Q64_WriteOTAInfo();
             // 跳转到激活槽的应用程序
             LOG_I("Boot active slot %c", (active_slot == MCU_FLASH_APP_A_SLOT) ? 'A' : 'B');
             LOAD_A(Boot_GetSlotStartAddr(active_slot));
